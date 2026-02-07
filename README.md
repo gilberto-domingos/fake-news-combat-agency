@@ -1,1 +1,22 @@
-# fake-news-combat-agency
+Em desenvolvimento : 
+
+- DDD (Domain-Driven Design)
+- Python 3.12
+- FastAPI
+- POO
+- SOLID
+- Design Pattern
+- Docker
+- Fila + Workers
+- Redis
+- Scraper
+- OCR
+- NLP
+- SCORE
+- Dashboard
+- Reports
+- GitHub Actions → CI/CD
+- Prometheus → métrics
+- Grafana → Observable
+- Postgresql
+- Angular-cli 21.1.3

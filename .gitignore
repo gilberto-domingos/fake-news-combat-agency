@@ -149,3 +149,25 @@ allure-report/
 *.tmp
 *.old
 *.orig
+
+############################################
+# ANGULAR CLI 21.x (OFICIAL)
+############################################
+
+# Cache do Angular CLI (21+)
+.angular/
+.ng/
+
+# Build artifacts
+dist/
+out-tsc/
+
+# SSR / SSG (caso ativado no futuro)
+browser/
+server/
+.prerender-cache/
+
+# Angular compiler / tooling
+*.ngfactory.ts
+*.ngstyle.ts
+

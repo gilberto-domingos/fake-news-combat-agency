@@ -1,9 +1,9 @@
 ############################################
 # 🔒 SEGURANÇA / VARIÁVEIS DE AMBIENTE
 ############################################
-.venvnews
-.venv
-.env
+.venvnews/
+.venv/
+.env/
 .env.*
 !.env.example
 *.secret

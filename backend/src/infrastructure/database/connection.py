@@ -5,43 +5,36 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-#Em produção isso vem de settings/env
-DATABASE_URL = "postgresql+asyncpg://police_user:police_pass@localhost:5432/police_db"
+_engine: AsyncEngine | None = None
+_session_factory: async_sessionmaker[AsyncSession] | None = None
 
 
 def create_engine() -> AsyncEngine:
-    """
-    Cria o engine async do SQLAlchemy.
+    global _engine
 
-    Não guarda estado.
-    Não abre conexão imediatamente.
-    Apenas descreve como conectar.
-    """
-    return create_async_engine(
-        DATABASE_URL,
-        echo=True,          # bom para DEV (false em prod)
+    _engine = create_async_engine(
+        "postgresql+asyncpg://police_user:police_pass@localhost:5432/police_db",
+        echo=True,
         pool_pre_ping=True,
     )
+    return _engine
 
 
-def create_session_factory(
-    engine: AsyncEngine,
-) -> async_sessionmaker[AsyncSession]:
-    """
-    Cria a factory de sessões async.
+def create_session_factory(engine: AsyncEngine) -> async_sessionmaker[AsyncSession]:
+    global _session_factory
 
-    Cada chamada da factory cria uma nova AsyncSession,
-    reutilizando o pool de conexões do engine.
-    """
-    return async_sessionmaker(
+    _session_factory = async_sessionmaker(
         bind=engine,
         expire_on_commit=False,
     )
+    return _session_factory
+
+
+def get_session_factory() -> async_sessionmaker[AsyncSession]:
+    if _session_factory is None:
+        raise RuntimeError("Session factory not initialized")
+    return _session_factory
 
 
 async def dispose_engine(engine: AsyncEngine) -> None:
-    """
-    Encerra corretamente o engine e o pool de conexões.
-    Usado no shutdown da aplicação.
-    """
     await engine.dispose()

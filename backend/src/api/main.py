@@ -1,11 +1,15 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncEngine, async_sessionmaker
 
-from src.infrastructure.database.database import connect_db, disconnect_db
-import src.infrastructure.database.database as database
+from infrastructure.database.connection import (
+    create_engine,
+    create_session_factory,
+    dispose_engine,
+)
 
 
 
@@ -15,18 +19,25 @@ async def lifespan(app: FastAPI):
     Lifespan da aplicação.
 
     Responsável por:
-    - Conectar no banco de dados (Postgres async)
-    - Inicializar cache (Redis futuramente)
-    - Inicializar message broker (se houver)
-    - Warm-up de modelos / serviços
+    - Criar engine async do Postgres
+    - Criar session factory
+    - Guardar recursos em app.state
+    - Encerrar tudo corretamente no shutdown
     """
     print("API iniciando...")
-    await connect_db()
+
+    # --- Database ---
+    engine: AsyncEngine = create_engine()
+    session_factory: async_sessionmaker = create_session_factory(engine)
+
+    app.state.db_engine = engine
+    app.state.db_session_factory = session_factory
 
     yield
 
     print("API finalizando...")
-    await disconnect_db()
+
+    await dispose_engine(engine)
 
 
 app = FastAPI(
@@ -35,6 +46,10 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+
+# --------------------------------------------------
+# Health checks
+# --------------------------------------------------
 
 @app.get("/health", tags=["Health"])
 async def health_check():
@@ -51,17 +66,18 @@ async def health_check():
 
 
 @app.get("/health/db", tags=["Health"])
-async def health_check_db():
+async def health_check_db(request: Request):
     """
     Health check do banco de dados.
 
     Valida:
-    - Se o container do Postgres está acessível
-    - Se a API consegue abrir conexão async
+    - Se o Postgres está acessível
+    - Se a aplicação consegue executar query async
     """
     try:
-        # SessionLocal só existe após connect_db()
-        async with database.SessionLocal() as session:
+        session_factory = request.app.state.db_session_factory
+
+        async with session_factory() as session:
             await session.execute(text("SELECT 1"))
 
         return {"database": "ok"}

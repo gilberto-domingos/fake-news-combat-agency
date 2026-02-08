@@ -3,6 +3,9 @@ Em desenvolvimento :
 - DDD (Domain-Driven Design)
 - Python 3.12
 - FastAPI
+- One session per request
+- Auto Lifecycle 
+- Auto commit/rollback with dependencies
 - POO
 - SOLID
 - Design Pattern
@@ -20,3 +23,12 @@ Em desenvolvimento :
 - Grafana → Observable
 - Postgresql
 - Angular-cli 21.1.3
+
+> **Explicando**
+> - Dependency pura
+> - Infra desacoplada
+> - FastAPI só orquestrando
+> - Sessão por requisição
+> - Base para Unit of Work
+> - Lifecycle automatizada
+

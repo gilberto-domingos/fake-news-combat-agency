@@ -1,16 +1,20 @@
 Em desenvolvimento : 
 
-- DDD (Domain-Driven Design)
 - Python 3.12
 - FastAPI
-- One session per request
-- Auto Lifecycle 
-- Auto commit/rollback with dependencies
+- DDD (Domain-Driven Design)
 - POO
 - SOLID
 - Design Pattern
+- DTO
+- CQRS
+- SQL puro
+- One session per request
+- Auto Lifecycle 
+- Auto commit/rollback with dependencies
 - Docker
 - Fila + Workers
+- Workers assíncronos
 - Redis
 - Scraper
 - OCR
@@ -21,14 +25,14 @@ Em desenvolvimento :
 - GitHub Actions → CI/CD
 - Prometheus → métrics
 - Grafana → Observable
-- Postgresql
+- PostgreSQL
 - Angular-cli 21.1.3
 
-> **Explicando**
+> **Esclarecendo**
 > - Dependency pura
 > - Infra desacoplada
 > - FastAPI só orquestrando
 > - Sessão por requisição
-> - Base para Unit of Work
+>   - Unit Of Work transações complexas múltiplos objetos/repositórios
 > - Lifecycle automatizada
 

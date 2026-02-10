@@ -1,52 +1,24 @@
-from typing import Optional
-from uuid import UUID, uuid4
+from sqlalchemy import Column, String, DateTime
+from sqlalchemy.dialects.postgresql import UUID as PG_UUID
+from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
-import re
+from uuid import uuid4
+from domain.valueObjects.email import Email
 
-class User:
-    def __init__(self, username: str, email: str, password: str, user_id: Optional[UUID] = None):
-        self._id = user_id or uuid4()
+Base = declarative_base()  # base para ORM
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(PG_UUID(as_uuid=True), primary_key=True, default=uuid4)
+    username = Column(String(255), nullable=False)
+    email = Column(String(255), unique=True, nullable=False)
+    password = Column(String(255), nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    def __init__(self, username: str, email: Email, password: str, user_id=None):
+        self.id = user_id or uuid4()
         self.username = username
-        self.email = email
+        self.email = str(email)  # armazenamos o value object como string no banco
         self.password = password
-        self._created_at = datetime.utcnow()
-
-    # Encapsulamento de atributos
-    @property
-    def id(self) -> UUID:
-        return self._id
-
-    @property
-    def created_at(self) -> datetime:
-        return self._created_at
-
-    @property
-    def username(self) -> str:
-        return self._username
-
-    @username.setter
-    def username(self, value: str):
-        if not value or len(value) < 3:
-            raise ValueError("Username must have at least 3 characters")
-        self._username = value
-
-    @property
-    def email(self) -> str:
-        return self._email
-
-    @email.setter
-    def email(self, value: str):
-        # validação simples de email
-        if not re.match(r"[^@]+@[^@]+\.[^@]+", value):
-            raise ValueError("Invalid email address")
-        self._email = value
-
-    @property
-    def password(self) -> str:
-        return self._password
-
-    @password.setter
-    def password(self, value: str):
-        if not value or len(value) < 6:
-            raise ValueError("Password must have at least 6 characters")
-        self._password = value
+        self.created_at = datetime.utcnow()

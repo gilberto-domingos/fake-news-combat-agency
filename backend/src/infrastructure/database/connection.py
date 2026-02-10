@@ -38,3 +38,9 @@ def get_session_factory() -> async_sessionmaker[AsyncSession]:
 
 async def dispose_engine(engine: AsyncEngine) -> None:
     await engine.dispose()
+
+# FastAPI dependency
+async def get_session() -> AsyncSession:
+    async with get_session_factory()() as session:
+        yield session
+

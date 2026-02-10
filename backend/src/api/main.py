@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Depends
 from infrastructure.database.connection import (create_engine,create_session_factory,dispose_engine)
-from api.routers.product import router as product
+from api.routers.user import router as users
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -22,4 +22,4 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-app.include_router(product)
+app.include_router(users)

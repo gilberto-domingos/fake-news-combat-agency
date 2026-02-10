@@ -8,7 +8,8 @@ Em desenvolvimento :
 - Design Pattern
 - DTO
 - CQRS
-- SQL puro
+- SQLAlchemy ORM
+- AsyncSession
 - One session per request
 - Auto Lifecycle 
 - Auto commit/rollback with dependencies
@@ -26,6 +27,7 @@ Em desenvolvimento :
 - Prometheus → métrics
 - Grafana → Observable
 - PostgreSQL
+- Migrations
 - Angular-cli 21.1.3
 
 > **Esclarecendo**

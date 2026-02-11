@@ -33,7 +33,7 @@ Em desenvolvimento :
 > **Esclarecendo**
 > - Dependency pura
 > - Infra desacoplada
-> - FastAPI só orquestrando
+> - FastAPI orquestrando
 > - Sessão por requisição
 >   - Unit Of Work transações complexas múltiplos objetos/repositórios
 > - Lifecycle automatizada

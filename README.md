@@ -1,4 +1,4 @@
-Em desenvolvimento : 
+ Engenharia/arquitetura : 
 
 - Python 3.12
 - FastAPI

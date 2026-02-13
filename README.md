@@ -1,4 +1,4 @@
-  => Engenharia/arquitetura : 
+   ### * Engenharia / arquitetura : 
   
 - Python 3.12
 - FastAPI
@@ -13,6 +13,8 @@
 - One session per request
 - Auto Lifecycle 
 - Auto commit/rollback with dependencies
+- Celery automation
+- Artificial intelligence
 - Docker
 - Fila + Workers
 - Workers assíncronos

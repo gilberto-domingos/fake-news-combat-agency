@@ -40,3 +40,11 @@
 >   - Unit Of Work transações complexas múltiplos objetos/repositórios
 > - Lifecycle automatizada
 
+- DDD
+- CQRS
+- Clean Architecture
+- Repository Pattern
+- Dependency Injection
+- Global Exception Handling
+- Separação clara de camadas
+

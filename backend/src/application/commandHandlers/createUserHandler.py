@@ -1,25 +1,38 @@
-from domain.repositoriesCtr.user import UserRepository
+from domain.exceptions.business_exception import BusinessException
+from domain.repositoriesInt.user import UserRepository
 from domain.entities.user import User
 from domain.valueObjects.email import Email
 from application.commands.createUser import CreateUserCommand
+from uuid import UUID
+from datetime import datetime
+
 
 class CreateUserHandler:
-    def __init__(self, user_repository: UserRepository):
+
+    def __init__(self, user_repository: UserRepository, password_hasher):
         self.user_repository = user_repository
+        self.password_hasher = password_hasher
 
     async def handle(self, command: CreateUserCommand) -> User:
-        # verifica se já existe email
         existing_user = await self.user_repository.get_by_email(command.email)
         if existing_user:
-            raise ValueError("Email already registered")
+            raise BusinessException("Esse email já está registrado")
 
-        # cria entidade
+        password_hash = self.password_hasher.hash(command.password)
+
         user = User(
-            username=command.username,
+            name=command.name,
+            lastname=command.lastname,
             email=Email(command.email),
-            password=command.password
+            password_hash=password_hash,
+            birthdate=command.birthdate,
+            gender=command.gender,
+            profession=command.profession,
+            phone=command.phone,
         )
-
-        # persiste no banco
         await self.user_repository.save(user)
         return user
+
+    def hash_password(self, password: str) -> str:
+        import hashlib
+        return hashlib.sha256(password.encode()).hexdigest()

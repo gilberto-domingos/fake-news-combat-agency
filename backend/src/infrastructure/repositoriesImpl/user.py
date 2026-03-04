@@ -1,18 +1,35 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from domain.repositoriesCtr.user import UserRepository
+from domain.repositoriesInt.user import UserRepository
 from sqlalchemy import select
 from domain.entities.user import User
+import bcrypt
+from domain.repositoriesInt.user import PasswordHasher
+from infrastructure.database.models.user_model import UserModel
+from infrastructure.mappers.user_mapper import UserMapper
 
 class UserRepositoryImpl(UserRepository):
     def __init__(self, session: AsyncSession):
         self.session = session
 
     async def save(self, user: User) -> None:
-        self.session.add(user)        # ORM adiciona o objeto
-        await self.session.commit()   # commit assíncrono
+        model = UserMapper.to_model(user)
+        self.session.add(model)
+        await self.session.commit()
 
     async def get_by_email(self, email: str) -> User | None:
-        stmt = select(User).where(User.email == str(email))
+        stmt = select(UserModel).where(UserModel.email == email)
         result = await self.session.execute(stmt)
-        user = result.scalar_one_or_none()  # retorna um objeto User ou None
-        return user
+        model = result.scalar_one_or_none()
+
+        if not model:
+            return None
+
+        return UserMapper.to_entity(model)
+
+class BcryptPasswordHasher(PasswordHasher):
+
+    def hash(self, password: str) -> str:
+        return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+
+    def verify(self, password: str, hashed_password: str) -> bool:
+        return bcrypt.checkpw(password.encode(), hashed_password.encode())

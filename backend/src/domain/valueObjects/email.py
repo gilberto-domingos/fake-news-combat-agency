@@ -4,8 +4,12 @@ class Email:
     __slots__ = ("_value",)
 
     def __init__(self, value: str):
+        if not value:
+            raise ValueError("Email não pode estar vazio")
+
         if not self._is_valid(value):
-            raise ValueError("Invalid email address")
+            raise ValueError("Endereço de email inválido")
+
         self._value = value.lower()
 
     @staticmethod

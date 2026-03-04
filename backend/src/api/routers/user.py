@@ -1,33 +1,33 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.ext.asyncio import AsyncSession
-from application.dtos.user import CreateUserDTO, UserResponseDTO
-from infrastructure.database.connection import get_session
-from infrastructure.repositoriesImpl.user import UserRepositoryImpl
+from fastapi import APIRouter, Depends, status
+from application.dtos.crtUserDto import CreateUserDto
+from application.dtos.resUserDto import ResponseUserDto
 from application.commands.createUser import CreateUserCommand
-from application.commandHandlers.createUserHandler import CreateUserHandler
-
+from application.mediators.mediator import Mediator
+from api.dependencies import get_mediator
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
-@router.post("/", response_model=UserResponseDTO, status_code=status.HTTP_201_CREATED)
-async def create_user(payload: CreateUserDTO, session: AsyncSession = Depends(get_session)):
-    repo = UserRepositoryImpl(session)
-    handler = CreateUserHandler(repo)
 
-    command = CreateUserCommand(
-        username=payload.username,
-        email=payload.email,
-        password=payload.password
-    )
+@router.post(
+    "/",
+    response_model=ResponseUserDto,
+    status_code=status.HTTP_201_CREATED
+)
+async def create_user(
+    payload: CreateUserDto,
+    mediator: Mediator = Depends(get_mediator)
+):
+    command = CreateUserCommand(**payload.model_dump())
+    user = await mediator.send(command)
 
-    try:
-        user = await handler.handle(command)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-    return UserResponseDTO(
-        id=str(user.id),
-        username=user.username,
-        email=str(user.email),
-        created_at=user.created_at.isoformat()
+    return ResponseUserDto(
+        id=user.id,
+        name=user.name,
+        lastname=user.lastname,
+        email=user.email.value,
+        birthdate=user.birthdate,
+        gender=user.gender,
+        profession=user.profession,
+        phone=user.phone,
+        created_at=user.created_at
     )

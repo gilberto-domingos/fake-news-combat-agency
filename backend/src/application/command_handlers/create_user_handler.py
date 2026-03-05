@@ -1,8 +1,8 @@
 from domain.exceptions.business_exception import BusinessException
-from domain.repositoriesInt.user import UserRepository
+from domain.repositories_int.user import UserRepository
 from domain.entities.user import User
-from domain.valueObjects.email import Email
-from application.commands.createUser import CreateUserCommand
+from domain.value_objects.email import Email
+from application.commands.create_user import CreateUserCommand
 from uuid import UUID
 from datetime import datetime
 

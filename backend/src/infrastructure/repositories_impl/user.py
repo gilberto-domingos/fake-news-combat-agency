@@ -1,9 +1,9 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from domain.repositoriesInt.user import UserRepository
+from domain.repositories_int.user import UserRepository
 from sqlalchemy import select
 from domain.entities.user import User
 import bcrypt
-from domain.repositoriesInt.user import PasswordHasher
+from domain.repositories_int.user import PasswordHasher
 from infrastructure.database.models.user_model import UserModel
 from infrastructure.mappers.user_mapper import UserMapper
 

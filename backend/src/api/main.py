@@ -34,3 +34,7 @@ app.include_router(users)
 app.add_exception_handler(BusinessException, business_exception_handler)
 app.add_exception_handler(ValidationException, validation_exception_handler)
 app.add_exception_handler(DomainException, domain_exception_handler)
+
+@app.get("/healthz")
+async def health_check():
+    return {"status": "ok"}

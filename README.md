@@ -9,6 +9,7 @@
 - DTO
 - CQRS
 - SQLAlchemy ORM
+- Alembic Migrations
 - AsyncSession
 - One session per request
 - Auto Lifecycle 
@@ -30,7 +31,7 @@
 - Grafana → Observable
 - PostgreSQL
 - Migrations
-- Angular-cli 21.1.3
+
 
 > **Esclarecendo**
 > - Dependency pura

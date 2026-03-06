@@ -1,4 +1,4 @@
-   ### * Engenharia / arquitetura : 
+   ### * Engineering/architecture:
   
 - Python 3.12
 - FastAPI
@@ -33,13 +33,13 @@
 - Migrations
 
 
-> **Esclarecendo**
-> - Dependency pura
-> - Infra desacoplada
-> - FastAPI orquestrando
-> - Sessão por requisição
->   - Unit Of Work transações complexas múltiplos objetos/repositórios
-> - Lifecycle automatizada
+> **Clarifying**
+> - Pure Dependency
+> - Decoupled Infrastructure
+> - FastAPI Orchestration
+> - Session-by-Request
+> - Unit of Work: Complex Transactions with Multiple Objects/Repositories
+> - Automated Lifecycle
 
 - DDD
 - CQRS
@@ -47,5 +47,5 @@
 - Repository Pattern
 - Dependency Injection
 - Global Exception Handling
-- Separação clara de camadas
+- Clear separation of layers
 

@@ -1,4 +1,36 @@
+# Core FastAPI
 fastapi==0.102.0
-uvicorn[standard]==0.23.2
-python-dotenv==1.0.0   
-asyncpg==0.27.0       
+uvicorn==0.23.2
+starlette==0.27.0
+h11==0.16.0
+httptools==0.7.1
+uvloop==0.22.1
+websockets==16.0
+watchfiles==1.1.1
+
+# Data & typing
+pydantic==2.12.5
+pydantic_core==2.41.5
+typing-extensions==4.15.0
+annotated-types==0.7.0
+typing-inspection==0.4.2
+
+# PostgreSQL async driver
+asyncpg==0.27.0
+
+# Environment variables
+python-dotenv==1.0.0
+PyYAML==6.0.3
+
+# CLI / utils
+click==8.3.1
+anyio==4.12.1
+idna==3.11
+
+# Optional: Redis & job queue (adicionar se usar caching, workers ou filas)
+redis==5.2.0
+rq==1.12.0
+celery==5.3.1
+
+
+

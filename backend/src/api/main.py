@@ -3,7 +3,7 @@ from fastapi import FastAPI
 import os
 import uvicorn
 import logging
-from api.routers.user import router as users
+from backend.src.api.routers.user import router as users
 from api.middlewares.exception_handler import (business_exception_handler, validation_exception_handler, domain_exception_handler)
 from domain.exceptions.business_exception import BusinessException
 from domain.exceptions.validation_exception import ValidationException

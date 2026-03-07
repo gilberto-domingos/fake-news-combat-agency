@@ -7,7 +7,8 @@ from domain.exceptions.validation_exception import ValidationException
 from domain.exceptions.domain_exception import DomainException
 from infrastructure.database.connection import (create_engine, create_session_factory, dispose_engine)
 from infrastructure.config.cors import setup_cors
-
+import os
+import uvicorn
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -38,3 +39,7 @@ app.add_exception_handler(DomainException, domain_exception_handler)
 @app.get("/healthz")
 async def health_check():
     return {"status": "ok"}
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("src.api.main:app", host="0.0.0.0", port=port)

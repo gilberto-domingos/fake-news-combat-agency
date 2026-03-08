@@ -5,7 +5,7 @@ from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import create_async_engine
 from alembic import context
 
-from src.infrastructure.database.models.test_model import Base
+from src.infrastructure.database.models.user_model import Base
 from src.infrastructure.database.connection import DATABASE_URL
 
 config = context.config

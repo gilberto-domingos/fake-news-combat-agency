@@ -12,8 +12,8 @@ class UserModel(Base):
     name: Mapped[str] = mapped_column(String(100))
     lastname: Mapped[str] = mapped_column(String(100))
     email: Mapped[str] = mapped_column(String(255), unique=True, index=True)
-    password_hash: Mapped[str] = mapped_column(String(255))
     birthdate: Mapped[date]
     gender: Mapped[str] = mapped_column(String(20))
     profession: Mapped[str] = mapped_column(String(100))
     phone: Mapped[str] = mapped_column(String(20))
+    password_hash: Mapped[str] = mapped_column(String(255))

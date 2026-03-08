@@ -9,11 +9,11 @@ class User:
         name: str,
         lastname: str,
         email: Email,
-        password_hash: str,
         birthdate: date,
         gender: str,
         profession: str,
         phone: str,
+        password_hash: str,
         id: UUID | None = None,
         created_at: datetime | None = None,
     ):
@@ -21,13 +21,13 @@ class User:
         self._name = name
         self._lastname = lastname
         self._email = email
-        self._password_hash = password_hash
         self._birthdate = birthdate
         self._gender = gender
         self._profession = profession
         self._phone = phone
+        self._password_hash = password_hash
         self._created_at = created_at or datetime.now(timezone.utc)
-    #     self._validate_business_rules()
+    #   self._validate_business_rules()
     #
     # def _validate_business_rules(self):
     #     age = (date.today() - self.birthdate).days // 365
@@ -51,10 +51,6 @@ class User:
         return self._email
 
     @property
-    def password_hash(self) -> str:
-        return self._password_hash
-
-    @property
     def birthdate(self) -> date:
         return self._birthdate
 
@@ -69,6 +65,10 @@ class User:
     @property
     def phone(self) -> str:
         return self._phone
+
+    @property
+    def password_hash(self) -> str:
+        return self._password_hash
 
     @property
     def created_at(self) -> datetime:

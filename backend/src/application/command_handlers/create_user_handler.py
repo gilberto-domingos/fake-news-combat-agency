@@ -1,10 +1,8 @@
-from backend.src.domain.exceptions.business_exception import BusinessException
-from backend.src.domain.repositories_int.user import UserRepository
-from backend.src.domain.entities.user import User
-from backend.src.domain.value_objects.email import Email
-from backend.src.application.commands.create_user import CreateUserCommand
-from uuid import UUID
-from datetime import datetime
+from src.domain.repositories_int.user import UserRepository
+from src.domain.entities.user import User
+from src.domain.value_objects.email import Email
+from src.application.commands.create_user import CreateUserCommand
+from src.domain.exceptions.business_exception import BusinessException
 
 
 class CreateUserHandler:

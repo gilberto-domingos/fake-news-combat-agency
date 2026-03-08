@@ -9,13 +9,15 @@ load_dotenv(BASE_DIR / ".env")
 # ==========================================
 # DATABASE (PostgreSQL Async)
 # ==========================================
-DB_USER = os.getenv("DATABASE_USER")
-DB_PASSWORD = os.getenv("DATABASE_PASSWORD")
-DB_HOST = os.getenv("DATABASE_HOST")
-DB_PORT = os.getenv("DATABASE_PORT")
-DB_NAME = os.getenv("DATABASE_NAME")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL não definida")
+
+DATABASE_URL = DATABASE_URL.replace(
+    "postgres://",
+    "postgresql+asyncpg://"
+)
 
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine, AsyncSession, async_sessionmaker
 

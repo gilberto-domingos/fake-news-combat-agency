@@ -1,4 +1,4 @@
-from domain.exceptions.domain_exception import DomainException
+from src.domain.exceptions.domain_exception import DomainException
 
 class BusinessException(DomainException):
     """ Specific exception for business rules.

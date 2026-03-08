@@ -1,5 +1,5 @@
-from domain.entities.user import User
-from domain.repositories.user_repository import UserRepository
+from src.domain.entities.user import User
+from src.domain.repositories_int.user import UserRepository
 
 class UserService:
     def __init__(self, user_repository: UserRepository):

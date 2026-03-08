@@ -1,7 +1,6 @@
 from datetime import datetime, date, timezone
 from uuid import UUID, uuid4
-
-from domain.value_objects.email import Email
+from src.domain.value_objects.email import Email
 
 
 class User:

@@ -1,8 +1,8 @@
 from fastapi import Request
 from starlette.responses import JSONResponse
-from domain.exceptions.business_exception import BusinessException
-from domain.exceptions.validation_exception import ValidationException
-from domain.exceptions.domain_exception import DomainException
+from src.domain.exceptions.business_exception import BusinessException
+from src.domain.exceptions.validation_exception import ValidationException
+from src.domain.exceptions.domain_exception import DomainException
 
 
 async def business_exception_handler(request: Request, exc: BusinessException):

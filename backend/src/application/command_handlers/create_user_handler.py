@@ -1,8 +1,8 @@
-from domain.exceptions.business_exception import BusinessException
-from domain.repositories_int.user import UserRepository
-from domain.entities.user import User
-from domain.value_objects.email import Email
-from application.commands.create_user import CreateUserCommand
+from backend.src.domain.exceptions.business_exception import BusinessException
+from backend.src.domain.repositories_int.user import UserRepository
+from backend.src.domain.entities.user import User
+from backend.src.domain.value_objects.email import Email
+from backend.src.application.commands.create_user import CreateUserCommand
 from uuid import UUID
 from datetime import datetime
 

@@ -1,4 +1,4 @@
-from domain.exceptions.domain_exception import DomainException
+from src.domain.exceptions.domain_exception import DomainException
 
 class ValidationException(DomainException):
     """ Exception for data validation errors.

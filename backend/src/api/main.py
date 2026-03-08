@@ -3,13 +3,13 @@ from fastapi import FastAPI
 import os
 import uvicorn
 import logging
-from backend.src.api.routers.user import router as users
-from api.middlewares.exception_handler import (business_exception_handler, validation_exception_handler, domain_exception_handler)
-from domain.exceptions.business_exception import BusinessException
-from domain.exceptions.validation_exception import ValidationException
-from domain.exceptions.domain_exception import DomainException
-from infrastructure.database.connection import (create_engine, create_session_factory, dispose_engine)
-from infrastructure.config.cors import setup_cors
+from src.api.routers.user import router as users
+from src.api.middlewares.exception_handler import (business_exception_handler, validation_exception_handler, domain_exception_handler)
+from src.domain.exceptions.business_exception import BusinessException
+from src.domain.exceptions.validation_exception import ValidationException
+from src.domain.exceptions.domain_exception import DomainException
+from src.infrastructure.database.connection import (create_engine, create_session_factory, dispose_engine)
+from src.infrastructure.config.cors import setup_cors
 
 
 @asynccontextmanager

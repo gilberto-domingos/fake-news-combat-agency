@@ -1,12 +1,12 @@
 from typing import AsyncGenerator
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
-from infrastructure.database.connection import get_session_factory
-from infrastructure.repositories_impl.user import UserRepositoryImpl, BcryptPasswordHasher
-from application.mediators.mediator import Mediator
-from application.commands.create_user import CreateUserCommand
-from application.command_handlers.create_user_handler import CreateUserHandler
-from domain.repositories_int.user import PasswordHasher, UserRepository
+from src.infrastructure.database.connection import get_session_factory
+from src.infrastructure.repositories_impl.user import UserRepositoryImpl, BcryptPasswordHasher
+from src.application.mediators.mediator import Mediator
+from src.application.commands.create_user import CreateUserCommand
+from src.application.command_handlers.create_user_handler import CreateUserHandler
+from src.domain.repositories_int.user import PasswordHasher, UserRepository
 
 
 async def get_db_session() -> AsyncGenerator[AsyncSession, None]:

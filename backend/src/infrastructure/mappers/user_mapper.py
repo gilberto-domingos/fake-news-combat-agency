@@ -1,5 +1,5 @@
-from domain.entities.user import User
-from infrastructure.database.models.user_model import UserModel
+from src.domain.entities.user import User
+from src.infrastructure.database.models.user_model import UserModel
 
 class UserMapper:
 

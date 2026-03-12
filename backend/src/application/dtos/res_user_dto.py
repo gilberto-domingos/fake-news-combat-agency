@@ -2,6 +2,7 @@ from pydantic import BaseModel, EmailStr
 from datetime import date, datetime
 from uuid import UUID
 
+
 class ResponseUserDto(BaseModel):
     id: UUID
     name: str
@@ -12,3 +13,4 @@ class ResponseUserDto(BaseModel):
     profession: str
     phone: str
     created_at: datetime
+    access_counter: int

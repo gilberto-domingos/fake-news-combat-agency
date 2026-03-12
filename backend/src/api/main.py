@@ -1,30 +1,15 @@
 import logging
 import os
 from contextlib import asynccontextmanager
-
 import uvicorn
 from fastapi import FastAPI
+from src.api.routers.router_registry import api_router
+from src.api.exception_handlers import exception_registry
 
-from src.api.middlewares.exception_handler import (
-    business_exception_handler,
-    validation_exception_handler,
-    domain_exception_handler
-)
-from src.api.routers.user_router import router as users
-from src.domain.exceptions.business_exception import BusinessException
-from src.domain.exceptions.domain_exception import DomainException
-from src.domain.exceptions.validation_exception import ValidationException
 from src.infrastructure.config.cors import setup_cors
-from src.infrastructure.database.connection import (
-    create_engine,
-    create_session_factory,
-    dispose_engine
-)
+from src.infrastructure.database.connection import (create_engine, create_session_factory, dispose_engine)
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -40,19 +25,11 @@ async def lifespan(app: FastAPI):
         await dispose_engine(engine)
 
 
-app = FastAPI(
-    title="Police Fake News API",
-    version="0.1.0",
-    lifespan=lifespan
-)
+app = FastAPI(title="Police Fake News API", version="0.1.0", lifespan=lifespan)
 
 setup_cors(app)
-
-app.include_router(users)
-
-app.add_exception_handler(BusinessException, business_exception_handler)
-app.add_exception_handler(ValidationException, validation_exception_handler)
-app.add_exception_handler(DomainException, domain_exception_handler)
+app.include_router(api_router)
+exception_registry.register_exception_handlers(app)
 
 
 @app.get("/")

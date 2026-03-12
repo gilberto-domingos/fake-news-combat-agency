@@ -13,4 +13,3 @@ class ResponseUserDto(BaseModel):
     profession: str
     phone: str
     created_at: datetime
-    access_counter: int

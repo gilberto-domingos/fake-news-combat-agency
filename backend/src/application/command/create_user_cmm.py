@@ -13,4 +13,3 @@ class CreateUserCommand:
     profession: str
     phone: str
     recaptcha: str
-    access_counter: int

@@ -13,4 +13,3 @@ class CreateUserDto(BaseModel):
     phone: str = Field(min_length=10, max_length=20)
     password: str = Field(min_length=8)
     recaptcha: str
-    access_counter: int

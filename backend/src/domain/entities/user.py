@@ -4,19 +4,8 @@ from src.domain.value_objects.email import Email
 
 
 class User:
-    def __init__(
-        self,
-        name: str,
-        lastname: str,
-        email: Email,
-        birthdate: date,
-        gender: str,
-        profession: str,
-        phone: str,
-        password_hash: str,
-        id: UUID | None = None,
-        created_at: datetime | None = None,
-    ):
+    def __init__(self, name: str, lastname: str, email: Email, birthdate: date, gender: str, profession: str,
+                 phone: str, password_hash: str, id: UUID | None = None, created_at: datetime | None = None):
         self._id = id or uuid4()
         self._name = name
         self._lastname = lastname
@@ -27,6 +16,7 @@ class User:
         self._phone = phone
         self._password_hash = password_hash
         self._created_at = created_at or datetime.now(timezone.utc)
+
     #   self._validate_business_rules()
     #
     # def _validate_business_rules(self):

@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from datetime import date
 
+
 @dataclass(frozen=True)
 class CreateUserCommand:
     name: str
@@ -12,3 +13,4 @@ class CreateUserCommand:
     profession: str
     phone: str
     recaptcha: str
+    access_counter: int

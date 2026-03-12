@@ -1,12 +1,11 @@
-from src.domain.repositories_int.user import UserRepository
+from src.application.command.create_user_cmm import CreateUserCommand
 from src.domain.entities.user import User
-from src.domain.value_objects.email import Email
-from src.application.commands.create_user import CreateUserCommand
 from src.domain.exceptions.business_exception import BusinessException
+from src.domain.repositories_int.user import UserRepository
+from src.domain.value_objects.email import Email
 
 
 class CreateUserHandler:
-
     def __init__(self, user_repository: UserRepository, password_hasher):
         self.user_repository = user_repository
         self.password_hasher = password_hasher

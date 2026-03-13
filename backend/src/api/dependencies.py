@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.application.command.access_counter_comm import AccessCounterCommand
 from src.application.command_handlers.access_counter_handler import AccessCounterHandler
 from src.application.services.access_counter_service import AccessCounterService
+from src.application.services.user_service import UserService
 from src.infrastructure.database.connection import get_session_factory
 from src.infrastructure.repositories_impl.user import UserRepositoryImpl, BcryptPasswordHasher
 from src.application.mediators.mediator import Mediator
@@ -30,11 +31,17 @@ def get_password_hasher() -> PasswordHasher:
     return BcryptPasswordHasher()
 
 
-def get_create_user_handler(
+def get_create_user_service(
         repo: UserRepository = Depends(get_user_repository),
-        password_hasher: PasswordHasher = Depends(get_password_hasher),
-):
-    return CreateUserHandler(repo, password_hasher)
+        password_hasher=Depends(get_password_hasher)
+) -> UserService:
+    return UserService(user_repository=repo, password_hasher=password_hasher)
+
+
+def get_create_user_handler(
+        user_service: UserService = Depends(get_create_user_service)
+) -> CreateUserHandler:
+    return CreateUserHandler(user_service=user_service)
 
 
 def get_access_count_handler(

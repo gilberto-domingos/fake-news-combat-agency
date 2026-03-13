@@ -7,9 +7,9 @@ load_dotenv()
 RECAPTCHA_SECRET = os.getenv("RECAPTCHA_SECRET")
 GOOGLE_RECAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify"
 
-print(GOOGLE_RECAPTCHA_URL)
 
 async def verify_recaptcha(token: str, remote_ip: str | None = None) -> bool:
+    RECAPTCHA_SECRET = os.getenv("RECAPTCHA_SECRET")
     data = {
         "secret": RECAPTCHA_SECRET,
         "response": token

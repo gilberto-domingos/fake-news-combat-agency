@@ -1,35 +1,28 @@
 from src.application.command.create_user_cmm import CreateUserCommand
+from src.application.services.user_service import UserService
 from src.domain.entities.user import User
 from src.domain.exceptions.business_exception import BusinessException
-from src.domain.repositories_int.user import UserRepository
-from src.domain.value_objects.email import Email
+from src.infrastructure.external_services.recaptcha_service import verify_recaptcha
 
 
 class CreateUserHandler:
-    def __init__(self, user_repository: UserRepository, password_hasher):
-        self.user_repository = user_repository
-        self.password_hasher = password_hasher
+    def __init__(self, user_service: UserService):
+        self.user_service = user_service
 
     async def handle(self, command: CreateUserCommand) -> User:
-        existing_user = await self.user_repository.get_by_email(command.email)
-        if existing_user:
-            raise BusinessException("Esse email já está registrado")
+        is_human = await verify_recaptcha(command.recaptcha)
+        if not is_human:
+            raise BusinessException("reCAPTCHA inválido. Verifique se você não é um robô.")
 
-        password_hash = self.password_hasher.hash(command.password)
-
-        user = User(
+        user = await self.user_service.create_user(
             name=command.name,
             lastname=command.lastname,
-            email=Email(command.email),
-            password_hash=password_hash,
+            email=command.email,
+            password=command.password,
             birthdate=command.birthdate,
             gender=command.gender,
             profession=command.profession,
-            phone=command.phone,
+            phone=command.phone
         )
-        await self.user_repository.save(user)
-        return user
 
-    def hash_password(self, password: str) -> str:
-        import hashlib
-        return hashlib.sha256(password.encode()).hexdigest()
+        return user

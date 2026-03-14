@@ -30,6 +30,9 @@ setup_cors(app)
 app.include_router(api_router)
 exception_registry.register_exception_handlers(app)
 
+for route in app.routes:
+    print(route.path, route.methods)
+
 
 @app.get("/")
 async def root():

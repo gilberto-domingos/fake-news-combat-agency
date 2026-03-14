@@ -5,7 +5,6 @@ import uvicorn
 from fastapi import FastAPI
 from src.api.routers.router_registry import api_router
 from src.api.exception_handlers import exception_registry
-
 from src.infrastructure.config.cors import setup_cors
 from src.infrastructure.database.connection import (create_engine, create_session_factory, dispose_engine)
 

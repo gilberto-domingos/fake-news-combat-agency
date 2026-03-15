@@ -12,4 +12,5 @@ class CreateUserDto(BaseModel):
     profession: str = Field(max_length=100)
     phone: str = Field(min_length=10, max_length=20)
     password: str = Field(min_length=8)
+    terms_accepted: bool
     recaptcha: str

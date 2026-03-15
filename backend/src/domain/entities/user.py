@@ -5,7 +5,8 @@ from src.domain.value_objects.email import Email
 
 class User:
     def __init__(self, name: str, lastname: str, email: Email, birthdate: date, gender: str, profession: str,
-                 phone: str, password_hash: str, id: UUID | None = None, created_at: datetime | None = None):
+                 phone: str, password_hash: str, terms_accepted: bool, id: UUID | None = None,
+                 created_at: datetime | None = None):
         self._id = id or uuid4()
         self._name = name
         self._lastname = lastname
@@ -15,6 +16,7 @@ class User:
         self._profession = profession
         self._phone = phone
         self._password_hash = password_hash
+        self._terms_accepted = terms_accepted
         self._created_at = created_at or datetime.now(timezone.utc)
 
     #   self._validate_business_rules()
@@ -59,6 +61,10 @@ class User:
     @property
     def password_hash(self) -> str:
         return self._password_hash
+
+    @property
+    def terms_accepted(self) -> bool:
+        return self._terms_accepted
 
     @property
     def created_at(self) -> datetime:

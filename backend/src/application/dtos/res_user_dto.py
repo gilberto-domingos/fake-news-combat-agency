@@ -12,4 +12,5 @@ class ResponseUserDto(BaseModel):
     gender: str
     profession: str
     phone: str
+    terms_accepted: bool
     created_at: datetime

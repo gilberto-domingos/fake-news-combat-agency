@@ -7,20 +7,21 @@ from src.application.mediators.mediator import Mediator
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
-# @router.post("/", response_model=ResponseUserDto, status_code=status.HTTP_201_CREATED)
-# async def create_user(payload: CreateUserDto, mediator: Mediator = Depends(get_mediator)):
-#     command = CreateUserCommand(**payload.model_dump())
-#
-#     user = await mediator.send(command)
-#
-#     return ResponseUserDto(
-#         id=user.id,
-#         name=user.name,
-#         lastname=user.lastname,
-#         email=user.email.value,
-#         birthdate=user.birthdate,
-#         gender=user.gender,
-#         profession=user.profession,
-#         phone=user.phone,
-#         created_at=user.created_at,
-#     )
+
+@router.post("/", response_model=ResponseUserDto, status_code=status.HTTP_201_CREATED)
+async def create_user(payload: CreateUserDto, mediator: Mediator = Depends(get_mediator)):
+    command = CreateUserCommand(**payload.model_dump())
+
+    user = await mediator.send(command)
+
+    return ResponseUserDto(
+        id=user.id,
+        name=user.name,
+        lastname=user.lastname,
+        email=user.email.value,
+        birthdate=user.birthdate,
+        gender=user.gender,
+        profession=user.profession,
+        phone=user.phone,
+        created_at=user.created_at,
+    )

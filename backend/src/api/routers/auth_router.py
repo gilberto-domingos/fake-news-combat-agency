@@ -1,15 +1,26 @@
 from fastapi import APIRouter, Depends, status
+
 from src.api.dependencies import get_mediator
 from src.application.command.create_user_cmm import CreateUserCommand
 from src.application.dtos.crt_user_dto import CreateUserDto
 from src.application.dtos.res_user_dto import ResponseUserDto
 from src.application.mediators.mediator import Mediator
 
-router = APIRouter(prefix="/users", tags=["Users"])
+router = APIRouter(
+    prefix="/auth",
+    tags=["Auth"]
+)
 
 
-@router.post("/", response_model=ResponseUserDto, status_code=status.HTTP_201_CREATED)
-async def create_user(payload: CreateUserDto, mediator: Mediator = Depends(get_mediator)):
+@router.post(
+    "/signup",
+    response_model=ResponseUserDto,
+    status_code=status.HTTP_201_CREATED
+)
+async def signup(
+        payload: CreateUserDto,
+        mediator: Mediator = Depends(get_mediator)
+):
     command = CreateUserCommand(**payload.model_dump())
 
     user = await mediator.send(command)

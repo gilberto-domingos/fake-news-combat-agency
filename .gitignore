@@ -6,6 +6,7 @@
 .env/
 .env.*
 .env
+database.env
 !.env.example
 *.secret
 *.key

@@ -12,4 +12,5 @@ class CreateUserCommand:
     gender: str
     profession: str
     phone: str
-    recaptcha: str
+    terms_accepted: bool
+    recaptcha_token: str

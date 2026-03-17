@@ -1,3 +1,5 @@
+from datetime import date
+
 from src.domain.entities.user import User
 from src.domain.exceptions.business_exception import BusinessException
 from src.domain.repositories_int.user import UserRepository
@@ -14,11 +16,13 @@ class UserService:
                           name: str,
                           lastname: str,
                           email: str,
+                          birthdate: date,
+                          gender: str,
+                          profession: str,
+                          phone: str,
                           password: str,
-                          birthdate,
-                          gender,
-                          profession,
-                          phone) -> User:
+                          terms_accepted: bool
+                          ) -> User:
         existing_user = await self.user_repository.get_by_email(email)
         if existing_user:
             raise BusinessException("Email already registered")
@@ -29,11 +33,12 @@ class UserService:
             name=name,
             lastname=lastname,
             email=Email(email),
-            password_hash=password_hash,
             birthdate=birthdate,
             gender=gender,
             profession=profession,
-            phone=phone
+            phone=phone,
+            password_hash=password_hash,
+            terms_accepted=terms_accepted
         )
         await self.user_repository.save(user)
         return user

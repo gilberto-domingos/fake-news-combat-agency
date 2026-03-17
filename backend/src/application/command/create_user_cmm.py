@@ -13,4 +13,4 @@ class CreateUserCommand:
     profession: str
     phone: str
     terms_accepted: bool
-    recaptcha_token: str
+    captcha_token: str

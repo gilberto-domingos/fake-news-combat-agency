@@ -10,7 +10,7 @@ class CreateUserHandler:
         self.user_service = user_service
 
     async def handle(self, command: CreateUserCommand) -> User:
-        is_human = await verify_recaptcha(command.recaptcha_token)
+        is_human = await verify_recaptcha(command.captcha_token)
         if not is_human:
             raise BusinessException("reCAPTCHA inválido. Verifique se você não é um robô.")
 

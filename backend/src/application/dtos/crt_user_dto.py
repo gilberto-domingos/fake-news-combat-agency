@@ -1,5 +1,4 @@
-import ConfigDict
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field, EmailStr, ConfigDict
 from datetime import date
 from typing import Literal
 

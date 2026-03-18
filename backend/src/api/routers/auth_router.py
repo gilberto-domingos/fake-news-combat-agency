@@ -34,5 +34,6 @@ async def signup(
         gender=user.gender,
         profession=user.profession,
         phone=user.phone,
+        terms_accepted=user.terms_accepted,
         created_at=user.created_at,
     )

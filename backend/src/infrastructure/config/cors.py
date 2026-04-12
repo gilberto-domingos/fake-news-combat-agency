@@ -3,10 +3,15 @@ from fastapi.middleware.cors import CORSMiddleware
 
 def setup_cors(app):
     origins = [
+        "https://fakenewscombat.com",
+        "https://www.fakenewscombat.com",
+        "https://fake-news-combat-agency.onrender.com/healthz",
         "http://localhost:4200",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-        "https://b1010code.com.br",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+
     ]
 
     app.add_middleware(

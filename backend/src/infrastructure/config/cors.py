@@ -6,6 +6,7 @@ def setup_cors(app):
         "https://fakenewscombat.com",
         "https://www.fakenewscombat.com",
         "https://fake-news-combat-agency.onrender.com/healthz",
+        "https://fakenewscombat.com/anime-building",
         "http://localhost:4200",
         "http://localhost:3000",
         "http://127.0.0.1:3000",

@@ -7,7 +7,6 @@ class GetSineWaveMotionFramesHandler:
     async def handle(self, query):
         frames = []
 
-        # 1. gera lista linear de “tijolos”
         bricks = []
 
         for i in range(query.width):
@@ -20,7 +19,6 @@ class GetSineWaveMotionFramesHandler:
                 ).model_dump()
             )
 
-        # 2. constrói frames progressivos
         for i in range(len(bricks)):
             frame = bricks[:i + 1]
             frames.append(frame)

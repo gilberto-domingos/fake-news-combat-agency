@@ -6,13 +6,16 @@ from src.application.queries.get_sine_wave_motion_frames_query import GetSineWav
 
 class GetSineWaveMotionFramesHandler:
 
-    async def handle(self, query: GetSineWaveMotionFramesQuery) -> List[SineWaveFrameDTO]:
+    async def handle(self, query):
         frames = []
 
-        for i in range(query.steps):
-            x = i * 5
-            y = 200 + 80 * math.sin(i * 0.1)
+        for h in range(query.height):
+            frame = []
 
-            frames.append(SineWaveFrameDTO(x=x, y=y))
+            for y in range(h + 1):
+                for x in range(query.width):
+                    frame.append({"x": x, "y": y})
+
+            frames.append(frame)
 
         return frames

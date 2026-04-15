@@ -2,5 +2,7 @@ from pydantic import BaseModel
 
 
 class SineWaveFrameDTO(BaseModel):
-    x: float
-    y: float
+    x: int
+    y: int
+    type: str = "brick"
+    intensity: float = 1.0

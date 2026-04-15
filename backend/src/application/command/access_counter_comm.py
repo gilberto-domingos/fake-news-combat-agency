@@ -5,5 +5,7 @@ from dataclasses import dataclass
 class AccessCounterCommand:
     access_counter: int
 
-class Test :
+
+class Test:
     def get_code(self):
+        pass

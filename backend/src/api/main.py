@@ -8,6 +8,8 @@ from src.api.exception_handlers import exception_registry
 from src.infrastructure.config.cors import setup_cors
 from src.infrastructure.database.connection import (create_engine, create_session_factory, dispose_engine)
 
+# from src.api.exception_handlers.exception_registry import register_exception_handlers
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
@@ -30,8 +32,14 @@ setup_cors(app)
 app.include_router(api_router)
 exception_registry.register_exception_handlers(app)
 
-for route in app.routes:
-    print(route.path, route.methods)
+
+# print("------- REGISTERED HANDLERS -------")
+# for handler in app.exception_handlers:
+#     print("HANDLER:", handler)
+#
+# print("------- REGISTERED ROUTERS -------")
+# for route in app.routes:
+#     print(route.path, route.methods)
 
 
 @app.get("/ping")

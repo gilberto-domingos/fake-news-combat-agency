@@ -10,9 +10,11 @@ from src.api.middlewares.exception_handler import (
 from src.domain.exceptions.business_exception import BusinessException
 from src.domain.exceptions.domain_exception import DomainException
 from src.domain.exceptions.validation_exception import ValidationException
+from src.api.exception_handlers.global_exception_handler import global_exception_handler
 
 
 def register_exception_handlers(app: FastAPI):
     app.add_exception_handler(BusinessException, business_exception_handler)
     app.add_exception_handler(ValidationException, validation_exception_handler)
     app.add_exception_handler(DomainException, domain_exception_handler)
+    app.add_exception_handler(Exception, global_exception_handler)

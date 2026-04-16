@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class SineWaveFrameDTO(BaseModel):
+class BrickDto(BaseModel):
     x: int
     y: int
     type: str = "brick"

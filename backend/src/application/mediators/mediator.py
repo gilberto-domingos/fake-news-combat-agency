@@ -1,5 +1,5 @@
-from src.application.queries.get_sine_wave_motion_frames_query import GetSineWaveMotionFramesQuery
-from src.application.query_handlers.get_sine_wave_motion_frames_handler import GetSineWaveMotionFramesHandler
+from src.application.query.get_animation_frames_query import GetAnimationFramesQuery
+from src.application.query_handlers.get_animation_frames_query_handler import GetAnimationFramesQueryHandler
 
 
 class Mediator:
@@ -8,7 +8,7 @@ class Mediator:
         self._handlers = {}
 
         # registro
-        self._handlers[GetSineWaveMotionFramesQuery] = GetSineWaveMotionFramesHandler()
+        self._handlers[GetAnimationFramesQuery] = GetAnimationFramesQueryHandler()
 
     def register(self, command_type, handler):
         self._handlers[command_type] = handler

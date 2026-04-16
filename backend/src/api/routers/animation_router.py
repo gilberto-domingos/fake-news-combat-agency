@@ -1,11 +1,15 @@
 from fastapi import APIRouter, Depends
 from src.application.mediators.mediator import Mediator
-from src.application.queries.get_sine_wave_motion_frames_query import GetSineWaveMotionFramesQuery
+from src.application.query.get_animation_frames_query import GetAnimationFramesQuery
 
 router = APIRouter(prefix="/animation", tags=["Animation"])
 
 
 @router.get("/frames")
 async def get_frames(mediator: Mediator = Depends()):
-    query = GetSineWaveMotionFramesQuery(steps=120)
+    query = GetAnimationFramesQuery(
+        steps=120,
+        height=20,
+        width=10,
+    )
     return await mediator.send(query)

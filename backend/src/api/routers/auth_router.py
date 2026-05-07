@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends, status
-
 from src.api.dependencies import get_mediator
 from src.application.command.create_user_cmm import CreateUserCommand
 from src.application.dtos.crt_user_dto import CreateUserDto

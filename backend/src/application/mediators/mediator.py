@@ -1,14 +1,7 @@
-from src.application.query.get_animation_frames_query import GetAnimationFramesQuery
-from src.application.query_handlers.get_animation_frames_query_handler import GetAnimationFramesQueryHandler
-
-
 class Mediator:
 
     def __init__(self):
         self._handlers = {}
-
-        # registro
-        self._handlers[GetAnimationFramesQuery] = GetAnimationFramesQueryHandler()
 
     def register(self, command_type, handler):
         self._handlers[command_type] = handler

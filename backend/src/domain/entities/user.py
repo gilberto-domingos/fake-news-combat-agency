@@ -125,4 +125,4 @@ class User:
         return self._created_at
 
     def __str__(self):
-        return f"User=(user={self.name}, lastname={selt.lastname}, email={self.email}, birthdate={self.birthdate}, gender={self.gender}, profession={self.profession}, phone={self.phone}, passwor_hash={self.password_hash}, terms_accepted={self.terms_accepted}, created_at={self.created_at})"
+        return f"User=(user={self.name}, lastname={self.lastname}, email={self.email}, birthdate={self.birthdate}, gender={self.gender}, profession={self.profession}, phone={self.phone}, passwor_hash={self.password_hash}, terms_accepted={self.terms_accepted}, created_at={self.created_at})"

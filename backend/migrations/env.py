@@ -7,6 +7,7 @@ from alembic import context
 
 from src.infrastructure.database.models.user_model import Base
 from src.infrastructure.database.connection import DATABASE_URL
+from src.infrastructure.database.models.invest_model import InvestModel
 
 config = context.config
 config.set_main_option("sqlalchemy.url", DATABASE_URL)
@@ -15,6 +16,7 @@ if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
 target_metadata = Base.metadata
+
 
 def run_migrations_offline() -> None:
     url = config.get_main_option("sqlalchemy.url")
@@ -26,6 +28,7 @@ def run_migrations_offline() -> None:
     )
     with context.begin_transaction():
         context.run_migrations()
+
 
 def run_migrations_online() -> None:
     connectable = create_async_engine(
@@ -48,6 +51,7 @@ def run_migrations_online() -> None:
             context.run_migrations()
 
     asyncio.run(do_run_migrations())
+
 
 if context.is_offline_mode():
     run_migrations_offline()

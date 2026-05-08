@@ -1,4 +1,4 @@
-from src.application.command.create_user_cmm import CreateUserCommand
+from src.application.command.user_create_cmm import CreateUserCommand
 from src.application.services.user_service import UserService
 from src.domain.entities.user import User
 from src.domain.exceptions.business_exception import BusinessException

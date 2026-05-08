@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, status
 from src.api.dependencies import get_mediator
-from src.application.command.create_user_cmm import CreateUserCommand
-from src.application.dtos.crt_user_dto import CreateUserDto
-from src.application.dtos.res_user_dto import ResponseUserDto
+from src.application.command.user_create_cmm import CreateUserCommand
+from src.application.dtos.user_crt_dto import CreateUserDto
+from src.application.dtos.user_res_dto import ResponseUserDto
 from src.application.mediators.mediator import Mediator
 
 router = APIRouter(

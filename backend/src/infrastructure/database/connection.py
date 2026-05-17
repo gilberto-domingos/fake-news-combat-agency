@@ -12,7 +12,7 @@ load_dotenv(BASE_DIR / ".env")
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if not DATABASE_URL:
-    raise RuntimeError("DATABASE_URL não definida")
+    raise RuntimeError("DATABASE_URL NOT DEFINED")
 
 DATABASE_URL = DATABASE_URL.replace(
     "postgres://",
@@ -60,6 +60,7 @@ async def dispose_engine(engine: AsyncEngine) -> None:
 async def get_session() -> AsyncSession:
     async with get_session_factory()() as session:
         yield session
+
 
 # ==========================================
 # REDIS (Cache / Queue)

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from src.api.routers.auth_router import router as auth
-from src.api.routers.access_counter_router import router as counter_access
+from src.api.routers.analytics_access_router import router as counter_access
 from src.api.routers.invest_router import router as invest
 
 api_router = APIRouter()

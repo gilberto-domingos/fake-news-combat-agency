@@ -1,3 +1,4 @@
+from domain.value_objects.email import Email
 from src.domain.entities.invest import Invest
 from src.infrastructure.database.models.invest_model import InvestModel
 
@@ -19,5 +20,5 @@ class InvestMapper:
             id=model.id,
             name=model.name,
             proposal=model.proposal,
-            email=model.email
+            email=Email(model.email)
         )

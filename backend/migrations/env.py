@@ -8,6 +8,7 @@ from alembic import context
 from src.infrastructure.database.base import Base
 from src.infrastructure.database.models.user_model import UserModel
 from src.infrastructure.database.models.invest_model import InvestModel
+from src.infrastructure.database.models.analytics_access_model import AnalyticsAccessModel
 from src.infrastructure.database.connection import DATABASE_URL
 
 config = context.config
@@ -41,7 +42,7 @@ def run_sync_migrations(connection):
     context.configure(
         connection=connection,
         target_metadata=target_metadata,
-        compare_type=True  # importante para detectar changes
+        compare_type=True
     )
 
     with context.begin_transaction():

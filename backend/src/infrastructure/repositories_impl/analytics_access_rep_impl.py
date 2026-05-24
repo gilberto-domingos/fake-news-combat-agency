@@ -9,12 +9,15 @@ class AnalyticsAccessRepositoryImpl(AnalyticsAccessRepositoryInt):
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def create(self, analytics_access: AnalyticsAccess) -> None:
+    async def create(self, analytics_access: AnalyticsAccess) -> AnalyticsAccess:
         model = AnalyticsAccessMapper.to_model(analytics_access)
 
         self.session.add(model)
 
         await self.session.commit()
+        await self.session.refresh(model)
 
-    # async def find_all(self):
+        return AnalyticsAccessMapper.to_entity(model)
+
+        # async def find_all(self):
     #     pass

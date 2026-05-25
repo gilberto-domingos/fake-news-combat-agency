@@ -6,7 +6,12 @@ from fastapi import FastAPI
 from src.api.routers.router_registry import api_router
 from src.api.exception_handlers import exception_registry
 from src.infrastructure.config.cors import setup_cors
-from src.infrastructure.database.connection import (create_engine, create_session_factory, dispose_engine)
+from src.infrastructure.database.connection import (
+    create_engine,
+    create_session_factory,
+    dispose_engine,
+    test_database_connection,
+)
 
 # from src.api.exception_handlers.exception_registry import register_exception_handlers
 
@@ -16,14 +21,26 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("API iniciando...")
+    logger.info("API STARTING...")
+
     engine = create_engine()
+
+    await test_database_connection(engine)
+
     create_session_factory(engine)
+
+    logger.info("API STARTED SUCCESSFULLY")
+
     try:
         yield
+
     finally:
-        logger.info("API finalizando...")
+
+        logger.info("API SHUTTING DOWN...")
+
         await dispose_engine(engine)
+
+        logger.info("API SHUTDOWN COMPLETE")
 
 
 app = FastAPI(title="Police Fake News API", version="0.1.0", lifespan=lifespan)

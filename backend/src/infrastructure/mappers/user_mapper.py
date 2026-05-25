@@ -1,5 +1,7 @@
 from src.domain.entities.user import User
+from src.domain.value_objects.email import Email
 from src.infrastructure.database.models.user_model import UserModel
+
 
 class UserMapper:
 
@@ -23,7 +25,7 @@ class UserMapper:
             id=model.id,
             name=model.name,
             lastname=model.lastname,
-            email=model.email,
+            email=Email(model.email),
             password_hash=model.password_hash,
             birthdate=model.birthdate,
             gender=model.gender,

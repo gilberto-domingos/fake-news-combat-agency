@@ -1,4 +1,4 @@
-from domain.value_objects.email import Email
+from src.domain.value_objects.email import Email
 from src.domain.entities.invest import Invest
 from src.infrastructure.database.models.invest_model import InvestModel
 

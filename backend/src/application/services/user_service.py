@@ -1,14 +1,13 @@
 from datetime import date
-
 from src.domain.entities.user import User
 from src.domain.exceptions.business_exception import BusinessException
 from src.domain.repositories_int.user import UserRepository
 from src.domain.value_objects.email import Email
-from passlib.hash import bcrypt
+from src.domain.repositories_int.user import PasswordHasher
 
 
 class UserService:
-    def __init__(self, user_repository: UserRepository, password_hasher=bcrypt):
+    def __init__(self, user_repository: UserRepository, password_hasher: PasswordHasher):
         self.user_repository = user_repository
         self.password_hasher = password_hasher
 

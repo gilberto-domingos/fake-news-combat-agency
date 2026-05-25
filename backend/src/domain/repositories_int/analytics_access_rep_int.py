@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from domain.entities.analytics_access import AnalyticsAccess
+from src.domain.entities.analytics_access import AnalyticsAccess
 
 
 class AnalyticsAccessRepositoryInt(ABC):

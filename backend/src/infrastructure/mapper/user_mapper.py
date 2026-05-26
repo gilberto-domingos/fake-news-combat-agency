@@ -1,6 +1,6 @@
 from src.domain.entity.user import User
 from src.domain.value_object.email import Email
-from src.infrastructure.database.models.user_model import UserModel
+from src.infrastructure.database.model.user_model import UserModel
 
 
 class UserMapper:

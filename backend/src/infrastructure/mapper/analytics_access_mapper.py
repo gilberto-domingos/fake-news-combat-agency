@@ -1,5 +1,5 @@
 from src.domain.entity.analytics_access import AnalyticsAccess
-from src.infrastructure.database.models.analytics_access_model import AnalyticsAccessModel
+from src.infrastructure.database.model.analytics_access_model import AnalyticsAccessModel
 
 
 class AnalyticsAccessMapper:

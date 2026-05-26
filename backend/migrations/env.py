@@ -6,9 +6,9 @@ from sqlalchemy.ext.asyncio import create_async_engine
 from alembic import context
 
 from src.infrastructure.database.base import Base
-from src.infrastructure.database.models.user_model import UserModel
-from src.infrastructure.database.models.invest_model import InvestModel
-from src.infrastructure.database.models.analytics_access_model import AnalyticsAccessModel
+from src.infrastructure.database.model.user_model import UserModel
+from src.infrastructure.database.model.invest_model import InvestModel
+from src.infrastructure.database.model.analytics_access_model import AnalyticsAccessModel
 from src.infrastructure.database.connection import DATABASE_URL
 
 config = context.config
@@ -19,7 +19,7 @@ config.set_main_option("sqlalchemy.url", DATABASE_URL)
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# 🔥 IMPORTANTE: garante que models foram registrados no Base.metadata
+# 🔥 IMPORTANTE: garante que model foram registrados no Base.metadata
 target_metadata = Base.metadata
 
 

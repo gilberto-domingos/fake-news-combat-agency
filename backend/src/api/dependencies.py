@@ -9,6 +9,8 @@ from src.application.command.invest_create_cmm import InvestCreateCommand
 from src.application.command_handler.user_create_handler import CreateUserHandler
 from src.application.command_handler.analytics_access_crt_handler import AnalyticsAccessCreateHandler
 from src.application.command_handler.invest_create_handler import InvestCreateHandler
+from src.application.query.analytics_access_query import AnalyticsAccessQuery
+from src.application.query_handler.analytics_access_query_handler import AnalyticsAccessQueryHandler
 
 from src.application.service.user_service import UserService
 
@@ -18,7 +20,8 @@ from src.infrastructure.repository_impl.user import UserRepositoryImpl, BcryptPa
 from src.infrastructure.repository_impl.invest import InvestRepositoryImpl
 from src.infrastructure.repository_impl.analytics_access_rep_impl import AnalyticsAccessRepositoryImpl
 
-from src.application.mediator.mediator import Mediator
+from src.application.mediator.comm_mediator import CommandMediator
+from src.application.mediator.query_mediator import QueryMediator
 
 from src.infrastructure.database.connection import get_session_factory
 
@@ -79,15 +82,31 @@ def get_analytics_access_create_handler(
     return AnalyticsAccessCreateHandler(repository)
 
 
-def get_mediator(
+def get_analytics_access_query_handler(
+        repository: AnalyticsAccessRepositoryImpl = Depends(get_analytics_access_repository)
+) -> AnalyticsAccessQueryHandler:
+    return AnalyticsAccessQueryHandler(repository)
+
+
+def get_command_mediator(
         create_user_handler: CreateUserHandler = Depends(get_create_user_handler),
+        invest_create_handler: InvestCreateHandler = Depends(get_invest_create_handler),
         analytics_access_crt_handler: AnalyticsAccessCreateHandler = Depends(get_analytics_access_create_handler),
-        invest_create_handler: InvestCreateHandler = Depends(get_invest_create_handler)
-) -> Mediator:
-    mediator = Mediator()
+) -> CommandMediator:
+    comm_mediator = CommandMediator()
 
-    mediator.register(CreateUserCommand, create_user_handler)
-    mediator.register(AnalyticsAccessCreateCommand, analytics_access_crt_handler)
-    mediator.register(InvestCreateCommand, invest_create_handler)
+    comm_mediator.register(CreateUserCommand, create_user_handler)
+    comm_mediator.register(InvestCreateCommand, invest_create_handler)
+    comm_mediator.register(AnalyticsAccessCreateCommand, analytics_access_crt_handler)
 
-    return mediator
+    return comm_mediator
+
+
+def get_query_mediator(
+        analytics_access_query_handler: AnalyticsAccessQueryHandler = Depends(get_analytics_access_query_handler)
+) -> QueryMediator:
+    query_mediator = QueryMediator()
+
+    query_mediator.register(AnalyticsAccessQuery, analytics_access_query_handler)
+
+    return query_mediator

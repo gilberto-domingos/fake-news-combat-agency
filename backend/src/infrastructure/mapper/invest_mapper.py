@@ -1,6 +1,6 @@
 from src.domain.value_object.email import Email
 from src.domain.entity.invest import Invest
-from src.infrastructure.database.models.invest_model import InvestModel
+from src.infrastructure.database.model.invest_model import InvestModel
 
 
 class InvestMapper:

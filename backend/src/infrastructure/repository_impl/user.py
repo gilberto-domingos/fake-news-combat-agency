@@ -4,7 +4,7 @@ from sqlalchemy import select
 from src.domain.entity.user import User
 import bcrypt
 from src.domain.repository_int.user import PasswordHasher
-from src.infrastructure.database.models.user_model import UserModel
+from src.infrastructure.database.model.user_model import UserModel
 from src.infrastructure.mapper.user_mapper import UserMapper
 
 

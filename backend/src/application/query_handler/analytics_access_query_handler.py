@@ -4,15 +4,15 @@ from src.domain.repository_int.analytics_access_rep_int import AnalyticsAccessRe
 
 class AnalyticsAccessQueryHandler:
 
-    def __init__(self, repo: AnalyticsAccessRepositoryInt):
-        self.repo = repo
+    def __init__(self, repository: AnalyticsAccessRepositoryInt):
+        self.repository = repository
 
     async def handle(self, query: AnalyticsAccessQuery):
         offset = (query.page - 1) * query.limit
 
         filters = query.model_dump(exclude={"page", "limit"})
 
-        return await self.repo.find_all(
+        return await self.repository.find_all(
             filters=filters,
             limit=query.limit,
             offset=offset

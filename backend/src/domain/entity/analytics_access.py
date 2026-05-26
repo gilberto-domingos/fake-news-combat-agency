@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
 from uuid import UUID
 from datetime import datetime
@@ -14,9 +14,17 @@ class AnalyticsAccess(BaseModel):
     screen_width: int
     screen_height: int
     timezone: str
-    sessionId: str
+
+    session_id: Optional[str] = Field(
+        default=None,
+        alias="sessionId"
+    )
+
     fingerprint: str
     ip_address: str
     country: str
     bot_detection: bool
     authenticate_user_id: Optional[str] = None
+
+    class Config:
+        populate_by_name = True

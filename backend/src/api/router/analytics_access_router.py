@@ -9,6 +9,7 @@ from src.application.mediator.query_mediator import QueryMediator
 
 from src.application.command.analytics_access_crt_cmm import (AnalyticsAccessCreateCommand, RequestMetadata)
 from src.application.query.analytics_access_query import AnalyticsAccessQuery
+from src.application.query.analytics_access_count_query import AnalyticsAccessCountQuery
 
 from src.application.dto.analytics_access_res_dto import AnalyticsAccessResDto
 
@@ -41,3 +42,13 @@ async def find_all(query: AnalyticsAccessQuery = Depends(),
     analytics_list = await query_mediator.send(query)
 
     return [AnalyticsAccessResDto.model_validate(item, from_attributes=True) for item in analytics_list]
+
+
+@router.get("/find_count", status_code=status.HTTP_200_OK)
+async def find_count(
+        query: AnalyticsAccessCountQuery = Depends(),
+        query_mediator: QueryMediator = Depends(get_query_mediator)
+):
+    analytics_count = await query_mediator.send(query)
+
+    return analytics_count

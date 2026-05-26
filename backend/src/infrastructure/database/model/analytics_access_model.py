@@ -36,7 +36,7 @@ class AnalyticsAccessModel(Base):
 
     timezone: Mapped[str] = mapped_column(String(100))
 
-    sessionId: Mapped[str] = mapped_column(
+    session_id: Mapped[str | None] = mapped_column(
         String(255),
         index=True
     )

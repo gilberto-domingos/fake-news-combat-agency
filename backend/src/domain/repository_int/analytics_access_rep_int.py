@@ -10,3 +10,7 @@ class AnalyticsAccessRepositoryInt(ABC):
     @abstractmethod
     async def find_all(self, filters: dict, limit: int, offset: int) -> list[AnalyticsAccess]:
         pass
+
+    @abstractmethod
+    async def find_count(self, filters: dict) -> int:
+        pass

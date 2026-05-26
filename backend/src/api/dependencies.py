@@ -10,7 +10,9 @@ from src.application.command_handler.user_create_handler import CreateUserHandle
 from src.application.command_handler.analytics_access_crt_handler import AnalyticsAccessCreateHandler
 from src.application.command_handler.invest_create_handler import InvestCreateHandler
 from src.application.query.analytics_access_query import AnalyticsAccessQuery
+from src.application.query.analytics_access_count_query import AnalyticsAccessCountQuery
 from src.application.query_handler.analytics_access_query_handler import AnalyticsAccessQueryHandler
+from src.application.query_handler.analytics_access_count_query_handler import AnalyticsAccessCountQueryHandler
 
 from src.application.service.user_service import UserService
 
@@ -88,6 +90,12 @@ def get_analytics_access_query_handler(
     return AnalyticsAccessQueryHandler(repository)
 
 
+def get_analytics_access_count_query_handler(
+        repository: AnalyticsAccessRepositoryImpl = Depends(get_analytics_access_repository)
+) -> AnalyticsAccessCountQueryHandler:
+    return AnalyticsAccessCountQueryHandler(repository)
+
+
 def get_command_mediator(
         create_user_handler: CreateUserHandler = Depends(get_create_user_handler),
         invest_create_handler: InvestCreateHandler = Depends(get_invest_create_handler),
@@ -103,10 +111,13 @@ def get_command_mediator(
 
 
 def get_query_mediator(
-        analytics_access_query_handler: AnalyticsAccessQueryHandler = Depends(get_analytics_access_query_handler)
+        analytics_access_query_handler: AnalyticsAccessQueryHandler = Depends(get_analytics_access_query_handler),
+        analytics_access_count_query_handler: AnalyticsAccessCountQueryHandler = Depends(
+            get_analytics_access_count_query_handler)
 ) -> QueryMediator:
     query_mediator = QueryMediator()
 
     query_mediator.register(AnalyticsAccessQuery, analytics_access_query_handler)
+    query_mediator.register(AnalyticsAccessCountQuery, analytics_access_count_query_handler)
 
     return query_mediator

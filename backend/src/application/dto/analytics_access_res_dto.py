@@ -1,11 +1,20 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional
 from datetime import datetime
 from uuid import UUID
 
 
 class AnalyticsAccessResDto(BaseModel):
-    id: UUID
+    model_config = ConfigDict(
+        populate_by_name=True,
+        from_attributes=True
+    )
+
+    session_id: Optional[str] = Field(
+        default=None,
+        alias="sessionId"
+    )
+
     route: str
     timestamp: datetime
     user_agent: str
@@ -14,7 +23,6 @@ class AnalyticsAccessResDto(BaseModel):
     screen_width: int
     screen_height: int
     timezone: str
-    sessionId: str
     fingerprint: str
     ip_address: str
     country: str

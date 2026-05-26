@@ -11,7 +11,7 @@ class AnalyticsAccessCrtDto(BaseModel):
     platform: str
     screen_width: int
     screen_height: int
-    sessionId: str
+    session_id: str = Field(alias="sessionId")
     fingerprint: str
     authenticate_user_id: Optional[str] = Field(
         default=None,

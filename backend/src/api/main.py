@@ -3,8 +3,8 @@ import os
 from contextlib import asynccontextmanager
 import uvicorn
 from fastapi import FastAPI
-from src.api.routers.router_registry import api_router
-from src.api.exception_handlers import exception_registry
+from src.api.router.router_registry import api_router
+from src.api.exception_handler import exception_registry
 from src.infrastructure.config.cors import setup_cors
 from src.infrastructure.database.connection import (
     create_engine,
@@ -13,7 +13,7 @@ from src.infrastructure.database.connection import (
     test_database_connection,
 )
 
-# from src.api.exception_handlers.exception_registry import register_exception_handlers
+# from src.api.exception_handler.exception_registry import register_exception_handlers
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -51,7 +51,7 @@ exception_registry.register_exception_handlers(app)
 
 
 # print("------- REGISTERED HANDLERS -------")
-# for handler in app.exception_handlers:
+# for handler in app.exception_handler:
 #     print("HANDLER:", handler)
 #
 # print("------- REGISTERED ROUTERS -------")

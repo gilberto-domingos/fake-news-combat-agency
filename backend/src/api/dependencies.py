@@ -6,19 +6,19 @@ from src.application.command.user_create_cmm import CreateUserCommand
 from src.application.command.analytics_access_crt_cmm import AnalyticsAccessCreateCommand
 from src.application.command.invest_create_cmm import InvestCreateCommand
 
-from src.application.command_handlers.user_create_handler import CreateUserHandler
-from src.application.command_handlers.analytics_access_crt_handler import AnalyticsAccessCreateHandler
-from src.application.command_handlers.invest_create_handler import InvestCreateHandler
+from src.application.command_handler.user_create_handler import CreateUserHandler
+from src.application.command_handler.analytics_access_crt_handler import AnalyticsAccessCreateHandler
+from src.application.command_handler.invest_create_handler import InvestCreateHandler
 
-from src.application.services.user_service import UserService
+from src.application.service.user_service import UserService
 
-from src.domain.repositories_int.user import PasswordHasher, UserRepository
+from src.domain.repository_int.user import PasswordHasher, UserRepository
 
-from src.infrastructure.repositories_impl.user import UserRepositoryImpl, BcryptPasswordHasher
-from src.infrastructure.repositories_impl.invest import InvestRepositoryImpl
-from src.infrastructure.repositories_impl.analytics_access_rep_impl import AnalyticsAccessRepositoryImpl
+from src.infrastructure.repository_impl.user import UserRepositoryImpl, BcryptPasswordHasher
+from src.infrastructure.repository_impl.invest import InvestRepositoryImpl
+from src.infrastructure.repository_impl.analytics_access_rep_impl import AnalyticsAccessRepositoryImpl
 
-from src.application.mediators.mediator import Mediator
+from src.application.mediator.mediator import Mediator
 
 from src.infrastructure.database.connection import get_session_factory
 

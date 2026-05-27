@@ -28,3 +28,6 @@ class AnalyticsAccess(BaseModel):
 
     class Config:
         populate_by_name = True
+        json_encoders = {
+            UUID: str
+        }

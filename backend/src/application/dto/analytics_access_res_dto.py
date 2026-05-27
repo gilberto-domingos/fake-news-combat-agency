@@ -10,6 +10,8 @@ class AnalyticsAccessResDto(BaseModel):
         from_attributes=True
     )
 
+    id: UUID
+
     session_id: Optional[str] = Field(
         default=None,
         alias="sessionId"

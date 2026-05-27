@@ -38,6 +38,7 @@ class AnalyticsAccessModel(Base):
 
     session_id: Mapped[str | None] = mapped_column(
         String(255),
+        nullable=True,
         index=True
     )
 

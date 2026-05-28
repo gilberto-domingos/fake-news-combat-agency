@@ -8,12 +8,17 @@ class AnalyticsAccessQueryHandler:
         self.repository = repository
 
     async def handle(self, query: AnalyticsAccessQuery):
-        offset = (query.page - 1) * query.limit
+        LIMIT = 5
 
-        filters = query.model_dump(exclude={"page", "limit"})
+        page = max(query.page, 1)
+        offset = (page - 1) * LIMIT
+
+        filters = query.model_dump(
+            exclude={"page", "limit"}
+        )
 
         return await self.repository.find_all(
             filters=filters,
-            limit=query.limit,
+            limit=LIMIT,
             offset=offset
         )

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, Any
 from uuid import UUID
 from datetime import datetime
 
@@ -8,6 +8,7 @@ class AnalyticsAccess(BaseModel):
     id: UUID
     route: str
     timestamp: datetime
+    city: Optional[str] = None
     user_agent: str
     language: str
     platform: str

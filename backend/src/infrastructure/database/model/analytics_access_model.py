@@ -23,6 +23,8 @@ class AnalyticsAccessModel(Base):
         DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc)
     )
+    
+    city: Mapped[str] = mapped_column(String(50))
 
     user_agent: Mapped[str] = mapped_column(String(1000))
 

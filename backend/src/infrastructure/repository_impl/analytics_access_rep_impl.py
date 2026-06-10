@@ -39,6 +39,11 @@ class AnalyticsAccessRepositoryImpl(AnalyticsAccessRepositoryInt):
                 AnalyticsAccessModel.timestamp == filters["timestamp"]
             )
 
+        if filters.get("city"):
+            query = query.where(
+                AnalyticsAccessModel.timestamp == filters["city"]
+            )
+
         if filters.get("user_agent"):
             query = query.where(
                 AnalyticsAccessModel.user_agent == filters["user_agent"]
@@ -100,6 +105,10 @@ class AnalyticsAccessRepositoryImpl(AnalyticsAccessRepositoryInt):
                 AnalyticsAccessModel.bot_detection
                 == filters["bot_detection"]
             )
+
+        query = query.order_by(
+            AnalyticsAccessModel.id.desc()
+        )
 
         query = query.offset(offset).limit(limit)
 

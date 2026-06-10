@@ -6,6 +6,7 @@ from datetime import datetime
 class AnalyticsAccessCrtDto(BaseModel):
     route: str
     timestamp: datetime
+    city: Optional[str] = None
     user_agent: str
     language: str
     platform: str

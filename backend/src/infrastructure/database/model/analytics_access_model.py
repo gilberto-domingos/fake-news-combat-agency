@@ -23,8 +23,11 @@ class AnalyticsAccessModel(Base):
         DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc)
     )
-    
-    city: Mapped[str] = mapped_column(String(50))
+
+    city: Mapped[str | None] = mapped_column(
+        String(100),
+        nullable=True
+    )
 
     user_agent: Mapped[str] = mapped_column(String(1000))
 

@@ -1,12 +1,15 @@
 from src.application.command.analytics_access_crt_cmm import AnalyticsAccessCreateCommand, RequestMetadata
 from src.domain.entity.analytics_access import AnalyticsAccess
 from src.domain.repository_int.analytics_access_rep_int import AnalyticsAccessRepositoryInt
+from src.domain.repository_int.geo_location_int import GeoLocationServiceInt
 from uuid import uuid4
 
 
 class AnalyticsAccessCreateHandler:
-    def __init__(self, analytics_access_repository: AnalyticsAccessRepositoryInt):
+    def __init__(self, analytics_access_repository: AnalyticsAccessRepositoryInt,
+                 geo_location_service: GeoLocationServiceInt):
         self.repository = analytics_access_repository
+        self.geo_location_service = geo_location_service
 
     async def handle(self, command: AnalyticsAccessCreateCommand,
                      metadata: RequestMetadata | None = None) -> AnalyticsAccess:
@@ -14,6 +17,7 @@ class AnalyticsAccessCreateHandler:
             id=uuid4(),
             route=command.route,
             timestamp=command.timestamp,
+            city=command.city,
             user_agent=command.user_agent,
             language=command.language,
             platform=command.platform,

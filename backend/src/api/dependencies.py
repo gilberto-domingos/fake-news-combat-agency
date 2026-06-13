@@ -21,6 +21,9 @@ from src.domain.repository_int.user import PasswordHasher, UserRepository
 from src.infrastructure.repository_impl.user import UserRepositoryImpl, BcryptPasswordHasher
 from src.infrastructure.repository_impl.invest import InvestRepositoryImpl
 from src.infrastructure.repository_impl.analytics_access_rep_impl import AnalyticsAccessRepositoryImpl
+from src.application.service.geo_location_service import GeoLocationServiceInt
+from src.infrastructure.geoip.geoip_reader import GeoIPReader
+from src.application.service.geo_location_service import GeoLocationService
 
 from src.application.mediator.comm_mediator import CommandMediator
 from src.application.mediator.query_mediator import QueryMediator
@@ -52,6 +55,21 @@ def get_analytics_access_repository(
     return AnalyticsAccessRepositoryImpl(session)
 
 
+from infrastructure.geoip.geoip_reader import GeoIPReader
+
+
+def get_geoip_reader() -> GeoIPReader:
+    return GeoIPReader(
+        "infrastructure/geoip/GeoLite2-City.mmdb"
+    )
+
+
+def get_geo_location_service(
+        geoip_reader: GeoIPReader = Depends(get_geoip_reader)
+) -> GeoLocationService:
+    return GeoLocationService(geoip_reader)
+
+
 def get_password_hasher() -> PasswordHasher:
     return BcryptPasswordHasher()
 
@@ -79,9 +97,10 @@ def get_invest_create_handler(
 
 
 def get_analytics_access_create_handler(
-        repository: AnalyticsAccessRepositoryImpl = Depends(get_analytics_access_repository)
+        repository: AnalyticsAccessRepositoryImpl = Depends(get_analytics_access_repository),
+        geo_location_service: GeoLocationServiceInt = Depends(get_geo_location_service)
 ) -> AnalyticsAccessCreateHandler:
-    return AnalyticsAccessCreateHandler(repository)
+    return AnalyticsAccessCreateHandler(repository, geo_location_service)
 
 
 def get_analytics_access_query_handler(

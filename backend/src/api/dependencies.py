@@ -55,9 +55,6 @@ def get_analytics_access_repository(
     return AnalyticsAccessRepositoryImpl(session)
 
 
-from infrastructure.geoip.geoip_reader import GeoIPReader
-
-
 def get_geoip_reader() -> GeoIPReader:
     return GeoIPReader(
         "infrastructure/geoip/GeoLite2-City.mmdb"

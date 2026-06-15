@@ -9,7 +9,9 @@ class GeoIPReader:
     def get_city(self, ip: str) -> str | None:
         try:
             response = self.reader.city(ip)
-            return response.city.name
+            city = response.city.name
+            return city
+        
         except Exception:
             return None
 

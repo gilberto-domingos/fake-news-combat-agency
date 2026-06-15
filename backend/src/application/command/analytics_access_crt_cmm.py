@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field
 class AnalyticsAccessCreateCommand(BaseModel):
     route: str
     timestamp: datetime
-    city: str
+    city: str | None = None
     user_agent: str
     language: str
     platform: str

@@ -12,12 +12,19 @@ class AnalyticsAccessCreateHandler:
         self.geo_location_service = geo_location_service
 
     async def handle(self, command: AnalyticsAccessCreateCommand,
-                     metadata: RequestMetadata | None = None) -> AnalyticsAccess:
+                     metadata: RequestMetadata | None = None):
+        city = None
+
+        if metadata:
+            city = self.geo_location_service.get_city(
+                metadata.ip_address
+            )
+
         analytics = AnalyticsAccess(
             id=uuid4(),
             route=command.route,
             timestamp=command.timestamp,
-            city=command.city,
+            city=city,
             user_agent=command.user_agent,
             language=command.language,
             platform=command.platform,
@@ -31,5 +38,4 @@ class AnalyticsAccessCreateHandler:
             bot_detection=metadata.bot_detection,
             authenticate_user_id=command.authenticate_user_id
         )
-
         return await self.repository.create(analytics)

@@ -1,0 +1,28 @@
+from src.module.land.application.command.user_create_cmm import CreateUserCommand
+from src.module.land.application.service.user_service import UserService
+from src.module.land.domain.entity.user import User
+from src.module.land.domain.exception.business_exception import BusinessException
+from src.module.land.infrastructure.external_service.recaptcha_service import verify_recaptcha
+
+
+class CreateUserHandler:
+    def __init__(self, user_service: UserService):
+        self.user_service = user_service
+
+    async def handle(self, command: CreateUserCommand) -> User:
+        is_human = await verify_recaptcha(command.captcha_token)
+        if not is_human:
+            raise BusinessException("reCAPTCHA inválido. Verifique se você não é um robô.")
+
+        user = await self.user_service.create_user(
+            name=command.name,
+            lastname=command.lastname,
+            email=command.email,
+            birthdate=command.birthdate,
+            gender=command.gender,
+            profession=command.profession,
+            phone=command.phone,
+            password=command.password,
+            terms_accepted=command.terms_accepted
+        )
+        return user

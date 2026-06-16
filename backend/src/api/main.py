@@ -3,17 +3,15 @@ import os
 from contextlib import asynccontextmanager
 import uvicorn
 from fastapi import FastAPI
-from src.api.router.router_registry import api_router
-from src.api.exception_handler import exception_registry
-from src.infrastructure.config.cors import setup_cors
-from src.infrastructure.database.connection import (
+from src.api.router_registry_global import api_router
+from src.api.exception_handler.exception_registry import register_exception_handlers
+from src.module.land.infrastructure.config.cors import setup_cors
+from src.module.land.infrastructure.database.connection import (
     create_engine,
     create_session_factory,
     dispose_engine,
     test_database_connection,
 )
-
-# from src.api.exception_handler.exception_registry import register_exception_handlers
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -47,16 +45,7 @@ app = FastAPI(title="Police Fake News API", version="0.1.0", lifespan=lifespan)
 
 setup_cors(app)
 app.include_router(api_router)
-exception_registry.register_exception_handlers(app)
-
-
-# print("------- REGISTERED HANDLERS -------")
-# for handler in app.exception_handler:
-#     print("HANDLER:", handler)
-#
-# print("------- REGISTERED ROUTERS -------")
-# for route in app.routes:
-#     print(route.path, route.methods)
+register_exception_handlers(app)
 
 
 @app.get("/ping")

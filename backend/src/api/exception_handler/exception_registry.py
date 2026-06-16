@@ -7,9 +7,9 @@ from fastapi import FastAPI
 from src.api.middleware.exception_handler import (
     business_exception_handler, validation_exception_handler, domain_exception_handler
 )
-from src.domain.exception.business_exception import BusinessException
-from src.domain.exception.domain_exception import DomainException
-from src.domain.exception.validation_exception import ValidationException
+from src.module.land.domain.exception.business_exception import BusinessException
+from src.module.land.domain.exception.domain_exception import DomainException
+from src.module.land.domain.exception.validation_exception import ValidationException
 from src.api.exception_handler.global_exception_handler import global_exception_handler
 
 

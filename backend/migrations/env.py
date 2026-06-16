@@ -5,11 +5,8 @@ from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import create_async_engine
 from alembic import context
 
-from src.infrastructure.database.base import Base
-from src.infrastructure.database.model.user_model import UserModel
-from src.infrastructure.database.model.invest_model import InvestModel
-from src.infrastructure.database.model.analytics_access_model import AnalyticsAccessModel
-from src.infrastructure.database.connection import DATABASE_URL
+from src.module.land.infrastructure.database.base import Base
+from src.module.land.infrastructure.database.connection import DATABASE_URL
 
 config = context.config
 

@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 BASE_DIR = Path(__file__).resolve().parents[3]
 
-dotenv_path = BASE_DIR / ".env"
+dotenv_path = BASE_DIR / "database.env"
 
 logger.info(f"BASE_DIR: {BASE_DIR}")
 logger.info(f".env exists: {dotenv_path.exists()}")

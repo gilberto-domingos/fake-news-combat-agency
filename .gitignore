@@ -1,8 +1,7 @@
 ############################################
-# 🔒 SEGURANÇA / VARIÁVEIS DE AMBIENTE
+# 🔒 SEGURANÇA / ENVIRONMENTAL VARIABLES
 ############################################
 .venvnews/
-.venv/
 .env/
 .env.*
 .env
@@ -100,7 +99,7 @@ docker-data/
 *.pid
 
 ############################################
-# 🧠 IDEs / EDITORES
+# 🧠 IDEs / EDITORS
 ############################################
 .vscode/
 !.vscode/extensions.json
@@ -115,7 +114,7 @@ docker-data/
 .classpath
 
 ############################################
-# 💻 SISTEMA OPERACIONAL
+# 💻 OPERATIONAL SYTEM
 ############################################
 .DS_Store
 Thumbs.db
@@ -129,7 +128,7 @@ $RECYCLE.BIN/
 .nfs*
 
 ############################################
-# 🧪 TESTES / RELATÓRIOS
+# 🧪 TESTS / REPORTS
 ############################################
 test-results/
 coverage/
@@ -146,12 +145,13 @@ allure-report/
 .env.prod
 
 ############################################
-# 📦 OUTROS
+# 📦 Others
 ############################################
 *.bak
 *.tmp
 *.old
 *.orig
+digital_evidence_dev.md
 
 ############################################
 # ANGULAR CLI 21.x (OFICIAL)

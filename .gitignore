@@ -152,6 +152,7 @@ allure-report/
 *.old
 *.orig
 digital_evidence_dev.md
+digital_evidence_code.md
 
 ############################################
 # ANGULAR CLI 21.x (OFICIAL)

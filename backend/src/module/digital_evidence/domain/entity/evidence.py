@@ -1,17 +1,16 @@
-from abc import ABC, abstractmethod
 from uuid import UUID, uuid4
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 
 from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStatus
 
 
-class Evidence(ABC):
+class Evidence:
     def __init__(self, url: str, source: str):
         self._id: UUID = uuid4()
         self._url = url
         self._source = source
-        self._captured_at = datetime.utcnow()
+        self._captured_at = datetime.now(timezone.utc)
         self._status = EvidenceStatus.CAPTURED
         self._hash: Optional[str] = None
 
@@ -70,9 +69,8 @@ class Evidence(ABC):
     def mark_failed(self) -> None:
         self._status = EvidenceStatus.FAILED
 
-    @abstractmethod
     def validate(self) -> bool:
-        pass
+        return bool(self.url and self.source)
 
     def __str__(self) -> str:
         return f"Evidence(id={self.id}, url={self.url}, status={self.status})"

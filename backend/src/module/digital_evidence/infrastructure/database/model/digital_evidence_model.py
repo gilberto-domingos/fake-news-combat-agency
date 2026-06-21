@@ -8,7 +8,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from src.module.digital_evidence.infrastructure.database.base import Base
 
 
-class EvidenceModel(Base):
+class DigitalEvidenceModel(Base):
     __tablename__ = "evidences"
 
     id: Mapped[UUID] = mapped_column(

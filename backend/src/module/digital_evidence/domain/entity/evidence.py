@@ -1,4 +1,4 @@
-from uuid import UUID, uuid4
+from uuid import UUID
 from datetime import datetime, timezone
 from typing import Optional
 
@@ -6,8 +6,8 @@ from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStat
 
 
 class Evidence:
-    def __init__(self, url: str, source: str):
-        self._id: UUID = uuid4()
+    def __init__(self, id: UUID, url: str, source: str):
+        self._id = id
         self._url = url
         self._source = source
         self._captured_at = datetime.now(timezone.utc)

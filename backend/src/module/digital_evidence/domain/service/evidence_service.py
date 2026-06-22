@@ -1,12 +1,13 @@
 from src.module.digital_evidence.domain.entity.evidence import Evidence
-from src.module.digital_evidence.domain.repository_int.digital_evidence_rep_int import EvidenceRepository
 
 
 class EvidenceService:
-    def __init__(self, repository: EvidenceRepository):
-        self.repository = repository
 
-    async def create(self, url: str, source: str) -> Evidence:
-        evidence = Evidence(url=url, source=source)
+    def is_valid_for_processing(self, evidence: Evidence) -> bool:
+        if not evidence.url:
+            return False
 
-        return await self.repository.create(evidence)
+        if not evidence.source:
+            return False
+
+        return True

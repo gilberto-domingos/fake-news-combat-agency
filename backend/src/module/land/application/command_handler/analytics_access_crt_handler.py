@@ -20,7 +20,7 @@ class AnalyticsAccessCreateHandler:
                 metadata.ip_address
             )
 
-        analytics = AnalyticsAccess(
+        analytics_entity = AnalyticsAccess(
             id=uuid4(),
             route=command.route,
             timestamp=command.timestamp,
@@ -38,4 +38,4 @@ class AnalyticsAccessCreateHandler:
             bot_detection=metadata.bot_detection,
             authenticate_user_id=command.authenticate_user_id
         )
-        return await self.repository.create(analytics)
+        return await self.repository.create(analytics_entity)

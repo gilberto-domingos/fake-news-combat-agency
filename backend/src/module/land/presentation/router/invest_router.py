@@ -9,10 +9,7 @@ router = APIRouter(prefix="/invest", tags=["Invest"])
 
 
 @router.post("/", response_model=InvestResponseDto, status_code=status.HTTP_201_CREATED)
-async def invest(
-        payload: InvestCreateDto,
-        mediator: CommandMediator = Depends(get_command_mediator)
-):
+async def invest(payload: InvestCreateDto, mediator: CommandMediator = Depends(get_command_mediator)):
     command = InvestCreateCommand(**payload.model_dump())
 
     invests = await mediator.send(command)

@@ -5,8 +5,8 @@ import uvicorn
 from fastapi import FastAPI
 from src.api.router_registry_global import api_router
 from src.api.exception_handler.exception_registry import register_exception_handlers
-from src.module.land.infrastructure.config.cors import setup_cors
-from src.module.land.infrastructure.database.connection import (
+from src.shared_infrastructure.config.cors import setup_cors
+from src.shared_infrastructure.database.connection import (
     create_engine,
     create_session_factory,
     dispose_engine,
@@ -46,6 +46,8 @@ app = FastAPI(title="Police Fake News API", version="0.1.0", lifespan=lifespan)
 setup_cors(app)
 app.include_router(api_router)
 register_exception_handlers(app)
+
+print("🔥 CONNECTION MODULE IMPORTED")
 
 
 @app.get("/ping")

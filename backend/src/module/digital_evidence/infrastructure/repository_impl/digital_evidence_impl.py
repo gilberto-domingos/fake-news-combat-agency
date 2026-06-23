@@ -1,6 +1,6 @@
 from src.module.digital_evidence.domain.entity.evidence import Evidence
 from src.module.digital_evidence.domain.repository_int.digital_evidence_rep_int import DigitalEvidenceRepositoryInt
-from src.module.digital_evidence.infrastructure.database.model.digital_evidence_model import DigitalEvidenceModel
+from src.module.digital_evidence.infrastructure.model.digital_evidence_model import DigitalEvidenceModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
 

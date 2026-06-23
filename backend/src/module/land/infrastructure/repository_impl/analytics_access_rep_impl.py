@@ -3,7 +3,7 @@ from sqlalchemy import select, func
 from src.module.land.domain.entity.analytics_access import AnalyticsAccess
 from src.module.land.domain.repository_int.analytics_access_rep_int import AnalyticsAccessRepositoryInt
 from src.module.land.infrastructure.mapper.analytics_access_mapper import AnalyticsAccessMapper
-from src.module.land.infrastructure.database.model.analytics_access_model import AnalyticsAccessModel
+from module.land.infrastructure.model.analytics_access_model import AnalyticsAccessModel
 
 
 class AnalyticsAccessRepositoryImpl(AnalyticsAccessRepositoryInt):

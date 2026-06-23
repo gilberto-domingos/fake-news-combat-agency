@@ -1,6 +1,6 @@
 import asyncio
-from src.module.land.infrastructure.database.base import Base
-from src.module.land.infrastructure.database.connection import create_engine
+from src.shared_infrastructure.database.base import Base
+from src.shared_infrastructure.database.connection import create_engine
 import sys
 from pathlib import Path
 

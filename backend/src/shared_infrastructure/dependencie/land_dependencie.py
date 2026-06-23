@@ -29,7 +29,7 @@ from src.module.land.application.service.geo_location_service import GeoLocation
 from src.module.land.application.mediator.comm_mediator import CommandMediator
 from src.module.land.application.mediator.query_mediator import QueryMediator
 
-from src.module.land.infrastructure.database.connection import get_session_factory
+from src.shared_infrastructure.database.connection import get_session_factory
 
 
 async def get_db_session() -> AsyncGenerator[AsyncSession, None]:

@@ -3,6 +3,7 @@ from src.module.digital_evidence.application.command.digital_evidence_crt_comm i
 from src.module.digital_evidence.application.dto.evidence_crt_dto import EvidenceCrtDto
 from src.module.digital_evidence.application.dto.evidence_res_dto import EvidenceResDto
 from src.module.digital_evidence.application.mediator.comm_mediator import CommandMediator
+from shared_infrastructure.dependencie.digital_evidence_dependencie import get_command_mediator
 
 router = APIRouter(prefix="/digital_evidence", tags=["Digital_evidence"])
 

@@ -1,6 +1,6 @@
 from src.module.land.domain.value_object.email import Email
 from src.module.land.domain.entity.invest import Invest
-from src.module.land.infrastructure.database.model.invest_model import InvestModel
+from module.land.infrastructure.model.invest_model import InvestModel
 
 
 class InvestMapper:

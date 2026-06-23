@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 BASE_DIR = Path(__file__).resolve().parents[3]
 
-dotenv_path = BASE_DIR / "database.env"
+dotenv_path = BASE_DIR / ".env"
 
 logger.info(f"BASE_DIR: {BASE_DIR}")
 logger.info(f".env exists: {dotenv_path.exists()}")
@@ -40,6 +40,11 @@ load_dotenv(dotenv_path)
 # =========================================================
 
 DATABASE_URL = os.getenv("DATABASE_URL")
+
+print("=" * 80)
+print("DATABASE_URL RAW:")
+print(repr(DATABASE_URL))
+print("=" * 80)
 
 logger.info(f"DATABASE_URL ORIGINAL: {DATABASE_URL}")
 
@@ -79,11 +84,15 @@ def create_engine() -> AsyncEngine:
     """
     Create singleton async engine.
     """
-
     global _engine
 
     if _engine is None:
         logger.info("CREATING SQLALCHEMY ENGINE...")
+
+        logger.info(f"DATABASE_URL USED: {DATABASE_URL}")
+        logger.info(
+            f"CONNECT_ARGS: {{'ssl': 'require'}}"
+        )
 
         _engine = create_async_engine(
             DATABASE_URL,

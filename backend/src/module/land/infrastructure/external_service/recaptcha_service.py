@@ -1,8 +1,5 @@
-from dotenv import load_dotenv
 import httpx
 import os
-
-load_dotenv()
 
 RECAPTCHA_SECRET = os.getenv("RECAPTCHA_SECRET")
 GOOGLE_RECAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify"

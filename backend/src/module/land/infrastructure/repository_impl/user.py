@@ -3,7 +3,7 @@ from sqlalchemy import select
 from src.module.land.domain.entity.user import User
 import bcrypt
 from src.module.land.domain.repository_int.user import UserRepository, PasswordHasher
-from src.module.land.infrastructure.database.model.user_model import UserModel
+from module.land.infrastructure.model.user_model import UserModel
 from src.module.land.infrastructure.mapper.user_mapper import UserMapper
 
 

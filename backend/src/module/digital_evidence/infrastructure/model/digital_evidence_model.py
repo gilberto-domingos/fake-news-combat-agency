@@ -5,7 +5,7 @@ from sqlalchemy import String, DateTime
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
-from src.module.digital_evidence.infrastructure.database.base import Base
+from src.shared_infrastructure.database.base import Base
 
 
 class DigitalEvidenceModel(Base):

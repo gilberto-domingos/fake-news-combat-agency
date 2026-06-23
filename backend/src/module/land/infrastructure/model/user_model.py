@@ -3,7 +3,7 @@ from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy import String
 from uuid import UUID, uuid4
 from datetime import date
-from shared_infrastructure.database.base import Base
+from src.shared_infrastructure.database.base import Base
 
 
 class UserModel(Base):

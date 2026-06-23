@@ -1,18 +1,37 @@
-from uuid import UUID
+from uuid import UUID, uuid4
 from datetime import datetime, timezone
 from typing import Optional
+import hashlib
 
 from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStatus
 
 
 class Evidence:
-    def __init__(self, id: UUID, url: str, source: str):
+    def __init__(self, id: UUID, url: str, source: str, captured_at: datetime, status: EvidenceStatus,
+                 hash: Optional[str]):
         self._id = id
         self._url = url
         self._source = source
-        self._captured_at = datetime.now(timezone.utc)
-        self._status = EvidenceStatus.CAPTURED
-        self._hash: Optional[str] = None
+        self._captured_at = captured_at
+        self._status = status
+        self._hash = hash
+
+    @classmethod
+    def create(cls, url: str, source: str):
+        captured_at = datetime.now(timezone.utc)
+
+        hash_value = hashlib.sha256(
+            f"{url}:{source}:{captured_at}".encode()
+        ).hexdigest()
+    
+        return cls(
+            id=uuid4(),
+            url=url,
+            source=source,
+            captured_at=captured_at,
+            status=EvidenceStatus.CAPTURED,
+            hash=hash_value
+        )
 
     @property
     def id(self) -> UUID:

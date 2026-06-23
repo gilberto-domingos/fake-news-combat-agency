@@ -5,18 +5,17 @@ from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import create_async_engine
 from alembic import context
 
-from shared_infrastructure.database.base import Base
-from shared.connection import DATABASE_URL
+from src.shared_infrastructure.database.base import Base
+from src.shared_infrastructure.database.connection import DATABASE_URL
+import src.shared_infrastructure.database.model_registry
 
 config = context.config
 
-# set DB URL no alembic.ini runtime
 config.set_main_option("sqlalchemy.url", DATABASE_URL)
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# 🔥 IMPORTANTE: garante que model foram registrados no Base.metadata
 target_metadata = Base.metadata
 
 

@@ -5,7 +5,7 @@ from sqlalchemy import String, Boolean, DateTime, Integer
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
-from shared_infrastructure.database.base import Base
+from src.shared_infrastructure.database.base import Base
 
 
 class AnalyticsAccessModel(Base):

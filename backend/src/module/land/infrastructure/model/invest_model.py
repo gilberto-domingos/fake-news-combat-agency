@@ -1,4 +1,4 @@
-from shared_infrastructure.database.base import Base
+from src.shared_infrastructure.database.base import Base
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import String

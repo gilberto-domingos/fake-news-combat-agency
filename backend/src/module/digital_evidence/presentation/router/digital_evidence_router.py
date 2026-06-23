@@ -17,7 +17,7 @@ async def evidence(payload: EvidenceCrtDto, mediator: CommandMediator = Depends(
         id=evidence.id,
         url=evidence.url,
         source=evidence.source,
-        captured_at=evidence.caputred_at,
+        captured_at=evidence.captured_at,
         status=evidence.status,
         hash=evidence.hash
     )

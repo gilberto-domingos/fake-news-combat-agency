@@ -47,7 +47,7 @@ setup_cors(app)
 app.include_router(api_router)
 register_exception_handlers(app)
 
-print("🔥 CONNECTION MODULE IMPORTED")
+print("CONNECTION MODULE IMPORTED")
 
 
 @app.get("/ping")

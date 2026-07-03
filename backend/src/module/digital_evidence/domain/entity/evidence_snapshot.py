@@ -1,13 +1,16 @@
 from abc import ABC, abstractmethod
 from uuid import UUID, uuid4
+from typing import Optional
 
 
 class EvidenceSnapshot(ABC):
-    def __init__(self, evidence_id: UUID, html_content: str, screenshot_path: str, text_content: str):
+    def __init__(self, evidence_id: UUID, html_content: str, screenshot_path: str, hash: Optional[str],
+                 text_content: str):
         self._id: UUID = uuid4()
         self._evidence_id = evidence_id
         self._html_content = html_content
         self._screenshot_path = screenshot_path
+        self._hash = hash
         self._text_content = text_content
 
     @property
@@ -37,6 +40,14 @@ class EvidenceSnapshot(ABC):
         if not value:
             raise ValueError("Screenshot path cannot be empty")
         self._screenshot_path = value
+
+    @property
+    def hash(self) -> Optional[str]:
+        return self._hash
+
+    @hash.setter
+    def hash(self, value: str) -> None:
+        self.hash = value
 
     @property
     def text_content(self) -> str:

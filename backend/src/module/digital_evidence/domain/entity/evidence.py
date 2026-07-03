@@ -2,19 +2,27 @@ from uuid import UUID, uuid4
 from datetime import datetime, timezone
 from typing import Optional
 import hashlib
-
+from src.module.digital_evidence.domain.entity.evidence_snapshot import EvidenceSnapshot
 from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStatus
 
 
 class Evidence:
-    def __init__(self, id: UUID, url: str, source: str, captured_at: datetime, status: EvidenceStatus,
-                 hash: Optional[str]):
+    def __init__(self,
+                 id: UUID,
+                 url: str,
+                 source: str,
+                 captured_at: datetime,
+                 status: EvidenceStatus,
+                 hash: Optional[str],
+                 snapshots: Optional[list[EvidenceSnapshot]] = None,
+                 ):
         self._id = id
         self._url = url
         self._source = source
         self._captured_at = captured_at
         self._status = status
         self._hash = hash
+        self._snapshots = snapshots if snapshots is not None else []
 
     @classmethod
     def create(cls, url: str, source: str):
@@ -23,7 +31,7 @@ class Evidence:
         hash_value = hashlib.sha256(
             f"{url}:{source}:{captured_at}".encode()
         ).hexdigest()
-    
+
         return cls(
             id=uuid4(),
             url=url,
@@ -78,6 +86,16 @@ class Evidence:
     @hash.setter
     def hash(self, value: Optional[str]) -> None:
         self._hash = value
+
+    @property
+    def snapshots(self) -> list[EvidenceSnapshot]:
+        return self._snapshots
+
+    @snapshots.setter
+    def snapshots(self, value: list[EvidenceSnapshot]) -> None:
+        if value is None:
+            raise ValueError("Snapshots cannot be None")
+        self._snapshots = value
 
     def mark_processing(self) -> None:
         self._status = EvidenceStatus.PROCESSING

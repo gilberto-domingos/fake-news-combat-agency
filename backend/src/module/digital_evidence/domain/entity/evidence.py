@@ -24,23 +24,6 @@ class Evidence:
         self._hash = hash
         self._snapshots = snapshots if snapshots is not None else []
 
-    @classmethod
-    def create(cls, url: str, source: str):
-        captured_at = datetime.now(timezone.utc)
-
-        hash_value = hashlib.sha256(
-            f"{url}:{source}:{captured_at}".encode()
-        ).hexdigest()
-
-        return cls(
-            id=uuid4(),
-            url=url,
-            source=source,
-            captured_at=captured_at,
-            status=EvidenceStatus.CAPTURED,
-            hash=hash_value
-        )
-
     @property
     def id(self) -> UUID:
         return self._id

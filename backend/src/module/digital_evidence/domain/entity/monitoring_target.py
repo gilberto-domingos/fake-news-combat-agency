@@ -25,6 +25,14 @@ class MonitoringTarget:
         self._target_name = value
 
     @property
+    def keywords(self) -> list[str]:
+        return self._keywords
+
+    @keywords.setter
+    def keywords(self, value: list[str]) -> None:
+        self._keywords = value
+
+    @property
     def is_active(self) -> bool:
         return self._is_active
 
@@ -42,8 +50,8 @@ class MonitoringTarget:
             raise ValueError("Target is already is deactivate")
         self._is_active = False
 
-    # def deactivate(self) -> bool:
-    #     return bool(is_active)
-    # 
-    # def update_keywords(self) -> str:
-    #     return str(keywords)
+    def add_keywords(self, keywords: list[str]) -> None:
+        self._keywords.extend(keywords)
+
+    def update_keywords(self, keywords: list[str]) -> None:
+        self._keywords = keywords

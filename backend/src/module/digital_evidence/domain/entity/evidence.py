@@ -1,7 +1,6 @@
 from uuid import UUID, uuid4
 from datetime import datetime, timezone
 from typing import Optional
-import hashlib
 from src.module.digital_evidence.domain.entity.evidence_snapshot import EvidenceSnapshot
 from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStatus
 
@@ -9,6 +8,7 @@ from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStat
 class Evidence:
     def __init__(self,
                  id: UUID,
+                 incident_id: UUID,
                  url: str,
                  source: str,
                  captured_at: datetime,
@@ -17,6 +17,7 @@ class Evidence:
                  snapshots: Optional[list[EvidenceSnapshot]] = None,
                  ):
         self._id = id
+        self._incident_id = incident_id
         self._url = url
         self._source = source
         self._captured_at = captured_at
@@ -27,6 +28,10 @@ class Evidence:
     @property
     def id(self) -> UUID:
         return self._id
+
+    @property
+    def incident_id(self) -> UUID:
+        return self._incident_id
 
     @property
     def url(self) -> str:
@@ -79,6 +84,13 @@ class Evidence:
         if value is None:
             raise ValueError("Snapshots cannot be None")
         self._snapshots = value
+
+    def register_snapshot(self, snapshots: EvidenceSnapshot) -> None:
+        if snapshots is None:
+            raise ValueError("Snapshots cannot be none")
+        if snapshots.evidence_id != self._id:
+            raise ValueError("Snapshot does not belong to this evidence")
+        self._snapshots.append(snapshots)
 
     def mark_processing(self) -> None:
         self._status = EvidenceStatus.PROCESSING

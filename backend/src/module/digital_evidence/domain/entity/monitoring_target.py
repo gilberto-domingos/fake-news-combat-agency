@@ -40,6 +40,10 @@ class MonitoringTarget:
     def is_active(self, value: bool) -> None:
         self._is_active = value
 
+    @property
+    def created_at(self) -> datetime:
+        return self._created_at
+
     def activate(self) -> None:
         if self._is_active:
             raise ValueError("Target is already is active")

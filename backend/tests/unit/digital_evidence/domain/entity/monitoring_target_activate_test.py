@@ -1,12 +1,19 @@
-from entity.drafts.methods_experiment import MethodsExperiment
+from src.module.digital_evidence.domain.entity.monitoring_target import MonitoringTarget
+from uuid import UUID, uuid4
+from faker import Faker
+
+faker = Faker("pt_BR")
 
 
-class MethodsExperimentTest:
+class MonitoringTargetTest:
     @staticmethod
     def run() -> None:
-        variable = MethodsExperiment(
+        variable = MonitoringTarget(
+            id=uuid4(),
+            target_name=faker.company(),
             is_active=False,
-            keywords=["homicidio", "sequestro", "assalto"]
+            keywords=["homicidio", "sequestro", "assalto"],
+            created_at=faker.date_time()
         )
         print(f"Activate: {variable.is_active}")
         print(f"Keywords: {variable.keywords} ")
@@ -24,4 +31,4 @@ class MethodsExperimentTest:
 
 
 if __name__ == "__main__":
-    MethodsExperimentTest.run()
+    MonitoringTargetTest.run()

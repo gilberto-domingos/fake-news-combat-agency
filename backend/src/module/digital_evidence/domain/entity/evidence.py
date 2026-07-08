@@ -18,7 +18,7 @@ class Evidence:
                  snapshots: Optional[list[EvidenceSnapshot]] = None,
                  ):
         self._id = id
-        self._incident_id = incident
+        self._incident = incident
         self._url = url
         self._source = source
         self._captured_at = captured_at
@@ -32,7 +32,7 @@ class Evidence:
 
     @property
     def incident(self):
-        return self._incident_id
+        return self._incident
 
     @property
     def url(self) -> str:
@@ -89,7 +89,7 @@ class Evidence:
     def register_snapshot(self, snapshots: EvidenceSnapshot) -> None:
         if snapshots is None:
             raise ValueError("Snapshots cannot be none")
-        if snapshots.evidence_id != self._id:
+        if snapshots.id != self._id:
             raise ValueError("Snapshot does not belong to this evidence")
         self._snapshots.append(snapshots)
 
@@ -102,8 +102,5 @@ class Evidence:
     def mark_failed(self) -> None:
         self._status = EvidenceStatus.FAILED
 
-    def validate(self) -> bool:
-        return bool(self.url and self.source)
-
     def __str__(self) -> str:
-        return f"Evidence(id={self.id}, url={self.url}, status={self.status})"
+        return f"Evidence(id={self.id}, url={self.url}, source={self.source},captured_at={self.captured_at}, status={self.status}, hash={self.hash}, snapshots={self.snapshots} )"

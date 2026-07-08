@@ -43,13 +43,13 @@ evidence = Evidence(
     url=faker.url(),
     source=faker.domain_name(),
     captured_at=faker.date_time(),
+    status=status,
     hash=faker.sha256(),
     snapshots=[]
 )
 
 snapshot_1 = EvidenceSnapshot(
     id=uuid4(),
-    evidence=evidence,
     screenshot_path=faker.file_path(depth=3, extension="png"),
     hash=faker.sha256(),
     text_content=faker.text(),
@@ -58,7 +58,6 @@ snapshot_1 = EvidenceSnapshot(
 
 snapshot_2 = EvidenceSnapshot(
     id=uuid4(),
-    evidence=evidence,
     screenshot_path=faker.file_path(depth=3, extension="png"),
     hash=faker.sha256(),
     text_content=faker.text(),
@@ -67,7 +66,6 @@ snapshot_2 = EvidenceSnapshot(
 
 snapshot_3 = EvidenceSnapshot(
     id=uuid4(),
-    evidence=evidence,
     screenshot_path=faker.file_path(depth=3, extension="png"),
     hash=faker.sha256(),
     text_content=faker.text(),

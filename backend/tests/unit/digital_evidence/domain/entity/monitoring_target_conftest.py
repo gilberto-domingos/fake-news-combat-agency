@@ -12,7 +12,7 @@ def inactive_target():
         target_name="test",
         keywords=["python"],
         is_active=False,
-        created_at=datetime.utcnow()
+        created_at=datetime.now()
     )
 
 
@@ -23,7 +23,7 @@ def active_target():
         target_name="test",
         keywords=["python"],
         is_active=True,
-        created_at=datetime.utcnow()
+        created_at=datetime.now()
     )
 
 

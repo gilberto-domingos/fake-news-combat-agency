@@ -1,18 +1,16 @@
 from uuid import UUID, uuid4
 from typing import Optional
 from hashlib import sha256
-from src.module.digital_evidence.domain.entity.evidence import Evidence
 
 
 class EvidenceSnapshot:
-    def __init__(self, id: UUID,
-                 evidence: Evidence,
+    def __init__(self,
+                 id: UUID,
                  screenshot_path: str,
                  hash: Optional[str],
                  text_content: str,
                  html_path: str):
         self._id = id
-        self._evidence = evidence
         self._screenshot_path = screenshot_path
         self._hash = hash
         self._text_content = text_content
@@ -21,10 +19,6 @@ class EvidenceSnapshot:
     @property
     def id(self) -> UUID:
         return self._id
-
-    @property
-    def evidence_id(self):
-        return self._evidence
 
     @property
     def screenshot_path(self) -> str:
@@ -92,7 +86,10 @@ class EvidenceSnapshot:
         ).hexdigest()
 
     def validate_integrity(self) -> bool:
-        return self.calculate_hast() == self._hash
+        return self.calculate_hash() == self._hash
 
     def __str__(self) -> str:
-        return f"EvidenceSnapshot(id={self.id}, evidence_id={self.evidence_id})"
+        return f"EvidenceSnapshot(id={self.id}, screenshot_path={self.screenshot_path}, hash={self.hash}, text_content={self.text_content}, html_path={self.html_path} )"
+
+    def __repr__(self) -> str:
+        return self.__str__()

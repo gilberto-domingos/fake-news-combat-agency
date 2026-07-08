@@ -47,19 +47,15 @@ class Incident:
         self._description = value
 
     @property
-    def status(self) -> bool:
+    def status(self) -> IncidentStatus:
         return self._status
 
     @status.setter
-    def status(self, value: bool) -> bool:
+    def status(self, value: IncidentStatus) -> None:
+        if not isinstance(value, IncidentStatus):
+            raise ValueError("Invalid status type")
         self._status = value
 
     @property
     def created_at(self) -> datetime:
         return self._created_at
-
-    def open(self) -> None:
-        self._status = True
-
-    def closed(self) -> None:
-        self._status = False

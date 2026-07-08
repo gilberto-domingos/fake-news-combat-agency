@@ -1,13 +1,18 @@
 from uuid import UUID, uuid4
 from typing import Optional
 from hashlib import sha256
+from src.module.digital_evidence.domain.entity.evidence import Evidence
 
 
 class EvidenceSnapshot:
-    def __init__(self, id: UUID, evidence_id: UUID, screenshot_path: str, hash: Optional[str],
-                 text_content: str, html_path: str):
+    def __init__(self, id: UUID,
+                 evidence: Evidence,
+                 screenshot_path: str,
+                 hash: Optional[str],
+                 text_content: str,
+                 html_path: str):
         self._id = id
-        self._evidence_id = evidence_id
+        self._evidence = evidence
         self._screenshot_path = screenshot_path
         self._hash = hash
         self._text_content = text_content
@@ -18,8 +23,8 @@ class EvidenceSnapshot:
         return self._id
 
     @property
-    def evidence_id(self) -> UUID:
-        return self._evidence_id
+    def evidence_id(self):
+        return self._evidence
 
     @property
     def screenshot_path(self) -> str:

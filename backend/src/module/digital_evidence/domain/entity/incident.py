@@ -1,12 +1,18 @@
 from uuid import UUID, uuid4
 from datetime import datetime
+from src.module.digital_evidence.domain.entity.monitoring_target import MonitoringTarget
+from src.module.digital_evidence.domain.enum.incident_status import IncidentStatus
 
 
 class Incident:
-    def __init__(self, id: UUID, monitoring_target_id: UUID, title: str, description: str, status: bool,
+    def __init__(self,
+                 id: UUID,
+                 monitoring_target: MonitoringTarget,
+                 title: str, description: str,
+                 status: IncidentStatus,
                  created_at: datetime):
         self._id = id
-        self._monitoring_target_id = monitoring_target_id
+        self._monitoring_target_id = monitoring_target
         self._title = title
         self._description = description
         self._status = status
@@ -17,7 +23,7 @@ class Incident:
         return self._id
 
     @property
-    def monitoring_target_id(self) -> UUID:
+    def monitoring_target_id(self):
         return self._monitoring_target_id
 
     @property

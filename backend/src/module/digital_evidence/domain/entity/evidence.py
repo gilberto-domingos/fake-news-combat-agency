@@ -3,12 +3,13 @@ from datetime import datetime, timezone
 from typing import Optional
 from src.module.digital_evidence.domain.entity.evidence_snapshot import EvidenceSnapshot
 from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStatus
+from src.module.digital_evidence.domain.entity.incident import Incident
 
 
 class Evidence:
     def __init__(self,
                  id: UUID,
-                 incident_id: UUID,
+                 incident: Incident,
                  url: str,
                  source: str,
                  captured_at: datetime,
@@ -17,7 +18,7 @@ class Evidence:
                  snapshots: Optional[list[EvidenceSnapshot]] = None,
                  ):
         self._id = id
-        self._incident_id = incident_id
+        self._incident_id = incident
         self._url = url
         self._source = source
         self._captured_at = captured_at
@@ -30,7 +31,7 @@ class Evidence:
         return self._id
 
     @property
-    def incident_id(self) -> UUID:
+    def incident(self):
         return self._incident_id
 
     @property

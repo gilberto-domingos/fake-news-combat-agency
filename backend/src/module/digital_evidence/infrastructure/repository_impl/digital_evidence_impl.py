@@ -10,10 +10,10 @@ class DigitalEvidenceImpl(DigitalEvidenceRepositoryInt):
 
     async def create(self, evidence: Evidence) -> Evidence:
         model = DigitalEvidenceModel(
-            id=str(evidence.id),
+            id=evidence.id,
             url=evidence.url,
             source=evidence.source,
-            captured_at=evidence.captured_at,
+            created_at=evidence.created_at,
             status=evidence.status,
             hash=evidence.hash
         )

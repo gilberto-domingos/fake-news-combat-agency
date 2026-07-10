@@ -58,6 +58,10 @@ class Evidence:
     def created_at(self) -> datetime:
         return self._created_at
 
+    @created_at.setter
+    def created_at(self, value: datetime):
+        self._created_at = value
+
     @property
     def status(self) -> EvidenceStatus:
         return self._status

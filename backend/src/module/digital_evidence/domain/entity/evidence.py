@@ -12,16 +12,16 @@ class Evidence:
                  incident: Incident,
                  url: str,
                  source: str,
-                 captured_at: datetime,
+                 created_at: datetime,
                  status: EvidenceStatus,
-                 hash: Optional[str],
+                 hash: str,
                  snapshots: Optional[list[EvidenceSnapshot]] = None,
                  ):
         self._id = id
         self._incident = incident
         self._url = url
         self._source = source
-        self._captured_at = captured_at
+        self._created_at = created_at
         self._status = status
         self._hash = hash
         self._snapshots = snapshots if snapshots is not None else []
@@ -55,8 +55,8 @@ class Evidence:
         self._source = value
 
     @property
-    def captured_at(self) -> datetime:
-        return self._captured_at
+    def created_at(self) -> datetime:
+        return self._created_at
 
     @property
     def status(self) -> EvidenceStatus:
@@ -69,12 +69,8 @@ class Evidence:
         self._status = value
 
     @property
-    def hash(self) -> Optional[str]:
+    def hash(self) -> str:
         return self._hash
-
-    @hash.setter
-    def hash(self, value: Optional[str]) -> None:
-        self._hash = value
 
     @property
     def snapshots(self) -> list[EvidenceSnapshot]:

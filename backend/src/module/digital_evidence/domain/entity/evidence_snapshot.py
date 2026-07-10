@@ -1,20 +1,22 @@
-from uuid import UUID, uuid4
-from typing import Optional
+from uuid import UUID
 from hashlib import sha256
+from datetime import datetime
 
 
 class EvidenceSnapshot:
     def __init__(self,
                  id: UUID,
-                 screenshot_path: str,
-                 hash: Optional[str],
                  text_content: str,
-                 html_path: str):
+                 html_path: str,
+                 screenshot_path: str,
+                 hash: str,
+                 captured_at: datetime):
         self._id = id
-        self._screenshot_path = screenshot_path
-        self._hash = hash
         self._text_content = text_content
         self._html_path = html_path
+        self._screenshot_path = screenshot_path
+        self._hash = hash
+        self._captured_at = captured_at
 
     @property
     def id(self) -> UUID:
@@ -31,12 +33,8 @@ class EvidenceSnapshot:
         self._screenshot_path = value
 
     @property
-    def hash(self) -> Optional[str]:
+    def hash(self) -> str:
         return self._hash
-
-    @hash.setter
-    def hash(self, value: str) -> None:
-        self.hash = value
 
     @property
     def text_content(self) -> str:
@@ -57,6 +55,10 @@ class EvidenceSnapshot:
         if not value:
             raise ValueError("Html path cannot to be empty")
         self._html_path = value
+
+    @property
+    def captured_at(self) -> datetime:
+        return self._captured_at
 
     def update_text_from_html(self) -> None:
         if not self._text_content:

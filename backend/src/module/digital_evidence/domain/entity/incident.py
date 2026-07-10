@@ -12,7 +12,7 @@ class Incident:
                  status: IncidentStatus,
                  created_at: datetime):
         self._id = id
-        self._monitoring_target_id = monitoring_target
+        self._monitoring_target = monitoring_target
         self._title = title
         self._description = description
         self._status = status
@@ -24,7 +24,7 @@ class Incident:
 
     @property
     def monitoring_target_id(self):
-        return self._monitoring_target_id
+        return self._monitoring_target
 
     @property
     def title(self) -> str:

@@ -12,3 +12,7 @@ class EvidenceResDto(BaseModel):
     captured_at: datetime
     status: EvidenceStatus
     hash: str
+
+    model_config = {
+        "from_attributes": True
+    }

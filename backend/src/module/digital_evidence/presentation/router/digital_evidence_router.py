@@ -13,7 +13,6 @@ router = APIRouter(prefix="/digital_evidence", tags=["Digital_evidence"])
 async def evidence(payload: Evidence, mediator: CommandMediator = Depends(get_command_mediator)):
     command = DigitalEvidenceCrtCommand(**payload.model_dump())
     evidence_entity = await mediator.send(command)
-    ## snapshots wil to be salved in evidence table ??
     return EvidenceResDto(
         id=evidence_entity.id,
         url=evidence_entity.url,

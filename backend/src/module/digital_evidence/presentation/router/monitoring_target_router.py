@@ -1,7 +1,5 @@
 from fastapi import APIRouter, Depends, status
 from src.module.digital_evidence.application.command.monitoring_target_crt_cmd import MonitoringTargetCrtCommand
-from src.module.digital_evidence.application.command_handler.monitoring_target_crt_handler import \
-    MonitoringTargetHandler
 from src.module.digital_evidence.application.dto.monitoring_target_crt_dto import MonitoringTargetCrtDto
 from src.module.digital_evidence.application.dto.monitoring_target_res_dto import MonitoringTargetResDto
 from src.module.digital_evidence.application.mediator.comm_mediator import CommandMediator

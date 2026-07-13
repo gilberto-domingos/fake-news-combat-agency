@@ -4,12 +4,11 @@ from datetime import datetime
 
 class MonitoringTarget:
     def __init__(self,
-                 id: UUID,
                  target_name: str,
                  keywords: list[str],
                  is_active: bool,
                  created_at: datetime):
-        self._id = id
+        self._id = uuid4()
         self._target_name = target_name
         self._keywords = keywords
         self._is_active = is_active

@@ -3,7 +3,6 @@ from src.module.digital_evidence.domain.repository_int.monitoring_target_rep_int
 from src.module.digital_evidence.domain.entity.monitoring_target import MonitoringTarget
 
 
-# Use Case service
 class MonitoringTargetCreateService:
     def __init__(self, repository: MonitoringTargetRepInt):
         self._repository = repository

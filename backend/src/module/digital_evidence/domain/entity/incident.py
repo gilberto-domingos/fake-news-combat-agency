@@ -6,12 +6,11 @@ from src.module.digital_evidence.domain.enum.incident_status import IncidentStat
 
 class Incident:
     def __init__(self,
-                 id: UUID,
                  monitoring_target: MonitoringTarget,
                  title: str, description: str,
                  status: IncidentStatus,
                  created_at: datetime):
-        self._id = id
+        self._id = uuid4()
         self._monitoring_target = monitoring_target
         self._title = title
         self._description = description

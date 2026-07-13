@@ -5,11 +5,9 @@ class QueryMediator:
     def __init__(self):
         self._handlers: Dict[Type, Any] = {}
 
-    # Registers a handler for a specific query.
     def register(self, query_type: Type, handler: Any) -> None:
         self._handlers[query_type] = handler
 
-    # Executes a query using its registered handler. (NO metadata, NO command context)
     async def send(self, query) -> Any:
         query_type = type(query)
 

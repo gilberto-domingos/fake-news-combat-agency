@@ -4,7 +4,7 @@ from uuid import UUID
 from src.module.digital_evidence.domain.enum.incident_status import IncidentStatus
 
 
-class InicidentResDto(BaseModel):
+class IncidentResDto(BaseModel):
     id: UUID
     monitoring_target_id: UUID
     title: str

@@ -5,7 +5,7 @@ from src.module.digital_evidence.application.dto.incident_res_dto import Inciden
 from src.module.digital_evidence.application.mediator.comm_mediator import CommandMediator
 from shared_infrastructure.dependencie.digital_evidence_dependencie import get_command_mediator
 
-router = APIRouter()
+router = APIRouter(prefix="/incident", tags=["Incident"])
 
 
 @router.post("/", response_model=IncidentResDto, status_code=status.HTTP_201_CREATED)
@@ -16,7 +16,7 @@ async def create_incident(
     command = IncidentCrtCommand(
         **payload.model_dump()
     )
-    
+
     incident = await mediator.send(command)
 
     return incident

@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 import uvicorn
 from fastapi import FastAPI
 from src.api.router_registry_global import api_router
-from src.api.exception_handler.exception_registry import register_exception_handlers
+from src.api.exception_handler_http.exception_registry import register_exception_handlers
 from src.shared_infrastructure.config.cors import setup_cors
 from src.shared_infrastructure.database.connection import (
     create_engine,

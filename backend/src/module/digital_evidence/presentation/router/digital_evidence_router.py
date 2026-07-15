@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, status
-from src.module.digital_evidence.application.command.digital_evidence_crt_comm import DigitalEvidenceCrtCommand
+from src.module.digital_evidence.application.command.digital_evidence_crt_cmd import DigitalEvidenceCrtCommand
 from src.module.digital_evidence.domain.entity.evidence import Evidence
 
 from src.module.digital_evidence.application.dto.evidence_res_dto import EvidenceResDto

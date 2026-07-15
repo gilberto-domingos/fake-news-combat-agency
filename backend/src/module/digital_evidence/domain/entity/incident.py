@@ -7,7 +7,8 @@ from src.module.digital_evidence.domain.enum.incident_status import IncidentStat
 class Incident:
     def __init__(self,
                  monitoring_target: MonitoringTarget,
-                 title: str, description: str,
+                 title: str,
+                 description: str,
                  status: IncidentStatus,
                  created_at: datetime):
         self._id = uuid4()
@@ -22,8 +23,12 @@ class Incident:
         return self._id
 
     @property
-    def monitoring_target_id(self):
+    def monitoring_target(self) -> MonitoringTarget:
         return self._monitoring_target
+
+    @property
+    def monitoring_target_id(self) -> UUID:
+        return self._monitoring_target_id
 
     @property
     def title(self) -> str:

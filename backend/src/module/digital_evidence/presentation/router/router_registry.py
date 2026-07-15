@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from src.module.digital_evidence.presentation.router.digital_evidence_router import router as evidence
-from src.module.digital_evidence.presentation.router.monitoring_target_router import router as monitoring_target
+from src.module.digital_evidence.presentation.router.monitoring_target_crt_router import router as monitoring_target
 
 api_router = APIRouter()
 

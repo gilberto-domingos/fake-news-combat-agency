@@ -15,7 +15,7 @@ from src.module.digital_evidence.application.command_handler.monitoring_target_c
     MonitoringTargetHandler
 
 from src.module.digital_evidence.application.command.monitoring_target_crt_cmd import MonitoringTargetCrtCommand
-from src.module.digital_evidence.application.command.digital_evidence_crt_comm import DigitalEvidenceCrtCommand
+from src.module.digital_evidence.application.command.digital_evidence_crt_cmd import DigitalEvidenceCrtCommand
 
 
 async def get_db_session() -> AsyncGenerator[AsyncSession, None]:

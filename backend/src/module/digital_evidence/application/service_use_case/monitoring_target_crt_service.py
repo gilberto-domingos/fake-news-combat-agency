@@ -1,10 +1,10 @@
 from datetime import datetime
-from src.module.digital_evidence.domain.repository_int.monitoring_target_rep_int import MonitoringTargetRepInt
+from src.module.digital_evidence.domain.repository_int.monitoring_target_rep_int import MonitoringTargetRepositoryInt
 from src.module.digital_evidence.domain.entity.monitoring_target import MonitoringTarget
 
 
 class MonitoringTargetCreateService:
-    def __init__(self, repository: MonitoringTargetRepInt):
+    def __init__(self, repository: MonitoringTargetRepositoryInt):
         self._repository = repository
 
     async def execute(self,

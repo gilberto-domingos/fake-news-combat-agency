@@ -6,17 +6,57 @@ from src.module.digital_evidence.domain.enum.incident_status import IncidentStat
 
 class Incident:
     def __init__(self,
+                 id: UUID,
                  monitoring_target: MonitoringTarget,
                  title: str,
                  description: str,
                  status: IncidentStatus,
                  created_at: datetime):
-        self._id = uuid4()
+        self._id = id
         self._monitoring_target = monitoring_target
         self._title = title
         self._description = description
         self._status = status
         self._created_at = created_at
+
+    @classmethod
+    def create(
+            cls,
+            monitoring_target: MonitoringTarget,
+            title: str,
+            description: str,
+            status: IncidentStatus,
+            created_at: datetime
+    ):
+        entity = cls(
+            id=uuid4(),
+            monitoring_target=monitoring_target,
+            title=title,
+            description=description,
+            status=status,
+            created_at=created_at
+        )
+        return entity
+
+    @classmethod
+    def from_persistence(
+            cls,
+            id: UUID,
+            monitoring_target: MonitoringTarget,
+            title: str,
+            description: str,
+            status: IncidentStatus,
+            created_at: datetime
+    ):
+        persistence = cls(
+            id=id,
+            monitoring_target=monitoring_target,
+            title=title,
+            description=description,
+            status=status,
+            created_at=created_at
+        )
+        return persistence
 
     @property
     def id(self) -> UUID:
@@ -25,10 +65,6 @@ class Incident:
     @property
     def monitoring_target(self) -> MonitoringTarget:
         return self._monitoring_target
-
-    @property
-    def monitoring_target_id(self) -> UUID:
-        return self._monitoring_target_id
 
     @property
     def title(self) -> str:

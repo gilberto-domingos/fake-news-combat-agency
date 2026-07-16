@@ -1,10 +1,10 @@
 from datetime import datetime
-from src.module.digital_evidence.domain.repository_int.monitoring_target_rep_int import MonitoringTargetRepositoryInt
+from src.module.digital_evidence.domain.repository_int.monitoring_target_crt_int import MonitoringTargetCrtInt
 from src.module.digital_evidence.domain.entity.monitoring_target import MonitoringTarget
 
 
 class MonitoringTargetCreateService:
-    def __init__(self, repository: MonitoringTargetRepositoryInt):
+    def __init__(self, repository: MonitoringTargetCrtInt):
         self._repository = repository
 
     async def execute(self,
@@ -13,7 +13,7 @@ class MonitoringTargetCreateService:
                       is_active: bool,
                       created_at: datetime
                       ) -> MonitoringTarget:
-        monitoring_target = MonitoringTarget(
+        monitoring_target = MonitoringTarget.create(
             target_name=target_name,
             keywords=keywords,
             is_active=is_active,

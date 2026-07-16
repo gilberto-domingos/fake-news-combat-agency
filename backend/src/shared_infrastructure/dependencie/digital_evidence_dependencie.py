@@ -4,18 +4,18 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.shared_infrastructure.database.connection import get_session_factory
 from src.module.digital_evidence.application.mediator.comm_mediator import CommandMediator
 
+from src.module.digital_evidence.domain.repository_int.digital_evidence_crt_int import DigitalEvidenceRepositoryInt
+from src.module.digital_evidence.domain.repository_int.monitoring_target_crt_int import MonitoringTargetInt
+
 from src.module.digital_evidence.infrastructure.repository_impl.digital_evidence_impl import DigitalEvidenceImpl
 from src.module.digital_evidence.infrastructure.repository_impl.monitoring_target_impl import MonitoringTargetImpl
 
-from src.module.digital_evidence.domain.repository_int.digital_evidence_rep_int import DigitalEvidenceRepositoryInt
-from src.module.digital_evidence.domain.repository_int.monitoring_target_rep_int import MonitoringTargetRepInt
+from src.module.digital_evidence.application.command.monitoring_target_crt_cmd import MonitoringTargetCrtCommand
+from src.module.digital_evidence.application.command.digital_evidence_crt_cmd import DigitalEvidenceCrtCommand
 
 from src.module.digital_evidence.application.command_handler.digital_evidence_crt_handler import DigitalEvidenceHandler
 from src.module.digital_evidence.application.command_handler.monitoring_target_crt_handler import \
     MonitoringTargetHandler
-
-from src.module.digital_evidence.application.command.monitoring_target_crt_cmd import MonitoringTargetCrtCommand
-from src.module.digital_evidence.application.command.digital_evidence_crt_cmd import DigitalEvidenceCrtCommand
 
 
 async def get_db_session() -> AsyncGenerator[AsyncSession, None]:
@@ -32,7 +32,7 @@ def get_digital_evidence_repository(
 
 def get_monitoring_target_repository(
         session: AsyncSession = Depends(get_db_session)
-) -> MonitoringTargetRepInt:
+) -> MonitoringTargetInt:
     return MonitoringTargetImpl(session)
 
 
@@ -43,7 +43,7 @@ def get_create_digital_evidence_handler(
 
 
 def get_create_monitoring_target_handler(
-        repository: MonitoringTargetRepInt = Depends(get_monitoring_target_repository)
+        repository: MonitoringTargetInt = Depends(get_monitoring_target_repository)
 ) -> MonitoringTargetHandler:
     return MonitoringTargetHandler(repository)
 

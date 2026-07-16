@@ -1,5 +1,5 @@
 from src.module.digital_evidence.domain.entity.incident import Incident
-from src.module.digital_evidence.domain.repository_int.incident_rep_int import IncidentRepositoryCrtInt
+from src.module.digital_evidence.domain.repository_int.incident_crt_int import IncidentRepositoryCrtInt
 from src.module.digital_evidence.application.service_use_case.incident_crt_service import IncidentCrtService
 from src.module.digital_evidence.application.command.incident_crt_cmd import IncidentCrtCommand
 

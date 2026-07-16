@@ -1,16 +1,16 @@
 from src.module.digital_evidence.domain.entity.incident import Incident
 from src.module.digital_evidence.domain.enum.incident_status import IncidentStatus
 from src.module.digital_evidence.domain.exception.business_exception import BusinessException
-from src.module.digital_evidence.domain.repository_int.incident_rep_int import IncidentRepositoryCrtInt
-from src.module.digital_evidence.domain.repository_int.monitoring_target_rep_int import MonitoringTargetRepositoryInt
+from src.module.digital_evidence.domain.repository_int.incident_crt_int import IncidentCrtInt
+from src.module.digital_evidence.domain.repository_int.monitoring_target_crt_int import MonitoringTargetCrtInt
 from datetime import datetime
 from uuid import UUID
 
 
 class IncidentCrtService:
     def __init__(self,
-                 incident_repository: IncidentRepositoryCrtInt,
-                 monitoring_target_repository: MonitoringTargetRepositoryInt
+                 incident_repository: IncidentCrtInt,
+                 monitoring_target_repository: MonitoringTargetCrtInt
                  ):
         self._incident_repository = incident_repository
         self._monitoring_target_repository = monitoring_target_repository
@@ -28,7 +28,7 @@ class IncidentCrtService:
                 error_code="MONITORING_TARGET_NOT_FOUND"
             )
 
-        incident = Incident(
+        incident = Incident.create(
             monitoring_target=monitoring_target,
             title=title,
             description=description,

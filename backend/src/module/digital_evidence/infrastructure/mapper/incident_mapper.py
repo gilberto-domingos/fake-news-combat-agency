@@ -20,9 +20,7 @@ class IncidentMapper:
     @staticmethod
     def to_entity(model: IncidentModel) -> Incident:
         entity = Incident(
-            monitoring_target=MonitoringTargetMapper.to_entity(
-                model.monitoring_target
-            ),
+            monitoring_target=MonitoringTargetMapper.to_entity(model.monitoring_target),
             title=model.title,
             description=model.description,
             status=model.status,

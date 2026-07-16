@@ -4,15 +4,51 @@ from datetime import datetime
 
 class MonitoringTarget:
     def __init__(self,
+                 id: UUID,
                  target_name: str,
                  keywords: list[str],
                  is_active: bool,
                  created_at: datetime):
-        self._id = uuid4()
+        self._id = id
         self._target_name = target_name
         self._keywords = keywords
         self._is_active = is_active
         self._created_at = created_at
+
+    @classmethod
+    def create(
+            cls,
+            target_name: str,
+            keywords: list[str],
+            is_active: bool,
+            created_at: datetime
+    ):
+        entity = cls(
+            id=uuid4(),
+            target_name=target_name,
+            keywords=keywords,
+            is_active=is_active,
+            created_at=created_at
+        )
+        return entity
+
+    @classmethod
+    def from_persistence(
+            cls,
+            id: UUID,
+            target_name: str,
+            keywords: list[str],
+            is_active: bool,
+            created_at: datetime
+    ):
+        persistence = cls(
+            id=id,
+            target_name=target_name,
+            keywords=keywords,
+            is_active=is_active,
+            created_at=created_at
+        )
+        return persistence
 
     @property
     def id(self) -> UUID:

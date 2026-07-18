@@ -13,7 +13,7 @@ class EvidenceImplement(EvidenceInterface):
             id=evidence.id,
             url=evidence.url,
             source=evidence.source,
-            created_at=evidence.created_at,
+            captured_at=evidence.captured_at,
             status=evidence.status,
             hash=evidence.hash
         )

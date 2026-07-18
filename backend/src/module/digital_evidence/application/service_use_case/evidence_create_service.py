@@ -31,7 +31,7 @@ class EvidenceCreateService():
             incident=incident,
             url=url,
             source=source,
-            created_at=datetime.now(),
+            captured_at=datetime.now(),
             status=status.CAPTURED,
             hash=hash,
             snapshots=[]

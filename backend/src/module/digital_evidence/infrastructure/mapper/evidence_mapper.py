@@ -11,7 +11,7 @@ class EvidenceMapper:
             incident_id=evidence.incident.id,
             url=evidence.url,
             source=evidence.source,
-            created_at=evidence.created_at,
+            captured_at=evidence.captured_at,
             status=evidence.status,
             hash=evidence.hash,
 
@@ -24,7 +24,7 @@ class EvidenceMapper:
             incident=incident,
             url=model.url,
             source=model.source,
-            created_at=model.created_at,
+            captured_at=model.captured_at,
             status=model.status,
             hash=model.hash,
             snapshots=[]

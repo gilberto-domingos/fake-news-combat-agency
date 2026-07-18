@@ -12,7 +12,7 @@ class Evidence:
                  incident: Incident,
                  url: str,
                  source: str,
-                 created_at: datetime,
+                 captured_at: datetime,
                  status: EvidenceStatus,
                  hash: str,
                  snapshots: Optional[list[EvidenceSnapshot]] = None,
@@ -21,7 +21,7 @@ class Evidence:
         self._incident = incident
         self._url = url
         self._source = source
-        self._created_at = created_at
+        self._captured_at = captured_at
         self._status = status
         self._hash = hash
         self._snapshots = snapshots if snapshots is not None else []
@@ -32,7 +32,7 @@ class Evidence:
             incident: Incident,
             url: str,
             source: str,
-            created_at: datetime,
+            captured_at: datetime,
             status: EvidenceStatus,
             hash: str,
             snapshots: list[EvidenceSnapshot]
@@ -42,7 +42,7 @@ class Evidence:
             incident=incident,
             url=url,
             source=source,
-            created_at=created_at,
+            captured_at=captured_at,
             status=status,
             hash=hash,
             snapshots=snapshots
@@ -56,7 +56,7 @@ class Evidence:
             incident: Incident,
             url: str,
             source: str,
-            created_at: datetime,
+            captured_at: datetime,
             status: EvidenceStatus,
             hash: str,
             snapshots: list[EvidenceSnapshot]
@@ -66,7 +66,7 @@ class Evidence:
             incident=incident,
             url=url,
             source=source,
-            created_at=created_at,
+            captured_at=captured_at,
             status=status,
             hash=hash,
             snapshots=snapshots
@@ -102,12 +102,12 @@ class Evidence:
         self._source = value
 
     @property
-    def created_at(self) -> datetime:
-        return self._created_at
+    def captured_at(self) -> datetime:
+        return self._captured_at
 
-    @created_at.setter
-    def created_at(self, value: datetime):
-        self._created_at = value
+    @captured_at.setter
+    def captured_at(self, value: datetime):
+        self._captured_at = value
 
     @property
     def status(self) -> EvidenceStatus:
@@ -150,4 +150,4 @@ class Evidence:
         self._status = EvidenceStatus.FAILED
 
     def __str__(self) -> str:
-        return f"Evidence(id={self.id}, url={self.url}, source={self.source},captured_at={self.created_at}, status={self.status}, hash={self.hash}, snapshots={self.snapshots} )"
+        return f"Evidence(id={self.id}, url={self.url}, source={self.source},captured_at={self.captured_at}, status={self.status}, hash={self.hash}, snapshots={self.snapshots} )"

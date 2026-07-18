@@ -26,6 +26,53 @@ class Evidence:
         self._hash = hash
         self._snapshots = snapshots if snapshots is not None else []
 
+    @classmethod
+    def create(
+            cls,
+            incident: Incident,
+            url: str,
+            source: str,
+            created_at: datetime,
+            status: EvidenceStatus,
+            hash: str,
+            snapshots: list[EvidenceSnapshot]
+    ):
+        entity = cls(
+            id=uuid4(),
+            incident=incident,
+            url=url,
+            source=source,
+            created_at=created_at,
+            status=status,
+            hash=hash,
+            snapshots=snapshots
+        )
+        return entity
+
+    @classmethod
+    def from_persistence(
+            cls,
+            id: UUID,
+            incident: Incident,
+            url: str,
+            source: str,
+            created_at: datetime,
+            status: EvidenceStatus,
+            hash: str,
+            snapshots: list[EvidenceSnapshot]
+    ):
+        persistence = cls(
+            id=id,
+            incident=incident,
+            url=url,
+            source=source,
+            created_at=created_at,
+            status=status,
+            hash=hash,
+            snapshots=snapshots
+        )
+        return persistence
+
     @property
     def id(self) -> UUID:
         return self._id
@@ -103,4 +150,4 @@ class Evidence:
         self._status = EvidenceStatus.FAILED
 
     def __str__(self) -> str:
-        return f"Evidence(id={self.id}, url={self.url}, source={self.source},captured_at={self.captured_at}, status={self.status}, hash={self.hash}, snapshots={self.snapshots} )"
+        return f"Evidence(id={self.id}, url={self.url}, source={self.source},captured_at={self.created_at}, status={self.status}, hash={self.hash}, snapshots={self.snapshots} )"

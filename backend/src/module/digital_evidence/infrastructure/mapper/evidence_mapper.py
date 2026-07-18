@@ -1,10 +1,9 @@
 from src.module.digital_evidence.domain.entity.evidence import Evidence
 from src.module.digital_evidence.domain.entity.incident import Incident
-from src.module.digital_evidence.infrastructure.model.digital_evidence_model import DigitalEvidenceModel
+from src.module.digital_evidence.infrastructure.model.evidence_model import DigitalEvidenceModel
 
 
 class EvidenceMapper:
-
     @staticmethod
     def to_model(evidence: Evidence) -> DigitalEvidenceModel:
         return DigitalEvidenceModel(

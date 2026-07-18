@@ -3,7 +3,7 @@ from uuid import UUID
 from datetime import datetime
 
 
-class MonitoringTargetResDto(BaseModel):
+class MonitoringTargetResponseDto(BaseModel):
     id: UUID
     target_name: str
     keywords: list[str]

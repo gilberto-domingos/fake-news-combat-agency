@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, status
-from shared_infrastructure.dependencie.land_dependencie import get_command_mediator
+from shared_infrastructure.dependency.land_dependency import get_command_mediator
 from src.module.land.application.command.invest_create_cmm import InvestCreateCommand
 from src.module.land.application.dto.invest_crt_dto import InvestCreateDto
 from src.module.land.application.dto.invest_res_dto import InvestResponseDto

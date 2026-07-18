@@ -1,10 +1,10 @@
 from src.module.digital_evidence.domain.entity.evidence import Evidence
-from src.module.digital_evidence.domain.repository_int.digital_evidence_crt_int import DigitalEvidenceCrtInt
-from src.module.digital_evidence.infrastructure.model.digital_evidence_model import DigitalEvidenceModel
+from src.module.digital_evidence.domain.repository_interface.evidence_interface import EvidenceInterface
+from src.module.digital_evidence.infrastructure.model.evidence_model import DigitalEvidenceModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
-class DigitalEvidenceImpl(DigitalEvidenceCrtInt):
+class EvidenceImplement(EvidenceInterface):
     def __init__(self, session: AsyncSession):
         self.session = session
 
@@ -17,9 +17,6 @@ class DigitalEvidenceImpl(DigitalEvidenceCrtInt):
             status=evidence.status,
             hash=evidence.hash
         )
-
         self.session.add(model)
-
         await self.session.commit()
-
         return evidence

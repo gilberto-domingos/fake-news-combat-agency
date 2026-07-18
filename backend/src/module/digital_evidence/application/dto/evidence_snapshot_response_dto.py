@@ -3,7 +3,7 @@ from uuid import UUID
 from datetime import datetime
 
 
-class EvidenceSnapshotResDto(BaseModel):
+class EvidenceSnapshotResponseDto(BaseModel):
     id: UUID
     screenshot_path: str
     hash: str

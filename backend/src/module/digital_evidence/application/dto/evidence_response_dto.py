@@ -4,7 +4,7 @@ from datetime import datetime
 from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStatus
 
 
-class EvidenceResDto(BaseModel):
+class EvidenceResponseDto(BaseModel):
     id: UUID
     incident_id: UUID
     url: str

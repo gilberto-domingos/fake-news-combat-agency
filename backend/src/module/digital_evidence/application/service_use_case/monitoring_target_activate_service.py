@@ -1,5 +1,6 @@
 from uuid import UUID
-from src.module.digital_evidence.domain.repository_int.monitoring_target_crt_int import MonitoringTargetRepositoryInt
+from src.module.digital_evidence.domain.repository_interface.monitoring_target_interface import \
+    MonitoringTargetRepositoryInt
 from src.module.digital_evidence.domain.exception.business_exception import BusinessException
 
 

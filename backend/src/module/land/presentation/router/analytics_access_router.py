@@ -1,8 +1,8 @@
 from fastapi import Request
 from fastapi import APIRouter, Depends, status
 
-from shared_infrastructure.dependencie.land_dependencie import get_command_mediator
-from shared_infrastructure.dependencie.land_dependencie import get_query_mediator
+from shared_infrastructure.dependency.land_dependency import get_command_mediator
+from shared_infrastructure.dependency.land_dependency import get_query_mediator
 
 from src.module.land.application.mediator.comm_mediator import CommandMediator
 from src.module.land.application.mediator.query_mediator import QueryMediator

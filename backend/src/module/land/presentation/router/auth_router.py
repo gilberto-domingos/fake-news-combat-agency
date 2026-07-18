@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, status
-from shared_infrastructure.dependencie.land_dependencie import get_command_mediator
+from shared_infrastructure.dependency.land_dependency import get_command_mediator
 from src.module.land.application.command.user_create_cmm import CreateUserCommand
 from src.module.land.application.dto.user_crt_dto import CreateUserDto
 from src.module.land.application.dto.user_res_dto import ResponseUserDto

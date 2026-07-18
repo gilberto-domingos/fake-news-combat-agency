@@ -9,7 +9,7 @@ class IncidentMapper:
     def to_model(incident: Incident) -> IncidentModel:
         model = IncidentModel(
             id=incident.id,
-            monitoring_target_id=incident.monitoring_target_id,
+            monitoring_target_id=incident.monitoring_target.id,
             title=incident.title,
             description=incident.description,
             status=incident.status,

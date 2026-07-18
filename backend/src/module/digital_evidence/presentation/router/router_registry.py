@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from src.module.digital_evidence.presentation.router.digital_evidence_router import router as evidence
+from src.module.digital_evidence.presentation.router.evidence_router import router as evidence
 from src.module.digital_evidence.presentation.router.monitoring_target_crt_router import router as monitoring_target
 from src.module.digital_evidence.presentation.router.incident_crt_router_experiment import router as incident
 

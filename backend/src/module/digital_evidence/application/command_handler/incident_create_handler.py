@@ -1,11 +1,11 @@
 from src.module.digital_evidence.domain.entity.incident import Incident
-from src.module.digital_evidence.domain.repository_int.incident_crt_int import IncidentRepositoryCrtInt
-from src.module.digital_evidence.application.service_use_case.incident_crt_service import IncidentCrtService
-from src.module.digital_evidence.application.command.incident_crt_cmd import IncidentCrtCommand
+from src.module.digital_evidence.domain.repository_interface.incident_interface import IncidentInterface
+from src.module.digital_evidence.application.service_use_case.incident_create_service import IncidentCreateService
+from src.module.digital_evidence.application.command.incident_create_cmd import IncidentCrtCommand
 
 
 class IncidentCrtHandler:
-    def __init__(self, service: IncidentCrtService, repository: IncidentRepositoryCrtInt):
+    def __init__(self, service: IncidentCreateService, repository: IncidentInterface):
         self._service = service
         self._repository = repository
 

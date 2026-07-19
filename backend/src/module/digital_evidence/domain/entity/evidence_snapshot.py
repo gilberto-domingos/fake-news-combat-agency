@@ -27,6 +27,7 @@ class EvidenceSnapshot:
             evidence: Evidence,
             text_content: str,
             html_path: str,
+            screenshot_path: str,
             hash: str,
     ):
         entity = cls(
@@ -34,6 +35,7 @@ class EvidenceSnapshot:
             evidence=evidence,
             text_content=text_content,
             html_path=html_path,
+            screenshot_path=screenshot_path,
             hash=hash,
             captured_at=datetime.now()
         )

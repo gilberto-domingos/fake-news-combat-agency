@@ -1,9 +1,8 @@
 from uuid import UUID, uuid4
 from datetime import datetime, timezone
-from typing import Optional
-from src.module.digital_evidence.domain.entity.evidence_snapshot import EvidenceSnapshot
 from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStatus
 from src.module.digital_evidence.domain.entity.incident import Incident
+from src.module.digital_evidence.domain.exception.business_exception import BusinessException
 
 
 class Evidence:
@@ -14,8 +13,7 @@ class Evidence:
                  source: str,
                  captured_at: datetime,
                  status: EvidenceStatus,
-                 hash: str,
-                 snapshots: Optional[list[EvidenceSnapshot]] = None,
+                 hash: str
                  ):
         self._id = id
         self._incident = incident
@@ -24,7 +22,6 @@ class Evidence:
         self._captured_at = captured_at
         self._status = status
         self._hash = hash
-        self._snapshots = snapshots if snapshots is not None else []
 
     @classmethod
     def create(
@@ -32,20 +29,16 @@ class Evidence:
             incident: Incident,
             url: str,
             source: str,
-            captured_at: datetime,
-            status: EvidenceStatus,
-            hash: str,
-            snapshots: list[EvidenceSnapshot]
+            hash: str
     ):
         entity = cls(
             id=uuid4(),
             incident=incident,
             url=url,
             source=source,
-            captured_at=captured_at,
-            status=status,
-            hash=hash,
-            snapshots=snapshots
+            captured_at=datetime.now(),
+            status=EvidenceStatus.PROCESSING,
+            hash=hash
         )
         return entity
 
@@ -59,7 +52,6 @@ class Evidence:
             captured_at: datetime,
             status: EvidenceStatus,
             hash: str,
-            snapshots: list[EvidenceSnapshot]
     ):
         persistence = cls(
             id=id,
@@ -69,7 +61,6 @@ class Evidence:
             captured_at=captured_at,
             status=status,
             hash=hash,
-            snapshots=snapshots
         )
         return persistence
 
@@ -123,31 +114,20 @@ class Evidence:
     def hash(self) -> str:
         return self._hash
 
-    @property
-    def snapshots(self) -> list[EvidenceSnapshot]:
-        return self._snapshots
-
-    @snapshots.setter
-    def snapshots(self, value: list[EvidenceSnapshot]) -> None:
-        if value is None:
-            raise ValueError("Snapshots cannot be None")
-        self._snapshots = value
-
-    def register_snapshot(self, snapshots: EvidenceSnapshot) -> None:
-        if snapshots is None:
-            raise ValueError("Snapshots cannot be none")
-        if snapshots.id != self._id:
-            raise ValueError("Snapshot does not belong to this evidence")
-        self._snapshots.append(snapshots)
-
     def mark_processing(self) -> None:
         self._status = EvidenceStatus.PROCESSING
+        self._captured_at = datetime.now()
 
     def mark_validated(self) -> None:
+        if self._status is EvidenceStatus.FAILED:
+            raise BusinessException(
+                message="Failed evidence cannot be validated",
+                error_code="FAILED_EVIDENCE_CANNOT_BE_VALIDATED"
+            )
         self._status = EvidenceStatus.VALIDATED
 
     def mark_failed(self) -> None:
         self._status = EvidenceStatus.FAILED
 
     def __str__(self) -> str:
-        return f"Evidence(id={self.id}, url={self.url}, source={self.source},captured_at={self.captured_at}, status={self.status}, hash={self.hash}, snapshots={self.snapshots} )"
+        return f"Evidence(id={self.id}, url={self.url}, source={self.source},captured_at={self.captured_at}, status={self.status}, hash={self.hash} )"

@@ -1,12 +1,12 @@
 from src.module.digital_evidence.domain.entity.evidence import Evidence
 from src.module.digital_evidence.domain.entity.incident import Incident
-from src.module.digital_evidence.infrastructure.model.evidence_model import DigitalEvidenceModel
+from src.module.digital_evidence.infrastructure.model.evidence_model import EvidenceModel
 
 
 class EvidenceMapper:
     @staticmethod
-    def to_model(evidence: Evidence) -> DigitalEvidenceModel:
-        return DigitalEvidenceModel(
+    def to_model(evidence: Evidence) -> EvidenceModel:
+        return EvidenceModel(
             id=evidence.id,
             incident_id=evidence.incident.id,
             url=evidence.url,
@@ -18,7 +18,7 @@ class EvidenceMapper:
         )
 
     @staticmethod
-    def to_entity(model: DigitalEvidenceModel, incident: Incident) -> Evidence:
+    def to_entity(model: EvidenceModel, incident: Incident) -> Evidence:
         evidence = Evidence(
             id=model.id,
             incident=incident,
@@ -27,7 +27,6 @@ class EvidenceMapper:
             captured_at=model.captured_at,
             status=model.status,
             hash=model.hash,
-            snapshots=[]
         )
 
         return evidence

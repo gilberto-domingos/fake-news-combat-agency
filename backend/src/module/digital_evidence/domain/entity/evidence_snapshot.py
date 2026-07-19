@@ -1,26 +1,71 @@
-from uuid import UUID
+from uuid import UUID, uuid4
 from hashlib import sha256
 from datetime import datetime
+from src.module.digital_evidence.domain.entity.evidence import Evidence
 
 
 class EvidenceSnapshot:
     def __init__(self,
                  id: UUID,
+                 evidence: Evidence,
                  text_content: str,
                  html_path: str,
                  screenshot_path: str,
                  hash: str,
                  captured_at: datetime):
         self._id = id
+        self._evidence = evidence
         self._text_content = text_content
         self._html_path = html_path
         self._screenshot_path = screenshot_path
         self._hash = hash
         self._captured_at = captured_at
 
+    @classmethod
+    def create(
+            cls,
+            evidence: Evidence,
+            text_content: str,
+            html_path: str,
+            hash: str,
+    ):
+        entity = cls(
+            id=uuid4(),
+            evidence=evidence,
+            text_content=text_content,
+            html_path=html_path,
+            hash=hash,
+            captured_at=datetime.now()
+        )
+        return entity
+
+    @classmethod
+    def from_persistence(
+            cls,
+            id: UUID,
+            evidence: Evidence,
+            text_content: str,
+            html_path: str,
+            hash: str,
+            captured_at: datetime
+    ):
+        persistence = cls(
+            id=id,
+            evidence=evidence,
+            text_content=text_content,
+            html_path=html_path,
+            hash=hash,
+            captured_at=captured_at
+        )
+        return persistence
+
     @property
     def id(self) -> UUID:
         return self._id
+
+    @property
+    def evidence(self) -> Evidence:
+        return self._evidence
 
     @property
     def screenshot_path(self) -> str:

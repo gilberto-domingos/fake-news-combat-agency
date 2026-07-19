@@ -31,10 +31,7 @@ class EvidenceCreateService():
             incident=incident,
             url=url,
             source=source,
-            captured_at=datetime.now(),
-            status=status.CAPTURED,
             hash=hash,
-            snapshots=[]
         )
         await self._repository_evidence.create(entity)
 

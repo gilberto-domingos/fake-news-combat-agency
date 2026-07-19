@@ -13,4 +13,3 @@ class EvidenceDetailResponseDto(BaseModel):
     captured_at: datetime
     status: EvidenceStatus
     hash: str
-    snapshots: list[EvidenceSnapshotResDto]

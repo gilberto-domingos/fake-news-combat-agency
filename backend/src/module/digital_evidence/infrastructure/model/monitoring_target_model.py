@@ -1,7 +1,5 @@
 from datetime import datetime
 from uuid import UUID, uuid4
-from sqlalchemy.orm import relationship
-
 from sqlalchemy import Boolean, DateTime, String
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
@@ -17,11 +15,6 @@ class MonitoringTargetModel(Base):
         PG_UUID(as_uuid=True),
         primary_key=True,
         default=uuid4
-    )
-
-    incidents = relationship(
-        "IncidentModel",
-        back_populates="monitoring_target"
     )
 
     target_name: Mapped[str] = mapped_column(

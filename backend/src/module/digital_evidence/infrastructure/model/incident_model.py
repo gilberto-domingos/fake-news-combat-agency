@@ -28,7 +28,7 @@ class IncidentModel(Base):
 
     monitoring_target = relationship(
         "MonitoringTargetModel",
-        back_populates="incidents"
+        back_populates="incident"
     )
 
     title: Mapped[str] = mapped_column(

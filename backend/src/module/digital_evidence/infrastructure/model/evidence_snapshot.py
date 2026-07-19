@@ -2,9 +2,9 @@ from uuid import UUID
 from datetime import datetime
 
 from sqlalchemy import String
+from sqlalchemy import Text
 from sqlalchemy import DateTime
 from sqlalchemy import ForeignKey
-from sqlalchemy import Enum as SQLEnum
 
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped
@@ -12,36 +12,40 @@ from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
 
 from src.shared_infrastructure.database.base import Base
-from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStatus
 
 
-class EvidenceModel(Base):
-    __tablename__ = "evidence"
+class EvidenceSnapshotModel(Base):
+    __tablename__ = "evidence_snapshots"
 
     id: Mapped[UUID] = mapped_column(
         PG_UUID(as_uuid=True),
         primary_key=True
     )
 
-    incident_id: Mapped[UUID] = mapped_column(
+    evidence_id: Mapped[UUID] = mapped_column(
         PG_UUID(as_uuid=True),
-        ForeignKey("incident.id"),
+        ForeignKey("evidences.id"),
         nullable=False,
         index=True
     )
 
-    url: Mapped[str] = mapped_column(
-        String(1000),
+    text_content: Mapped[str] = mapped_column(
+        Text,
         nullable=False
     )
 
-    source: Mapped[str] = mapped_column(
-        String(100),
+    html_path: Mapped[str] = mapped_column(
+        String(500),
         nullable=False
     )
 
-    status: Mapped[EvidenceStatus] = mapped_column(
-        SQLEnum(EvidenceStatus),
+    screenshot_path: Mapped[str] = mapped_column(
+        String(500),
+        nullable=False
+    )
+
+    hash: Mapped[str] = mapped_column(
+        String(255),
         nullable=False,
         index=True
     )
@@ -51,8 +55,7 @@ class EvidenceModel(Base):
         nullable=False
     )
 
-    hash: Mapped[str] = mapped_column(
-        String(255),
-        nullable=True,
-        index=True
+    evidence: Mapped["EvidenceModel"] = relationship(
+        "EvidenceModel",
+        back_populates="snapshots"
     )

@@ -3,8 +3,6 @@ from datetime import datetime
 
 
 @dataclass(frozen=True)
-class MonitoringTargetCrtCommand:
+class MonitoringTargetCreateCommand:
     target_name: str
     keywords: list[str]
-    is_active: bool
-    created_at: datetime

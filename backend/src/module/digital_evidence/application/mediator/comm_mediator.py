@@ -16,4 +16,4 @@ class CommandMediator:
                 f"No handler registered for {command_type}"
             )
 
-        return await handler.handle(command, metadata)
+        return await handler.handle(command)

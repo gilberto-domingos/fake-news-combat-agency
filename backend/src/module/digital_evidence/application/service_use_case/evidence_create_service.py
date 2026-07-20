@@ -4,7 +4,6 @@ from src.module.digital_evidence.domain.entity.evidence import Evidence
 from src.module.digital_evidence.domain.exception.business_exception import BusinessException
 from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStatus
 from uuid import UUID
-from datetime import datetime
 
 
 class EvidenceCreateService():

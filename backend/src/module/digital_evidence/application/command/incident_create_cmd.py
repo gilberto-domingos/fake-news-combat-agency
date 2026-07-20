@@ -3,7 +3,7 @@ from uuid import UUID
 
 
 @dataclass(frozen=True)
-class IncidentCrtCommand:
+class IncidentCreateCommand:
     monitoring_target_id: UUID
     title: str
     description: str

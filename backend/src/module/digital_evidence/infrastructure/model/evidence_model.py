@@ -30,6 +30,11 @@ class EvidenceModel(Base):
         index=True
     )
 
+    incident = relationship(
+        "IncidentModel",
+        back_populates="incident"
+    )
+
     url: Mapped[str] = mapped_column(
         String(1000),
         nullable=False
@@ -48,7 +53,8 @@ class EvidenceModel(Base):
 
     captured_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
-        nullable=False
+        nullable=False,
+        default=datetime.now
     )
 
     hash: Mapped[str] = mapped_column(

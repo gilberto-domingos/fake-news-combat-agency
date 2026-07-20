@@ -4,6 +4,7 @@ from sqlalchemy import Boolean, DateTime, String
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import relationship
 
 from src.shared_infrastructure.database.base import Base
 
@@ -15,6 +16,11 @@ class MonitoringTargetModel(Base):
         PG_UUID(as_uuid=True),
         primary_key=True,
         default=uuid4
+    )
+
+    incident = relationship(
+        "IncidentModel",
+        back_populates="monitoring_target"
     )
 
     target_name: Mapped[str] = mapped_column(
@@ -37,5 +43,5 @@ class MonitoringTargetModel(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
-        default=datetime.utcnow
+        default=datetime.now
     )

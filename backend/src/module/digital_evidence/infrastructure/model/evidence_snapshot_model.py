@@ -7,9 +7,8 @@ from sqlalchemy import DateTime
 from sqlalchemy import ForeignKey
 
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
-from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import Mapped, relationship
 from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
 
 from src.shared_infrastructure.database.base import Base
 
@@ -24,9 +23,14 @@ class EvidenceSnapshotModel(Base):
 
     evidence_id: Mapped[UUID] = mapped_column(
         PG_UUID(as_uuid=True),
-        ForeignKey("evidences.id"),
+        ForeignKey("evidence.id"),
         nullable=False,
         index=True
+    )
+
+    evidence = relationship(
+        "EvidenceModel",
+        back_populates="evidence_snapshot"
     )
 
     text_content: Mapped[str] = mapped_column(
@@ -52,10 +56,6 @@ class EvidenceSnapshotModel(Base):
 
     captured_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
-        nullable=False
-    )
-
-    evidence: Mapped["EvidenceModel"] = relationship(
-        "EvidenceModel",
-        back_populates="snapshots"
+        nullable=False,
+        default=datetime.now
     )

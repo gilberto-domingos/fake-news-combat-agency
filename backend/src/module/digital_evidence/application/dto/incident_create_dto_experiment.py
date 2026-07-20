@@ -4,7 +4,7 @@ from datetime import datetime
 from src.module.digital_evidence.domain.enum.incident_status import IncidentStatus
 
 
-class IncidentCrtDtoExperiment(BaseModel):
+class IncidentCreateDtoExperiment(BaseModel):
     monitoring_target_id: UUID
     title: str
     description: str

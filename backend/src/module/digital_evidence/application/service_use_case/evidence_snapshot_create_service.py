@@ -6,7 +6,7 @@ from src.module.digital_evidence.domain.entity.evidence_snapshot import Evidence
 from uuid import UUID
 
 
-class EvidenceSnapshotService:
+class EvidenceSnapshotCreateService:
     def __init__(self, repository_evidence_snapshot: EvidenceSnapshotInterface, repository_evidence: EvidenceInterface):
         self._repository_evidence_snapshot = repository_evidence_snapshot
         self._repository_evidence = repository_evidence

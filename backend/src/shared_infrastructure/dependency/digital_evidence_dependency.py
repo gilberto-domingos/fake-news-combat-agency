@@ -9,24 +9,35 @@ from src.module.digital_evidence.application.mediator.comm_mediator import Comma
 
 # Commands
 from src.module.digital_evidence.application.command.evidence_create_cmd import EvidenceCreateCommand
-from src.module.digital_evidence.application.command.monitoring_target_create_cmd import MonitoringTargetCrtCommand
-from src.module.digital_evidence.application.command.incident_create_cmd import IncidentCrtCommand
+from src.module.digital_evidence.application.command.evidence_snapshot_create_cmd import EvidenceSnapshotCreateCommand
+from src.module.digital_evidence.application.command.monitoring_target_create_cmd import MonitoringTargetCreateCommand
+from src.module.digital_evidence.application.command.incident_create_cmd import IncidentCreateCommand
 
 # Handlers
 from src.module.digital_evidence.application.command_handler.evidence_create_handler import (
     EvidenceCreateHandler,
 )
+
+from src.module.digital_evidence.application.command_handler.evidence_snapshot_create_handler import (
+    EvidenceSnapshotCreateHandler,
+)
+
 from src.module.digital_evidence.application.command_handler.monitoring_target_create_handler import (
-    MonitoringTargetCrtHandler,
+    MonitoringTargetCreateHandler,
 )
 from src.module.digital_evidence.application.command_handler.incident_create_handler import (
-    IncidentCrtHandler,
+    IncidentCreateHandler,
 )
 
 # Services
 from src.module.digital_evidence.application.service_use_case.evidence_create_service import (
     EvidenceCreateService,
 )
+
+from src.module.digital_evidence.application.service_use_case.evidence_snapshot_create_service import (
+    EvidenceSnapshotCreateService,
+)
+
 from src.module.digital_evidence.application.service_use_case.monitoring_target_create_service import (
     MonitoringTargetCreateService,
 )
@@ -38,6 +49,11 @@ from src.module.digital_evidence.application.service_use_case.incident_create_se
 from src.module.digital_evidence.domain.repository_interface.evidence_interface import (
     EvidenceInterface,
 )
+
+from src.module.digital_evidence.domain.repository_interface.evidence_snapshot_interface import (
+    EvidenceSnapshotInterface,
+)
+
 from src.module.digital_evidence.domain.repository_interface.monitoring_target_interface import (
     MonitoringTargetInterface,
 )
@@ -49,6 +65,11 @@ from src.module.digital_evidence.domain.repository_interface.incident_interface 
 from src.module.digital_evidence.infrastructure.repository_implement.evidence_implement import (
     EvidenceImplement,
 )
+
+from src.module.digital_evidence.infrastructure.repository_implement.evidence_snapshot_implement import (
+    EvidenceSnapshotImplement,
+)
+
 from src.module.digital_evidence.infrastructure.repository_implement.monitoring_target_implement import (
     MonitoringTargetImplement,
 )
@@ -78,6 +99,12 @@ def get_evidence_repository(
     return EvidenceImplement(session)
 
 
+def get_evidence_snapshot_repository(
+        session: AsyncSession = Depends(get_db_session),
+) -> EvidenceSnapshotInterface:
+    return EvidenceSnapshotImplement(session)
+
+
 def get_monitoring_target_repository(
         session: AsyncSession = Depends(get_db_session),
 ) -> MonitoringTargetInterface:
@@ -95,27 +122,55 @@ def get_incident_repository(
 # =====================================================================
 
 def get_evidence_create_service(
-        repository: EvidenceInterface = Depends(
+        evidence_repository: EvidenceInterface = Depends(
             get_evidence_repository
         ),
+        incident_repository: IncidentInterface = Depends(
+            get_incident_repository
+        ),
 ) -> EvidenceCreateService:
-    return EvidenceCreateService(repository)
+    return EvidenceCreateService(
+        evidence_repository,
+        incident_repository
+    )
+
+
+def get_evidence_snapshot_create_service(
+        evidence_snapshot_repository: EvidenceSnapshotInterface = Depends(
+            get_evidence_snapshot_repository
+        ),
+        evidence_repository: EvidenceInterface = Depends(
+            get_evidence_repository
+        ),
+) -> EvidenceSnapshotCreateService:
+    return EvidenceSnapshotCreateService(
+        evidence_snapshot_repository,
+        evidence_repository
+    )
 
 
 def get_monitoring_target_create_service(
-        repository: MonitoringTargetInterface = Depends(
+        monitoring_target_repository: MonitoringTargetInterface = Depends(
             get_monitoring_target_repository
         ),
 ) -> MonitoringTargetCreateService:
-    return MonitoringTargetCreateService(repository)
+    return MonitoringTargetCreateService(
+        monitoring_target_repository
+    )
 
 
 def get_incident_create_service(
-        repository: IncidentInterface = Depends(
+        incident_repository: IncidentInterface = Depends(
             get_incident_repository
         ),
+        monitoring_target_repository: MonitoringTargetInterface = Depends(
+            get_monitoring_target_repository
+        ),
 ) -> IncidentCreateService:
-    return IncidentCreateService(repository)
+    return IncidentCreateService(
+        incident_repository,
+        monitoring_target_repository
+    )
 
 
 # =====================================================================
@@ -123,27 +178,43 @@ def get_incident_create_service(
 # =====================================================================
 
 def get_create_evidence_handler(
-        service: EvidenceCreateService = Depends(
+        evidence_service: EvidenceCreateService = Depends(
             get_evidence_create_service
         ),
 ) -> EvidenceCreateHandler:
-    return EvidenceCreateHandler(service)
+    return EvidenceCreateHandler(
+        evidence_service
+    )
+
+
+def get_create_evidence_snapshot_handler(
+        evidence_snapshot_service: EvidenceSnapshotCreateService = Depends(
+            get_evidence_snapshot_create_service
+        ),
+) -> EvidenceSnapshotCreateHandler:
+    return EvidenceSnapshotCreateHandler(
+        evidence_snapshot_service
+    )
 
 
 def get_create_monitoring_target_handler(
-        service: MonitoringTargetCreateService = Depends(
+        monitoring_target_service: MonitoringTargetCreateService = Depends(
             get_monitoring_target_create_service
         ),
-) -> MonitoringTargetCrtHandler:
-    return MonitoringTargetCrtHandler(service)
+) -> MonitoringTargetCreateHandler:
+    return MonitoringTargetCreateHandler(
+        monitoring_target_service
+    )
 
 
 def get_create_incident_handler(
-        service: IncidentCreateService = Depends(
+        incident_service: IncidentCreateService = Depends(
             get_incident_create_service
         ),
-) -> IncidentCrtHandler:
-    return IncidentCrtHandler(service)
+) -> IncidentCreateHandler:
+    return IncidentCreateHandler(
+        incident_service
+    )
 
 
 # =====================================================================
@@ -154,10 +225,13 @@ def get_command_mediator(
         create_evidence_handler: EvidenceCreateHandler = Depends(
             get_create_evidence_handler
         ),
-        create_monitoring_target_handler: MonitoringTargetCrtHandler = Depends(
+        create_evidence_snapshot_handler: EvidenceSnapshotCreateHandler = Depends(
+            get_create_evidence_snapshot_handler
+        ),
+        create_monitoring_target_handler: MonitoringTargetCreateHandler = Depends(
             get_create_monitoring_target_handler
         ),
-        create_incident_handler: IncidentCrtHandler = Depends(
+        create_incident_handler: IncidentCreateHandler = Depends(
             get_create_incident_handler
         ),
 ) -> CommandMediator:
@@ -169,12 +243,17 @@ def get_command_mediator(
     )
 
     mediator.register(
-        MonitoringTargetCrtCommand,
+        EvidenceSnapshotCreateCommand,
+        create_evidence_snapshot_handler,
+    )
+
+    mediator.register(
+        MonitoringTargetCreateCommand,
         create_monitoring_target_handler,
     )
 
     mediator.register(
-        IncidentCrtCommand,
+        IncidentCreateCommand,
         create_incident_handler,
     )
 

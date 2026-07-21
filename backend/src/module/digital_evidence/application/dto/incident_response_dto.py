@@ -5,6 +5,10 @@ from src.module.digital_evidence.domain.enum.incident_status import IncidentStat
 
 
 class IncidentResponseDto(BaseModel):
+    model_config = {
+        "from_attributes": True
+    }
+
     id: UUID
     monitoring_target_id: UUID
     title: str

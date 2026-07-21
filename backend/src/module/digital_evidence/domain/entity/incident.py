@@ -1,19 +1,20 @@
 from uuid import UUID, uuid4
-from datetime import datetime
-from src.module.digital_evidence.domain.entity.monitoring_target import MonitoringTarget
+from datetime import datetime, timezone
 from src.module.digital_evidence.domain.enum.incident_status import IncidentStatus
 
 
 class Incident:
-    def __init__(self,
-                 id: UUID,
-                 monitoring_target: MonitoringTarget,
-                 title: str,
-                 description: str,
-                 status: IncidentStatus,
-                 created_at: datetime):
+    def __init__(
+            self,
+            id: UUID,
+            monitoring_target_id: UUID,
+            title: str,
+            description: str,
+            status: IncidentStatus,
+            created_at: datetime
+    ):
         self._id = id
-        self._monitoring_target = monitoring_target
+        self._monitoring_target_id = monitoring_target_id
         self._title = title
         self._description = description
         self._status = status
@@ -22,19 +23,17 @@ class Incident:
     @classmethod
     def create(
             cls,
-            monitoring_target: MonitoringTarget,
+            monitoring_target_id: UUID,
             title: str,
             description: str,
-            status: IncidentStatus,
-            created_at: datetime
     ):
         entity = cls(
             id=uuid4(),
-            monitoring_target=monitoring_target,
+            monitoring_target_id=monitoring_target_id,
             title=title,
             description=description,
-            status=status,
-            created_at=created_at
+            status=IncidentStatus.OPEN,
+            created_at=datetime.now(timezone.utc),
         )
         return entity
 
@@ -42,7 +41,7 @@ class Incident:
     def from_persistence(
             cls,
             id: UUID,
-            monitoring_target: MonitoringTarget,
+            monitoring_target_id: UUID,
             title: str,
             description: str,
             status: IncidentStatus,
@@ -50,7 +49,7 @@ class Incident:
     ):
         persistence = cls(
             id=id,
-            monitoring_target=monitoring_target,
+            monitoring_target_id=monitoring_target_id,
             title=title,
             description=description,
             status=status,
@@ -63,8 +62,8 @@ class Incident:
         return self._id
 
     @property
-    def monitoring_target(self) -> MonitoringTarget:
-        return self._monitoring_target
+    def monitoring_target_id(self) -> UUID:
+        return self._monitoring_target_id
 
     @property
     def title(self) -> str:

@@ -1,22 +1,23 @@
 from uuid import UUID, uuid4
 from datetime import datetime, timezone
+
 from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStatus
-from src.module.digital_evidence.domain.entity.incident import Incident
 from src.module.digital_evidence.domain.exception.business_exception import BusinessException
 
 
 class Evidence:
-    def __init__(self,
-                 id: UUID,
-                 incident: Incident,
-                 url: str,
-                 source: str,
-                 captured_at: datetime,
-                 status: EvidenceStatus,
-                 hash: str
-                 ):
+    def __init__(
+            self,
+            id: UUID,
+            incident_id: UUID,
+            url: str,
+            source: str,
+            captured_at: datetime,
+            status: EvidenceStatus,
+            hash: str
+    ):
         self._id = id
-        self._incident = incident
+        self._incident_id = incident_id
         self._url = url
         self._source = source
         self._captured_at = captured_at
@@ -26,17 +27,17 @@ class Evidence:
     @classmethod
     def create(
             cls,
-            incident: Incident,
+            incident_id: UUID,
             url: str,
             source: str,
             hash: str
     ):
         entity = cls(
             id=uuid4(),
-            incident=incident,
+            incident_id=incident_id,
             url=url,
             source=source,
-            captured_at=datetime.now(),
+            captured_at=datetime.now(timezone.utc),
             status=EvidenceStatus.PROCESSING,
             hash=hash
         )
@@ -46,7 +47,7 @@ class Evidence:
     def from_persistence(
             cls,
             id: UUID,
-            incident: Incident,
+            incident_id: UUID,
             url: str,
             source: str,
             captured_at: datetime,
@@ -55,7 +56,7 @@ class Evidence:
     ):
         persistence = cls(
             id=id,
-            incident=incident,
+            incident_id=incident_id,
             url=url,
             source=source,
             captured_at=captured_at,
@@ -69,8 +70,8 @@ class Evidence:
         return self._id
 
     @property
-    def incident(self):
-        return self._incident
+    def incident_id(self) -> UUID:
+        return self._incident_id
 
     @property
     def url(self) -> str:
@@ -116,7 +117,7 @@ class Evidence:
 
     def mark_processing(self) -> None:
         self._status = EvidenceStatus.PROCESSING
-        self._captured_at = datetime.now()
+        self._captured_at = datetime.now(timezone.utc)
 
     def mark_validated(self) -> None:
         if self._status is EvidenceStatus.FAILED:
@@ -130,4 +131,9 @@ class Evidence:
         self._status = EvidenceStatus.FAILED
 
     def __str__(self) -> str:
-        return f"Evidence(id={self.id}, url={self.url}, source={self.source},captured_at={self.captured_at}, status={self.status}, hash={self.hash} )"
+        return (
+            f"Evidence(id={self.id}, incident_id={self.incident_id}, "
+            f"url={self.url}, source={self.source}, "
+            f"captured_at={self.captured_at}, status={self.status}, "
+            f"hash={self.hash})"
+        )

@@ -1,14 +1,9 @@
-from uuid import UUID
 from datetime import datetime
+from uuid import UUID
 
-from sqlalchemy import String
-from sqlalchemy import Text
-from sqlalchemy import DateTime
-from sqlalchemy import ForeignKey
-
+from sqlalchemy import DateTime, ForeignKey, String, Text
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
-from sqlalchemy.orm import Mapped, relationship
-from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import Mapped, mapped_column
 
 from src.shared_infrastructure.database.base import Base
 
@@ -26,11 +21,6 @@ class EvidenceSnapshotModel(Base):
         ForeignKey("evidence.id"),
         nullable=False,
         index=True
-    )
-
-    evidence = relationship(
-        "EvidenceModel",
-        back_populates="evidence_snapshot"
     )
 
     text_content: Mapped[str] = mapped_column(

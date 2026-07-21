@@ -8,10 +8,4 @@ class EvidenceCreateDto(BaseModel):
     incident_id: UUID
     url: str
     source: str
-    captured_at: datetime
-    status: EvidenceStatus
     hash: str
-
-    model_config = {
-        "from_attributes": True
-    }

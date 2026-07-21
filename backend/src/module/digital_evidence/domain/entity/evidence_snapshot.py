@@ -1,20 +1,21 @@
 from uuid import UUID, uuid4
 from hashlib import sha256
-from datetime import datetime
-from src.module.digital_evidence.domain.entity.evidence import Evidence
+from datetime import datetime, timezone
 
 
 class EvidenceSnapshot:
-    def __init__(self,
-                 id: UUID,
-                 evidence: Evidence,
-                 text_content: str,
-                 html_path: str,
-                 screenshot_path: str,
-                 hash: str,
-                 captured_at: datetime):
+    def __init__(
+            self,
+            id: UUID,
+            evidence_id: UUID,
+            text_content: str,
+            html_path: str,
+            screenshot_path: str,
+            hash: str,
+            captured_at: datetime
+    ):
         self._id = id
-        self._evidence = evidence
+        self._evidence_id = evidence_id
         self._text_content = text_content
         self._html_path = html_path
         self._screenshot_path = screenshot_path
@@ -24,7 +25,7 @@ class EvidenceSnapshot:
     @classmethod
     def create(
             cls,
-            evidence: Evidence,
+            evidence_id: UUID,
             text_content: str,
             html_path: str,
             screenshot_path: str,
@@ -32,12 +33,12 @@ class EvidenceSnapshot:
     ):
         entity = cls(
             id=uuid4(),
-            evidence=evidence,
+            evidence_id=evidence_id,
             text_content=text_content,
             html_path=html_path,
             screenshot_path=screenshot_path,
             hash=hash,
-            captured_at=datetime.now()
+            captured_at=datetime.now(timezone.utc)
         )
         return entity
 
@@ -45,17 +46,19 @@ class EvidenceSnapshot:
     def from_persistence(
             cls,
             id: UUID,
-            evidence: Evidence,
+            evidence_id: UUID,
             text_content: str,
             html_path: str,
+            screenshot_path: str,
             hash: str,
             captured_at: datetime
     ):
         persistence = cls(
             id=id,
-            evidence=evidence,
+            evidence_id=evidence_id,
             text_content=text_content,
             html_path=html_path,
+            screenshot_path=screenshot_path,
             hash=hash,
             captured_at=captured_at
         )
@@ -66,8 +69,8 @@ class EvidenceSnapshot:
         return self._id
 
     @property
-    def evidence(self) -> Evidence:
-        return self._evidence
+    def evidence_id(self) -> UUID:
+        return self._evidence_id
 
     @property
     def screenshot_path(self) -> str:
@@ -100,7 +103,7 @@ class EvidenceSnapshot:
     @html_path.setter
     def html_path(self, value: str) -> None:
         if not value:
-            raise ValueError("Html path cannot to be empty")
+            raise ValueError("Html path cannot be empty")
         self._html_path = value
 
     @property
@@ -138,7 +141,13 @@ class EvidenceSnapshot:
         return self.calculate_hash() == self._hash
 
     def __str__(self) -> str:
-        return f"EvidenceSnapshot(id={self.id}, screenshot_path={self.screenshot_path}, hash={self.hash}, text_content={self.text_content}, html_path={self.html_path} )"
+        return (
+            f"EvidenceSnapshot("
+            f"id={self.id}, "
+            f"evidence_id={self.evidence_id}, "
+            f"screenshot_path={self.screenshot_path}, "
+            f"hash={self.hash})"
+        )
 
     def __repr__(self) -> str:
         return self.__str__()

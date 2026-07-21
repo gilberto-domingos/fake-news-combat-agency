@@ -1,5 +1,4 @@
 from src.module.digital_evidence.domain.entity.incident import Incident
-from src.module.digital_evidence.domain.repository_interface.incident_interface import IncidentInterface
 from src.module.digital_evidence.application.service_use_case.incident_create_service import IncidentCreateService
 from src.module.digital_evidence.application.command.incident_create_cmd import IncidentCreateCommand
 

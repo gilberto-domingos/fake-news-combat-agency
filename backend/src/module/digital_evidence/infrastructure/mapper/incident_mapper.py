@@ -1,6 +1,5 @@
 from src.module.digital_evidence.domain.entity.incident import Incident
 from src.module.digital_evidence.infrastructure.model.incident_model import IncidentModel
-from src.module.digital_evidence.infrastructure.mapper.monitoring_target_mapper import MonitoringTargetMapper
 
 
 class IncidentMapper:
@@ -9,7 +8,7 @@ class IncidentMapper:
     def to_model(incident: Incident) -> IncidentModel:
         model = IncidentModel(
             id=incident.id,
-            monitoring_target_id=incident.monitoring_target.id,
+            monitoring_target_id=incident.monitoring_target_id,
             title=incident.title,
             description=incident.description,
             status=incident.status,
@@ -18,9 +17,12 @@ class IncidentMapper:
         return model
 
     @staticmethod
-    def to_entity(model: IncidentModel) -> Incident:
-        entity = Incident(
-            monitoring_target=MonitoringTargetMapper.to_entity(model.monitoring_target),
+    def to_entity(
+            model: IncidentModel
+    ) -> Incident:
+        entity = Incident.from_persistence(
+            id=model.id,
+            monitoring_target_id=model.monitoring_target_id,
             title=model.title,
             description=model.description,
             status=model.status,

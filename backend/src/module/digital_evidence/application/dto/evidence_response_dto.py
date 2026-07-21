@@ -5,6 +5,10 @@ from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStat
 
 
 class EvidenceResponseDto(BaseModel):
+    model_config = {
+        "from_attributes": True
+    }
+
     id: UUID
     incident_id: UUID
     url: str
@@ -12,7 +16,3 @@ class EvidenceResponseDto(BaseModel):
     captured_at: datetime
     status: EvidenceStatus
     hash: str
-
-    model_config = {
-        "from_attributes": True
-    }

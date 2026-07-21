@@ -1,18 +1,13 @@
-from uuid import UUID
 from datetime import datetime
+from uuid import UUID
 
-from sqlalchemy import String
-from sqlalchemy import DateTime
-from sqlalchemy import ForeignKey
+from sqlalchemy import DateTime, ForeignKey, String
 from sqlalchemy import Enum as SQLEnum
-
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import Mapped, mapped_column
 
-from src.shared_infrastructure.database.base import Base
 from src.module.digital_evidence.domain.enum.evidence_status import EvidenceStatus
+from src.shared_infrastructure.database.base import Base
 
 
 class EvidenceModel(Base):
@@ -28,11 +23,6 @@ class EvidenceModel(Base):
         ForeignKey("incident.id"),
         nullable=False,
         index=True
-    )
-
-    incident = relationship(
-        "IncidentModel",
-        back_populates="incident"
     )
 
     url: Mapped[str] = mapped_column(

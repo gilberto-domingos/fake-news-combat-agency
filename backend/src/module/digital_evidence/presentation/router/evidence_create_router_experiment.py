@@ -10,15 +10,16 @@ router = APIRouter(prefix="/evidence", tags=["Evidence"])
 
 
 @router.post("/", response_model=EvidenceResponseDto, status_code=status.HTTP_201_CREATED)
-async def evidence(payload: EvidenceCreateDto, mediator: CommandMediator = Depends(get_command_mediator)):
-    command = EvidenceCreateCommand(**payload.model_dump())
-    entity = await mediator.send(command)
-    return EvidenceResponseDto(
-        id=entity.id,
-        incident_id=entity.incident_id,
-        url=entity.url,
-        source=entity.source,
-        captured_at=entity.captured_at,
-        status=entity.status,
-        hash=entity.hash
+async def create_evidence(
+        payload: EvidenceCreateDto,
+        mediator: CommandMediator = Depends(get_command_mediator)
+):
+    command = EvidenceCreateCommand(
+        **payload.model_dump()
+    )
+    evidence = await mediator.send(command)
+
+    return EvidenceResponseDto.model_validate(
+        evidence,
+        from_attributes=True
     )

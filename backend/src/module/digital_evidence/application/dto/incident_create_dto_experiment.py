@@ -8,5 +8,3 @@ class IncidentCreateDtoExperiment(BaseModel):
     monitoring_target_id: UUID
     title: str
     description: str
-    status: IncidentStatus
-    created_at: datetime

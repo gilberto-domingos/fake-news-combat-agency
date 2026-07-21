@@ -19,4 +19,7 @@ async def create_incident(
 
     incident = await mediator.send(command)
 
-    return incident
+    return IncidentResponseDto.model_validate(
+        incident,
+        from_attributes=True
+    )

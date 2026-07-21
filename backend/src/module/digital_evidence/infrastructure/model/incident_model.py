@@ -2,13 +2,12 @@ from datetime import datetime
 from uuid import UUID, uuid4
 
 from sqlalchemy import DateTime, ForeignKey, String
+from sqlalchemy import Enum as SQLEnum
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
 from src.module.digital_evidence.domain.enum.incident_status import IncidentStatus
 from src.shared_infrastructure.database.base import Base
-from sqlalchemy import Enum as SQLEnum
-from sqlalchemy.orm import relationship
 
 
 class IncidentModel(Base):
@@ -23,12 +22,8 @@ class IncidentModel(Base):
     monitoring_target_id: Mapped[UUID] = mapped_column(
         PG_UUID(as_uuid=True),
         ForeignKey("monitoring_target.id"),
-        nullable=False
-    )
-
-    monitoring_target = relationship(
-        "MonitoringTargetModel",
-        back_populates="incident"
+        nullable=False,
+        index=True
     )
 
     title: Mapped[str] = mapped_column(

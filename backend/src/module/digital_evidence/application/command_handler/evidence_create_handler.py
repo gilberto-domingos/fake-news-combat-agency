@@ -12,7 +12,6 @@ class EvidenceCreateHandler:
             incident_id=command.incident_id,
             url=command.url,
             source=command.source,
-            status=command.status,
             hash=command.hash,
         )
         return evidence

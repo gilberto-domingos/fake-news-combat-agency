@@ -66,19 +66,19 @@ from src.module.digital_evidence.application.service_use_case.incident_create_se
 # =====================================================================
 
 
-from src.module.digital_evidence.domain.repository_interface.evidence_interface import (
+from src.module.digital_evidence.domain.repository_interface.evidence_write_interface import (
     EvidenceInterface,
 )
 
-from src.module.digital_evidence.domain.repository_interface.evidence_snapshot_interface import (
+from src.module.digital_evidence.domain.repository_interface.evidence_snapshot_write_interface import (
     EvidenceSnapshotInterface,
 )
 
-from src.module.digital_evidence.domain.repository_interface.monitoring_target_interface import (
+from src.module.digital_evidence.domain.repository_interface.monitoring_target_write_interface import (
     MonitoringTargetInterface,
 )
 
-from src.module.digital_evidence.domain.repository_interface.incident_interface import (
+from src.module.digital_evidence.domain.repository_interface.incident_write_interface import (
     IncidentInterface,
 )
 

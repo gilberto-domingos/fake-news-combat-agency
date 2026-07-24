@@ -4,8 +4,8 @@ from uuid import UUID
 from src.module.digital_evidence.domain.entity.incident import Incident
 from src.module.digital_evidence.domain.enum.incident_status import IncidentStatus
 from src.module.digital_evidence.domain.exception.business_exception import BusinessException
-from src.module.digital_evidence.domain.repository_interface.incident_interface import IncidentInterface
-from src.module.digital_evidence.domain.repository_interface.monitoring_target_interface import (
+from src.module.digital_evidence.domain.repository_interface.incident_write_interface import IncidentInterface
+from src.module.digital_evidence.domain.repository_interface.monitoring_target_write_interface import (
     MonitoringTargetInterface,
 )
 

@@ -4,7 +4,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.module.digital_evidence.domain.entity.incident import Incident
-from src.module.digital_evidence.domain.repository_interface.incident_interface import IncidentInterface
+from src.module.digital_evidence.domain.repository_interface.incident_write_interface import IncidentInterface
 from src.module.digital_evidence.infrastructure.mapper.incident_mapper import IncidentMapper
 from src.module.digital_evidence.infrastructure.model.incident_model import IncidentModel
 

@@ -1,5 +1,5 @@
 from datetime import datetime
-from src.module.digital_evidence.domain.repository_interface.monitoring_target_interface import \
+from src.module.digital_evidence.domain.repository_interface.monitoring_target_write_interface import \
     MonitoringTargetInterface
 from src.module.digital_evidence.domain.entity.monitoring_target import MonitoringTarget
 

@@ -2,6 +2,6 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-class MonitoringTargetCreateCommand:
-    target_name: str
+class MonitoringTargetActiveKeywordsQuery:
     keywords: list[str]
+    is_active: bool

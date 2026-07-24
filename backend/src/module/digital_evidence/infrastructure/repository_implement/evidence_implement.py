@@ -4,7 +4,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.module.digital_evidence.domain.entity.evidence import Evidence
-from src.module.digital_evidence.domain.repository_interface.evidence_interface import EvidenceInterface
+from src.module.digital_evidence.domain.repository_interface.evidence_write_interface import EvidenceInterface
 from src.module.digital_evidence.infrastructure.mapper.evidence_mapper import EvidenceMapper
 from src.module.digital_evidence.infrastructure.model.evidence_model import EvidenceModel
 

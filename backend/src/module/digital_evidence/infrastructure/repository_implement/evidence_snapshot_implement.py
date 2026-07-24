@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.module.digital_evidence.domain.entity.evidence_snapshot import EvidenceSnapshot
-from src.module.digital_evidence.domain.repository_interface.evidence_snapshot_interface import (
+from src.module.digital_evidence.domain.repository_interface.evidence_snapshot_write_interface import (
     EvidenceSnapshotInterface
 )
 from src.module.digital_evidence.infrastructure.mapper.evidence_snapshot_mapper import (

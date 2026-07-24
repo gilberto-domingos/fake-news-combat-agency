@@ -3,7 +3,7 @@ from src.module.digital_evidence.domain.entity.monitoring_target import Monitori
 from uuid import UUID
 
 
-class MonitoringTargetInterface(ABC):
+class MonitoringTargetWriteInterface(ABC):
     @abstractmethod
     async def create(self, monitoring_target: MonitoringTarget) -> MonitoringTarget:
         pass

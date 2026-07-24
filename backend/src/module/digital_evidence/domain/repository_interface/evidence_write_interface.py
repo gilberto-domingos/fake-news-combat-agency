@@ -3,7 +3,7 @@ from uuid import UUID
 from src.module.digital_evidence.domain.entity.evidence import Evidence
 
 
-class EvidenceInterface(ABC):
+class EvidenceWriteInterface(ABC):
     @abstractmethod
     async def create(self, evidence: Evidence) -> Evidence:
         pass

@@ -2,8 +2,8 @@ from uuid import UUID
 
 from src.module.digital_evidence.domain.entity.evidence_snapshot import EvidenceSnapshot
 from src.module.digital_evidence.domain.exception.business_exception import BusinessException
-from src.module.digital_evidence.domain.repository_interface.evidence_interface import EvidenceInterface
-from src.module.digital_evidence.domain.repository_interface.evidence_snapshot_interface import (
+from src.module.digital_evidence.domain.repository_interface.evidence_write_interface import EvidenceInterface
+from src.module.digital_evidence.domain.repository_interface.evidence_snapshot_write_interface import (
     EvidenceSnapshotInterface
 )
 

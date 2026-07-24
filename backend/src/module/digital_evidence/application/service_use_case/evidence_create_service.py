@@ -2,8 +2,8 @@ from uuid import UUID
 
 from src.module.digital_evidence.domain.entity.evidence import Evidence
 from src.module.digital_evidence.domain.exception.business_exception import BusinessException
-from src.module.digital_evidence.domain.repository_interface.evidence_interface import EvidenceInterface
-from src.module.digital_evidence.domain.repository_interface.incident_interface import IncidentInterface
+from src.module.digital_evidence.domain.repository_interface.evidence_write_interface import EvidenceInterface
+from src.module.digital_evidence.domain.repository_interface.incident_write_interface import IncidentInterface
 
 
 class EvidenceCreateService:

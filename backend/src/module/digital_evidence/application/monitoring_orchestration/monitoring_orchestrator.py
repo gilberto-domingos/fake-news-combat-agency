@@ -19,7 +19,7 @@
    → solicitar busca de conteúdos relacionados
            ↓
 4) Pesquisar nas fontes externas
-   → search_gateway_content_interface.py
+   → search_content_gateway_interface.py
    → search_youtube_gateway_implement.py
    → search_google_gateway_implement.py
    → search_tiktok_gateway.py

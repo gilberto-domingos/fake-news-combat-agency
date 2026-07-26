@@ -1,20 +1,18 @@
-from datetime import datetime
 from uuid import UUID
 
 from src.module.digital_evidence.domain.entity.incident import Incident
-from src.module.digital_evidence.domain.enum.incident_status import IncidentStatus
 from src.module.digital_evidence.domain.exception.business_exception import BusinessException
-from src.module.digital_evidence.domain.repository_interface.incident_write_interface import IncidentInterface
+from src.module.digital_evidence.domain.repository_interface.incident_write_interface import IncidentWriteInterface
 from src.module.digital_evidence.domain.repository_interface.monitoring_target_write_interface import (
-    MonitoringTargetInterface,
+    MonitoringTargetWriteInterface,
 )
 
 
 class IncidentCreateService:
     def __init__(
             self,
-            incident_repository: IncidentInterface,
-            monitoring_target_repository: MonitoringTargetInterface
+            incident_repository: IncidentWriteInterface,
+            monitoring_target_repository: MonitoringTargetWriteInterface
     ):
         self._incident_repository = incident_repository
         self._monitoring_target_repository = monitoring_target_repository

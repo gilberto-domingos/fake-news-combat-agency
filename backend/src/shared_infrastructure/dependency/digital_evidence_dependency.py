@@ -67,19 +67,19 @@ from src.module.digital_evidence.application.service_use_case.incident_create_se
 
 
 from src.module.digital_evidence.domain.repository_interface.evidence_write_interface import (
-    EvidenceInterface,
+    EvidenceWriteInterface,
 )
 
 from src.module.digital_evidence.domain.repository_interface.evidence_snapshot_write_interface import (
-    EvidenceSnapshotInterface,
+    EvidenceSnapshotWriteInterface,
 )
 
 from src.module.digital_evidence.domain.repository_interface.monitoring_target_write_interface import (
-    MonitoringTargetInterface,
+    MonitoringTargetWriteInterface,
 )
 
 from src.module.digital_evidence.domain.repository_interface.incident_write_interface import (
-    IncidentInterface,
+    IncidentWriteInterface,
 )
 
 # =====================================================================
@@ -117,7 +117,7 @@ def get_evidence_repository(
         session: AsyncSession = Depends(
             get_db_session
         ),
-) -> EvidenceInterface:
+) -> EvidenceWriteInterface:
     return EvidenceImplement(session)
 
 
@@ -125,7 +125,7 @@ def get_evidence_snapshot_repository(
         session: AsyncSession = Depends(
             get_db_session
         ),
-) -> EvidenceSnapshotInterface:
+) -> EvidenceSnapshotWriteInterface:
     return EvidenceSnapshotImplement(session)
 
 
@@ -133,7 +133,7 @@ def get_monitoring_target_repository(
         session: AsyncSession = Depends(
             get_db_session
         ),
-) -> MonitoringTargetInterface:
+) -> MonitoringTargetWriteInterface:
     return MonitoringTargetImplement(session)
 
 
@@ -141,17 +141,17 @@ def get_incident_repository(
         session: AsyncSession = Depends(
             get_db_session
         ),
-) -> IncidentInterface:
+) -> IncidentWriteInterface:
     return IncidentImplement(session)
 
 
 # SERVICES
 
 def get_evidence_create_service(
-        repository_evidence: EvidenceInterface = Depends(
+        repository_evidence: EvidenceWriteInterface = Depends(
             get_evidence_repository
         ),
-        repository_incident: IncidentInterface = Depends(
+        repository_incident: IncidentWriteInterface = Depends(
             get_incident_repository
         ),
 ) -> EvidenceCreateService:
@@ -162,10 +162,10 @@ def get_evidence_create_service(
 
 
 def get_evidence_snapshot_create_service(
-        repository_snapshot: EvidenceSnapshotInterface = Depends(
+        repository_snapshot: EvidenceSnapshotWriteInterface = Depends(
             get_evidence_snapshot_repository
         ),
-        repository_evidence: EvidenceInterface = Depends(
+        repository_evidence: EvidenceWriteInterface = Depends(
             get_evidence_repository
         ),
 ) -> EvidenceSnapshotCreateService:
@@ -176,7 +176,7 @@ def get_evidence_snapshot_create_service(
 
 
 def get_monitoring_target_create_service(
-        repository: MonitoringTargetInterface = Depends(
+        repository: MonitoringTargetWriteInterface = Depends(
             get_monitoring_target_repository
         ),
 ) -> MonitoringTargetCreateService:
@@ -186,10 +186,10 @@ def get_monitoring_target_create_service(
 
 
 def get_incident_create_service(
-        incident_repository: IncidentInterface = Depends(
+        incident_repository: IncidentWriteInterface = Depends(
             get_incident_repository
         ),
-        monitoring_target_repository: MonitoringTargetInterface = Depends(
+        monitoring_target_repository: MonitoringTargetWriteInterface = Depends(
             get_monitoring_target_repository
         ),
 ) -> IncidentCreateService:

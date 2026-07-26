@@ -9,6 +9,10 @@ from src.module.digital_evidence.application.query_handler.monitoring_target_act
 from src.module.digital_evidence.application.service_use_case.monitoring_target_find_active_keywords_service import (
     MonitoringTargetFindActiveKeywordsService
 )
+
+from src.module.digital_evidence.domain.repository_interface.monitoring_target_read_interface import \
+    MonitoringTargetReadInterface
+
 from src.module.digital_evidence.infrastructure.repository_implement.monitoring_target_implement import (
     MonitoringTargetImplement
 )
@@ -26,11 +30,15 @@ async def test_find_active_keywords():
     create_session_factory(engine)
     session_factory = get_session_factory()
 
+    # Repository Iterface
+    repositoryInterface: MonitoringTargetReadInterface
+
     # Repository Implement
     async with session_factory() as session:
         repository = MonitoringTargetImplement(
             session=session
         )
+
         # Service Use Case
         service = MonitoringTargetFindActiveKeywordsService(
             repository=repository
